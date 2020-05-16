@@ -39,6 +39,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
+    implementation project(':network')
+    implementation project(':services')
     implementation rootProject.ext.deps.support.design
     implementation rootProject.ext.deps.dagger.dagger
     implementation rootProject.ext.deps.support.recyclerview
