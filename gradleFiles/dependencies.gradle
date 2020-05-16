@@ -1,0 +1,148 @@
+ext.deps = [:]
+def versions = [:]
+versions.support="1.1.0"
+versions.legacy="1.0.0"
+versions.cardView="1.0.0"
+versions.recyclerView="1.1.0"
+versions.multidex="2.0.1"
+versions.butterknife="10.2.0"
+versions.retrofit="2.8.1"
+versions.okhttp="4.6.0"
+versions.constraintLayout="1.1.3"
+versions.permissionDispatcher="4.6.0"
+versions.room="2.2.5"
+versions.dagger="2.27"
+versions.leakcanary="2.1"
+versions.kotlinVersion = '1.3.72'
+versions.arch_core = "2.1.0"
+versions.hamcrest = "1.3"
+versions.junit = "4.12"
+versions.mockito = "2.25.0"
+versions.fragment = "1.2.4"
+versions.workManager = "2.3.4"
+def deps = [:]
+
+def support = [:]
+support.appCompat="androidx.appcompat:appcompat:$versions.support"
+support.supportV4="androidx.legacy:legacy-support-v4:$versions.legacy"
+support.cardView="androidx.cardview:cardview:$versions.cardView"
+support.annotations="androidx.annotation:annotation:1.1.0"
+support.multidex="androidx.multidex:multidex:$versions.multidex"
+support.design="com.google.android.material:material:1.1.0"
+support.recyclerview="androidx.recyclerview:recyclerview:$versions.recyclerView"
+support.constraintLayout="androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+support.coreKtx="androidx.core:core-ktx:1.2.0"
+support.localBroadcastManager="androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
+deps.support = support
+
+def playservices = [:]
+playservices.location="com.google.android.gms:play-services-location:17.0.0"
+playservices.maps="com.google.android.gms:play-services-maps:17.0.0"
+playservices.auth="com.google.android.gms:play-services-auth:18.0.0"
+playservices.authPhone="com.google.android.gms:play-services-auth-api-phone:17.4.0"
+playservices.core="com.google.android.play:core:1.7.2"
+deps.playservices = playservices
+
+def arch = [:]
+arch.lifecycleExtensions="androidx.lifecycle:lifecycle-extensions:2.2.0"
+arch.lifecycleRuntime="androidx.lifecycle:lifecycle-runtime:2.2.0"
+arch.lifecycleCommonJava="androidx.lifecycle:lifecycle-common-java8:2.2.0"
+arch.room="androidx.room:room-runtime:$versions.room"
+arch.workmanager ="androidx.work:work-runtime:$versions.workManager"
+arch.workmanagerktx ="androidx.work:work-runtime-ktx:$versions.workManager"
+arch.coreKtx ="androidx.core:core-ktx:1.2.0"
+deps.arch = arch
+
+def firebase = [:]
+firebase.core="com.google.firebase:firebase-core:17.4.1"
+firebase.crashlytics="com.google.firebase:firebase-crashlytics:17.0.0"
+firebase.fcm="com.google.firebase:firebase-messaging:20.1.7"
+firebase.remoteConfig = "com.google.firebase:firebase-config:19.1.4"
+firebase.performance = "com.google.firebase:firebase-perf:19.0.7"
+deps.firebase = firebase
+
+def jetbrains = [:]
+jetbrains.coroutines="org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
+jetbrains.coroutinesAndroid="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
+jetbrains.kotlin="org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion"
+jetbrains.kotlinExtensions="org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlinVersion"
+deps.jetbrains = jetbrains
+
+def square = [:]
+square.otto="com.squareup:otto:1.3.8"
+square.retrofit="com.squareup.retrofit2:retrofit:$versions.retrofit"
+square.retrofitGsonConverter="com.squareup.retrofit2:converter-gson:$versions.retrofit"
+square.retrofitMoshiConverter="com.squareup.retrofit2:converter-moshi:$versions.retrofit"
+square.loggingInterceptor="com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+square.okhttp="com.squareup.okhttp3:okhttp:$versions.okhttp"
+square.retrofitAdapter="com.squareup.retrofit2:adapter-rxjava2:2.6.1"
+deps.square = square
+
+def fragment = [:]
+fragment.runtime = "androidx.fragment:fragment:${versions.fragment}"
+fragment.runtime_ktx = "androidx.fragment:fragment-ktx:${versions.fragment}"
+fragment.testing = "androidx.fragment:fragment-testing:${versions.fragment}"
+deps.fragment = fragment
+
+def dagger = [:]
+dagger.dagger="com.google.dagger:dagger:$versions.dagger"
+dagger.daggerAndroid="com.google.dagger:dagger-android:$versions.dagger"
+deps.dagger = dagger
+
+def thirdparty = [:]
+thirdparty.glide="com.github.bumptech.glide:glide:4.11.0"
+thirdparty.chuck = "com.github.ChuckerTeam.Chucker:library-no-op:3.2.0"
+deps.thirdparty = thirdparty
+
+def viewpager = [:]
+viewpager.viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
+viewpager.circleindicator = "me.relex:circleindicator:2.1.4"
+deps.viewpager = viewpager
+
+def processors = [:]
+processors.databinding="com.android.databinding:compiler:3.1.4"
+processors.room="androidx.room:room-compiler:$versions.room"
+processors.dagger="com.google.dagger:dagger-compiler:$versions.dagger"
+processors.daggerAndroid="com.google.dagger:dagger-android-processor:$versions.dagger"
+deps.processors = processors
+
+def devOnly = [:]
+devOnly.leakcanary="com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+devOnly.leakcanaryNoOp="com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
+devOnly.stetho="com.facebook.stetho:stetho:1.5.1"
+devOnly.stethoOkhttp="com.facebook.stetho:stetho-okhttp3:1.5.1"
+devOnly.toolarge="com.gu.android:toolargetool:0.2.1@aar"
+devOnly.chuck = "com.github.ChuckerTeam.Chucker:library:3.2.0"
+deps.devOnly = devOnly
+
+def androidTest = [:]
+androidTest.archCore="androidx.arch.core:core-testing:$versions.arch_core"
+androidTest.hamcrest="org.hamcrest:hamcrest-all:$versions.hamcrest"
+androidTest.mockRetrofit="com.squareup.okhttp:mockwebserver:2.7.2"
+androidTest.junit="junit:junit:$versions.junit"
+androidTest.testRunner="androidx.test:runner:1.2.0"
+androidTest.espressoCore="androidx.test.espresso:espresso-core:3.2.0"
+androidTest.espressoIntents="com.android.support.test.espresso:espresso-intents:3.0.1"
+androidTest.kotlinCoroutineTest="org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
+
+def mockito=[:]
+mockito.core="org.mockito:mockito-core:$versions.mockito"
+mockito.android="org.mockito:mockito-android:$versions.mockito"
+androidTest.mockito = mockito
+
+deps.androidTest = androidTest
+
+ext.deps = deps
+ext.versions = versions
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://maven.fabric.io/public' }
+    handler.maven { url 'https://dl.bintray.com/guardian/android' }
+    handler.mavenCentral()
+    handler.maven { url "https://jitpack.io" }
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+}
+ext.addRepos = this.&addRepos

@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "me.arunsharma.devupdates"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.getBuildProperty("VERSION_CODE", rootProject.ext.versionCode as String) as int
+        versionName rootProject.ext.getBuildProperty("VERSION_NAME", rootProject.ext.versionName)
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '$rootProject.rootDir.absolutePath/FreechargeAndroidApp/proguard-rules.txt'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.deps.support.design
+    implementation rootProject.ext.deps.dagger.dagger
+    implementation rootProject.ext.deps.support.recyclerview
+    implementation rootProject.ext.deps.support.appCompat
+    implementation rootProject.ext.deps.support.constraintLayout
+
+    kapt rootProject.ext.deps.processors.dagger
+
+    testImplementation rootProject.ext.deps.androidTest.junit
+    androidTestImplementation rootProject.ext.deps.androidTest.testRunner
+    androidTestImplementation rootProject.ext.deps.androidTest.espressoCore
+}
+

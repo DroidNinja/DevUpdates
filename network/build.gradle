@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.getBuildProperty("VERSION_CODE", rootProject.ext.versionCode as String) as int
+        versionName rootProject.ext.getBuildProperty("VERSION_NAME", rootProject.ext.versionName)
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '$rootProject.rootDir.absolutePath/FreechargeAndroidApp/proguard-rules.txt'
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api rootProject.ext.deps.jetbrains.coroutines
+    api rootProject.ext.deps.jetbrains.coroutinesAndroid
+    api rootProject.ext.deps.square.retrofit
+    api rootProject.ext.deps.square.retrofitMoshiConverter
+    api rootProject.ext.deps.square.loggingInterceptor
+    api rootProject.ext.deps.square.retrofitGsonConverter
+    debugApi rootProject.ext.deps.devOnly.chuck
+    releaseApi rootProject.ext.deps.thirdparty.chuck
+
+    testImplementation rootProject.ext.deps.androidTest.junit
+    androidTestImplementation rootProject.ext.deps.androidTest.testRunner
+    androidTestImplementation rootProject.ext.deps.androidTest.espressoCore
+}
