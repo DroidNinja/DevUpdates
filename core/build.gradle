@@ -46,6 +46,12 @@ dependencies {
     api rootProject.ext.deps.jetbrains.coroutines
     api rootProject.ext.deps.jetbrains.coroutinesAndroid
     api rootProject.ext.deps.support.coreKtx
+    api rootProject.ext.deps.arch.lifecycleExtensions
+    api rootProject.ext.deps.arch.lifecycleRuntime
+    api rootProject.ext.deps.arch.lifecycleCommonJava
+
+    implementation rootProject.ext.deps.dagger.dagger
+    kapt rootProject.ext.deps.processors.dagger
 
     testImplementation rootProject.ext.deps.androidTest.junit
     androidTestImplementation rootProject.ext.deps.androidTest.testRunner

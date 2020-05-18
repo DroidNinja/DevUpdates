@@ -48,6 +48,9 @@ dependencies {
     debugApi rootProject.ext.deps.devOnly.chuck
     releaseApi rootProject.ext.deps.thirdparty.chuck
 
+    implementation rootProject.ext.deps.dagger.dagger
+    kapt rootProject.ext.deps.processors.dagger
+
     testImplementation rootProject.ext.deps.androidTest.junit
     androidTestImplementation rootProject.ext.deps.androidTest.testRunner
     androidTestImplementation rootProject.ext.deps.androidTest.espressoCore

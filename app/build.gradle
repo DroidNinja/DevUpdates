@@ -48,6 +48,7 @@ dependencies {
     implementation rootProject.ext.deps.support.appCompat
     implementation rootProject.ext.deps.support.constraintLayout
 
+
     kapt rootProject.ext.deps.processors.dagger
 
     testImplementation rootProject.ext.deps.androidTest.junit
