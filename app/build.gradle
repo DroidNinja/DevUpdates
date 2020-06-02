@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -47,7 +51,8 @@ dependencies {
     implementation rootProject.ext.deps.support.recyclerview
     implementation rootProject.ext.deps.support.appCompat
     implementation rootProject.ext.deps.support.constraintLayout
-
+    implementation rootProject.ext.deps.fragment.runtime
+    implementation rootProject.ext.deps.fragment.runtime_ktx
 
     kapt rootProject.ext.deps.processors.dagger
 

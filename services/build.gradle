@@ -40,7 +40,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':core')
-
+    implementation project(':network')
+    implementation rootProject.ext.deps.dagger.dagger
+    kapt rootProject.ext.deps.processors.dagger
 
     testImplementation rootProject.ext.deps.androidTest.junit
     androidTestImplementation rootProject.ext.deps.androidTest.testRunner

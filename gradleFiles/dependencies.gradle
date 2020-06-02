@@ -113,6 +113,7 @@ devOnly.stetho="com.facebook.stetho:stetho:1.5.1"
 devOnly.stethoOkhttp="com.facebook.stetho:stetho-okhttp3:1.5.1"
 devOnly.toolarge="com.gu.android:toolargetool:0.2.1@aar"
 devOnly.chuck = "com.github.ChuckerTeam.Chucker:library:3.2.0"
+devOnly.timber = "com.jakewharton.timber:timber:4.7.1"
 deps.devOnly = devOnly
 
 def androidTest = [:]

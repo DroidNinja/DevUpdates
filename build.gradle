@@ -13,7 +13,7 @@ buildscript {
     addRepos(repositories)
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0-rc01'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath 'com.google.gms:google-services:4.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotinVersion"

@@ -49,6 +49,7 @@ dependencies {
     api rootProject.ext.deps.arch.lifecycleExtensions
     api rootProject.ext.deps.arch.lifecycleRuntime
     api rootProject.ext.deps.arch.lifecycleCommonJava
+    api rootProject.ext.deps.devOnly.timber
 
     implementation rootProject.ext.deps.dagger.dagger
     kapt rootProject.ext.deps.processors.dagger
