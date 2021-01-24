@@ -1,12 +1,15 @@
 package me.arunsharma.devupdates.app
 
 import android.app.Application
+import android.net.Network
+import com.dev.network.di.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import me.arunsharma.devupdates.di.ActivityBindingModule
 import me.arunsharma.devupdates.di.ApplicationModule
 import me.arunsharma.devupdates.di.DebugApplicationModule
 import me.arunsharma.devupdates.di.activity.MainComponent
+import me.arunsharma.devupdates.di.data.ServiceModule
 import javax.inject.Singleton
 
 @Singleton
@@ -14,7 +17,8 @@ import javax.inject.Singleton
     modules = [
         ApplicationModule::class,
         ActivityBindingModule::class,
-        DebugApplicationModule::class
+        DebugApplicationModule::class,
+        NetworkModule::class
     ]
 )
 interface ApplicationComponent {
