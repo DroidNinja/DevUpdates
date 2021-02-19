@@ -3,9 +3,10 @@ package me.arunsharma.devupdates.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
-import com.dev.services.github.ServiceGithub
+import com.devupdates.github.ServiceGithub
 import com.dev.services.models.ServiceItem
 import com.dev.services.repo.ServiceIntegration
+import com.devupdates.medium.ServiceMedium
 import javax.inject.Inject
 
 class VMFeed @Inject constructor(private val serviceIntegration: @JvmSuppressWildcards Map<String, ServiceIntegration>) :
@@ -16,7 +17,7 @@ class VMFeed @Inject constructor(private val serviceIntegration: @JvmSuppressWil
 
     fun getData() {
         launchDataLoad {
-            val result = serviceIntegration[ServiceGithub.SERVICE_KEY]?.getData() ?: mutableListOf()
+            val result = serviceIntegration[ServiceMedium.SERVICE_KEY]?.getData() ?: mutableListOf()
             _lvUIState.value = FeedUIState.ShowList(result)
         }
     }

@@ -33,18 +33,11 @@ android {
 }
 
 dependencies {
-    api(Dependencies.AndroidX.Material)
-    api(Dependencies.AndroidX.AppCompat)
-    api(Dependencies.AndroidX.ConstraintLayout)
-    api(Dependencies.AndroidX.Browser)
-    api(Dependencies.JetBrains.Coroutines)
-    api(Dependencies.JetBrains.CoroutinesAndroid)
-    api(Dependencies.Ktx.Core)
-    api(Dependencies.LifeCycle.LifecycleExtensions)
-    api(Dependencies.LifeCycle.LifecycleRuntime)
-    api(Dependencies.LifeCycle.LifecycleCommonJava)
-    api(Dependencies.LifeCycle.LifecycleCommonJava)
-    api(Dependencies.DevOnly.Timber)
+    implementation(project(":core"))
+    implementation(project(":network"))
+    implementation(project(":services"))
+    implementation(Dependencies.Utils.Jsoup)
+
     api(Dependencies.Di.Dagger)
     kapt(Dependencies.Compilers.Dagger)
 

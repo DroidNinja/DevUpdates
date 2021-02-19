@@ -20,6 +20,7 @@ object Dependencies {
         const val Material = "com.google.android.material:material:${Versions.AndroidX.Material}"
         const val RecyclerView = "androidx.recyclerview.recyclerview:${Versions.AndroidX.RecyclerView}"
         const val Fragment = "androidx.fragment:fragment:${Versions.AndroidX.Fragment}"
+        const val Browser = "androidx.browser:browser:1.3.0"
     }
     
     object JetBrains {

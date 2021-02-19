@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
+import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FeedFragmentBinding
@@ -60,8 +61,7 @@ class FeedFragment : BaseFragment(R.layout.feed_fragment), DaggerInjectable {
                 binding.recyclerView.adapter = FeedAdapter(state.list).apply {
                     setOnItemClickListener(object: BaseRecyclerViewAdapter.OnItemClickListener {
                         override fun onItemClick(view: View, position: Int) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getItem(position).actionUrl))
-                            startActivity(intent)
+                            CustomTabHelper.open(view.context, getItem(position).actionUrl)
                         }
                     })
                 }
