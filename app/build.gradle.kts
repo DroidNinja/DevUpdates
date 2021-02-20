@@ -3,6 +3,7 @@ plugins {
     kotlin(Plugins.KOTLIN_ANDROID)
     kotlin(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_PARCELIZE)
+    id("kotlin-android")
 }
 
 val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }

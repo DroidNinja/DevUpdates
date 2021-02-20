@@ -55,6 +55,7 @@ object Dependencies {
 
     object Helpers {
         const val Glide = "com.github.bumptech.glide:glide:${Versions.Helpers.Glide}"
+        const val Shimmer = "com.facebook.shimmer:shimmer:0.5.0"
     }
 
     object ClassPath {

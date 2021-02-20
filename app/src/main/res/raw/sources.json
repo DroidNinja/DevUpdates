@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "name": "Trending",
+      "type": "GITHUB",
+      "metadata": {
+        "language": "kotlin"
+      }
+    },
+    {
+      "name": "Android Developers",
+      "type": "MEDIUM",
+      "metadata": {
+        "username": "androiddevelopers"
+      }
+    },
+    {
+      "name": "ProAndroidDev",
+      "type": "MEDIUM",
+      "metadata": {
+        "username": "proandroiddev"
+      }
+    }
+  ]
+}

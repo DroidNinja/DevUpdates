@@ -1,5 +1,6 @@
 package me.arunsharma.devupdates.di.data
 
+import com.dev.services.models.ServiceRequest
 import com.devupdates.github.di.GithubModule
 import com.dev.services.repo.ServiceIntegration
 

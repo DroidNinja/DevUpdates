@@ -37,6 +37,7 @@ dependencies {
     api(Dependencies.AndroidX.AppCompat)
     api(Dependencies.AndroidX.ConstraintLayout)
     api(Dependencies.AndroidX.Browser)
+    api(Dependencies.Helpers.Shimmer)
     api(Dependencies.JetBrains.Coroutines)
     api(Dependencies.JetBrains.CoroutinesAndroid)
     api(Dependencies.Ktx.Core)

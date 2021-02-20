@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.fragments
+package me.arunsharma.devupdates.ui.fragments.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,6 +16,11 @@ class FeedAdapter(items: List<ServiceItem>) :
         helper.binding.tvSubTitle.text = item.description
         helper.binding.tvTopTitle.text = item.author
         helper.binding.tvFooter.text = item.likes
+        helper.binding.ivBookmark.isSelected = item.isBookmarked
+        helper.binding.ivBookmark.setOnClickListener {
+            item.isBookmarked = !item.isBookmarked
+            helper.binding.ivBookmark.isSelected = item.isBookmarked
+        }
     }
 
     override fun createHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {

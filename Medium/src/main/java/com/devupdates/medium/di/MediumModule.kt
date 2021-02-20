@@ -2,9 +2,11 @@ package com.devupdates.medium.di
 
 import com.dev.core.di.annotations.ServiceKey
 import com.dev.network.di.NetworkModule
+import com.dev.services.models.ServiceRequest
 import com.dev.services.repo.ServiceIntegration
 import com.devupdates.medium.APIMedium
 import com.devupdates.medium.ServiceMedium
+import com.devupdates.medium.ServiceMediumRequest
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

@@ -3,6 +3,7 @@ package com.devupdates.github.di
 import com.dev.core.di.annotations.ServiceKey
 import com.dev.network.di.NetworkModule
 import com.dev.network.utils.DecodingConverter
+import com.dev.services.models.ServiceRequest
 import com.devupdates.github.APIGithub
 import com.devupdates.github.GitHubTrendingParser
 import com.devupdates.github.ServiceGithub
@@ -28,7 +29,9 @@ abstract class GithubModule {
         internal fun provideGitHubService(okhttpBuilder: OkHttpClient.Builder): ServiceGithub {
             return Retrofit.Builder().baseUrl(ServiceGithub.ENDPOINT)
                 .client(okhttpBuilder
-                    .addInterceptor(HttpLoggingInterceptor())
+                    .addInterceptor(HttpLoggingInterceptor().apply {
+                        setLevel(HttpLoggingInterceptor.Level.BODY)
+                    })
                     .build())
                 .addConverterFactory(DecodingConverter.newFactory(GitHubTrendingParser::parse))
                 .build()

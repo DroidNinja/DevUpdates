@@ -18,7 +18,7 @@ fun FragmentActivity.addFragment(fragment: BaseFragment, frameId: Int, addToBack
         if (navAnimation) {
             setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
-        add(frameId, fragment)
+        add(frameId, fragment, fragment.getFragmentTag())
     }
 }
 
@@ -87,14 +87,6 @@ fun FragmentActivity.popAllAndReplace(fragment: BaseFragment, frameId: Int, addT
 
 fun FragmentActivity.removeFragment(fragment: BaseFragment) {
     supportFragmentManager.inTransaction { remove(fragment) }
-}
-
-fun FragmentActivity.replaceFragment(fragment: BaseFragment, frameId: Int, addToBackstack: Boolean) {
-    supportFragmentManager.inTransaction {
-        if (addToBackstack)
-            addToBackStack(fragment.getFragmentTag())
-        replace(frameId, fragment)
-    }
 }
 
 inline fun FragmentManager.inTransaction(func: androidx.fragment.app.FragmentTransaction.() -> androidx.fragment.app.FragmentTransaction) {
