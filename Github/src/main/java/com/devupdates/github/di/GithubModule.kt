@@ -29,9 +29,6 @@ abstract class GithubModule {
         internal fun provideGitHubService(okhttpBuilder: OkHttpClient.Builder): ServiceGithub {
             return Retrofit.Builder().baseUrl(ServiceGithub.ENDPOINT)
                 .client(okhttpBuilder
-                    .addInterceptor(HttpLoggingInterceptor().apply {
-                        setLevel(HttpLoggingInterceptor.Level.BODY)
-                    })
                     .build())
                 .addConverterFactory(DecodingConverter.newFactory(GitHubTrendingParser::parse))
                 .build()

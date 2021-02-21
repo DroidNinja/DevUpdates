@@ -5,21 +5,36 @@
       "type": "GITHUB",
       "metadata": {
         "language": "kotlin"
-      }
+      },
+      "shouldUseCache": false
     },
     {
       "name": "Android Developers",
       "type": "MEDIUM",
       "metadata": {
         "username": "androiddevelopers"
-      }
+      },
+      "shouldUseCache": false,
+      "hasPagingSupport": true
     },
     {
       "name": "ProAndroidDev",
       "type": "MEDIUM",
       "metadata": {
         "username": "proandroiddev"
-      }
+      },
+      "shouldUseCache": false,
+      "hasPagingSupport": true
+    },
+    {
+      "name": "Google Developers Experts",
+      "type": "MEDIUM",
+      "metadata": {
+        "username": "google-developer-experts",
+        "tag": "android"
+      },
+      "shouldUseCache": false,
+      "hasPagingSupport": true
     }
   ]
 }

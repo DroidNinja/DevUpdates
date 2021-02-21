@@ -1,7 +1,7 @@
 object Versions {
     object Gradle {
         const val Gradle = "4.2.0-beta04"
-        const val Kotlin = "1.4.21"
+        const val Kotlin = "1.4.30"
     }
 
     object Network {
@@ -20,6 +20,7 @@ object Versions {
         const val Material = "1.2.1"
         const val RecyclerView = "1.1.0"
         const val Fragment = "1.2.4"
+        const val Room = "2.2.6"
     }
 
     object Ktx {

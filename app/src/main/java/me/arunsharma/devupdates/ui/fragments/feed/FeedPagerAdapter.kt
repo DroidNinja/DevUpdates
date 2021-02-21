@@ -11,7 +11,7 @@ import me.arunsharma.devupdates.databinding.LayoutTabViewBinding
 data class FeedPagerItem(
     val title: String,
     val icon: Int,
-    val fragment: BaseFragment
+    val fragment: FeedListFragment
 )
 
 class FeedPagerAdapter(val fa: FragmentActivity, val feedItems: List<FeedPagerItem>) :

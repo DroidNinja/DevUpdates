@@ -37,6 +37,9 @@ dependencies {
     implementation(project(":network"))
     implementation(Dependencies.Utils.Jsoup)
 
+    implementation(Dependencies.AndroidX.Room)
+    kapt(Dependencies.Compilers.Room)
+
     api(Dependencies.Di.Dagger)
     kapt(Dependencies.Compilers.Dagger)
 

@@ -5,3 +5,4 @@ rootProject.name="DevUpdates"
 include(":app")
 include(":Medium")
 include(":Github")
+include(":RSS")

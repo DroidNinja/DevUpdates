@@ -75,6 +75,9 @@ dependencies {
     implementation(Dependencies.AndroidX.Fragment)
     implementation(Dependencies.Ktx.Fragment)
 
+    implementation(Dependencies.AndroidX.Room)
+    kapt(Dependencies.Compilers.Room)
+
     kapt(Dependencies.Compilers.Dagger)
 
     testImplementation(Dependencies.AndroidTest.Junit)

@@ -3,6 +3,7 @@ package com.dev.network.di
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 private const val TIME_OUT: Long = 30
@@ -16,5 +17,8 @@ class NetworkModule {
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .addInterceptor(
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                )
     }
 }

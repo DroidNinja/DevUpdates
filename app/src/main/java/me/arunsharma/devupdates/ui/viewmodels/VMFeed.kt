@@ -1,32 +1,51 @@
 package me.arunsharma.devupdates.ui.viewmodels
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
 import com.dev.services.models.DataSource
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
-import com.dev.services.repo.ServiceIntegration
-import com.devupdates.medium.ServiceMedium
 import com.devupdates.medium.ServiceMediumRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import me.arunsharma.devupdates.R
+import me.arunsharma.devupdates.data.SourceConfigStore
+import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
+import me.arunsharma.devupdates.ui.fragments.feed.FeedPagerItem
 import javax.inject.Inject
 
-class VMFeed @Inject constructor(private val serviceIntegration: @JvmSuppressWildcards Map<String, ServiceIntegration>) :
+class VMFeed @Inject constructor(
+    val sourceConfigStore: SourceConfigStore
+) :
     BaseViewModel() {
 
-    private val _lvUIState = MutableLiveData<FeedUIState>()
-    val lvUiState: LiveData<FeedUIState> = _lvUIState
+    private val _lvFetchConfig = MutableLiveData<List<FeedPagerItem>>()
+    val lvFetchConfig: LiveData<List<FeedPagerItem>> = _lvFetchConfig
 
-    fun getData(request: ServiceRequest) {
+
+    fun getConfig() {
         launchDataLoad {
-            _lvUIState.value = FeedUIState.Loading
-            val result = serviceIntegration[request.type.toString()]?.getData(request) ?: mutableListOf()
-            _lvUIState.value = FeedUIState.ShowList(result)
+            withContext(Dispatchers.IO) {
+                val configList = sourceConfigStore.getData()
+                _lvFetchConfig.postValue(configList.map { item ->
+                    if (item.type == DataSource.MEDIUM) {
+                        item.next = System.currentTimeMillis()
+                        FeedPagerItem(
+                            item.name,
+                            R.drawable.ic_logo_medium,
+                            FeedListFragment.newInstance(
+                                item)
+                        )
+                    } else {
+                        FeedPagerItem(
+                            item.name,
+                            R.drawable.ic_github,
+                            FeedListFragment.newInstance(item)
+                        )
+                    }
+                })
+            }
         }
     }
 
-    sealed class FeedUIState {
-        object Loading : FeedUIState()
-        class ShowList(val list: List<ServiceItem>) : FeedUIState()
-    }
 }

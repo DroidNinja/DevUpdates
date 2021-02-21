@@ -40,7 +40,6 @@ abstract class MediumModule {
                                 ?.toResponseBody(response.body?.contentType())
                             response.newBuilder().body(body).build()
                         }
-                        .addInterceptor(HttpLoggingInterceptor())
                         .build()
                 )
                 .addConverterFactory(GsonConverterFactory.create())

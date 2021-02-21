@@ -5,6 +5,8 @@ import dagger.Subcomponent
 import me.arunsharma.devupdates.di.data.ServiceModule
 import me.arunsharma.devupdates.di.viewmodels.ViewModelModule
 import me.arunsharma.devupdates.ui.MainActivity
+import me.arunsharma.devupdates.ui.fragments.addsource.AddDataSourceFragment
+import me.arunsharma.devupdates.ui.fragments.feed.FeedFragment
 import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
 
 @ActivityScope
@@ -21,4 +23,6 @@ interface MainComponent {
 
     fun inject(mainActivity: MainActivity)
     fun inject(feedListFragment: FeedListFragment)
+    fun inject(feedFragment: FeedFragment)
+    fun inject(feedFragment: AddDataSourceFragment)
 }

@@ -30,12 +30,16 @@ class APIErrorException(apiError: APIError) : Throwable(apiError.errorMessage) {
             }
         }
 
+        fun unexpectedError(): APIErrorException {
+            return APIErrorException(APIError(ERROR_CODE_UNKNOWN, ERROR_MESSAGE_UNKNOWN))
+        }
+
         private fun unexpectedError(exception: Throwable): APIErrorException {
             exception.printStackTrace()
             return APIErrorException(APIError(ERROR_CODE_UNKNOWN, ERROR_MESSAGE_UNKNOWN))
         }
 
-        private fun httpError(response: Response<*>?): APIErrorException {
+        fun httpError(response: Response<*>?): APIErrorException {
             val message = response?.code()?.toString() + " " + response?.message()
             return APIErrorException(APIError(response?.code().toString(), message))
         }

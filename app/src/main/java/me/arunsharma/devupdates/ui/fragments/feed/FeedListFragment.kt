@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
+import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
+import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedListBinding
 import me.arunsharma.devupdates.ui.MainActivity
-import me.arunsharma.devupdates.ui.viewmodels.VMFeed
+import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
 import javax.inject.Inject
 
 class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInjectable {
@@ -25,7 +27,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-    val viewModel: VMFeed by viewModels {
+    val viewModel: VMFeedList by viewModels {
         factory
     }
 
@@ -33,13 +35,8 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
         return TAG
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        injectDagger()
-    }
-
     override fun initView() {
-        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request->
+        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
             binding.recyclerView.apply {
                 layoutManager = LinearLayoutManager(context)
                 addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
@@ -49,33 +46,61 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 handleUIState(state)
             })
 
-            viewModel.getData(request)
+            loadData()
         }
     }
 
-    private fun handleUIState(state: VMFeed.FeedUIState?) {
-        when(state){
-            is VMFeed.FeedUIState.Loading -> {
+    private fun handleUIState(state: VMFeedList.FeedUIState?) {
+        when (state) {
+            is VMFeedList.FeedUIState.Loading -> {
                 binding.progressLayout.showLoading(true, arrayOf(R.layout.skeleton_item_feed_item))
             }
-            is VMFeed.FeedUIState.ShowList -> {
-                binding.recyclerView.adapter = FeedAdapter(state.list).apply {
-                    setOnItemClickListener(object: BaseRecyclerViewAdapter.OnItemClickListener {
+            is VMFeedList.FeedUIState.ShowList -> {
+                binding.progressLayout.showContent()
+                val data = state.list
+                setDataOnList(data)
+            }
+        }
+    }
+
+    private fun setDataOnList(data: List<ServiceItem>) =
+        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
+            if (binding.recyclerView.adapter == null) {
+                binding.recyclerView.adapter = FeedAdapter(data).apply {
+                    setOnItemClickListener(object :
+                        BaseRecyclerViewAdapter.OnItemClickListener {
                         override fun onItemClick(view: View, position: Int) {
                             CustomTabHelper.open(view.context, getItem(position).actionUrl)
                         }
                     })
+                    if (request.hasPagingSupport) {
+                        setOnLoadMoreListener(object : RequestLoadMoreListener {
+                            override fun onLoadMoreRequested() {
+                                viewModel.updateData(mData, request)
+                            }
+                        }, binding.recyclerView)
+                    }
                 }
-                binding.progressLayout.showContent()
+            } else if (request.hasPagingSupport) {
+                val adapter = binding.recyclerView.adapter as FeedAdapter
+                if (data.isNotEmpty()) {
+                    if (request.next > 0) {
+                        adapter.addData(data)
+                    }
+                    adapter.loadMoreComplete()
+                } else {
+                    if (request.next > 0) {
+                        adapter.loadMoreEnd()
+                    }
+                }
             }
         }
-    }
 
     companion object {
         const val TAG = "FeedListFragment"
         const val EXTRA_SERVICE_REQUEST = "EXTRA_SERVICE_REQUEST"
         fun newInstance(request: ServiceRequest): FeedListFragment = FeedListFragment().apply {
-            arguments  =Bundle().apply {
+            arguments = Bundle().apply {
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
             }
         }
@@ -83,5 +108,13 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
 
     override fun injectDagger() {
         (activity as MainActivity).mainComponent.inject(this)
+    }
+
+    fun loadData() {
+        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
+            if (view != null && viewModel.lvUiState.value == null) {
+                viewModel.getData(request)
+            }
+        }
     }
 }

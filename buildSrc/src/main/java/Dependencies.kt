@@ -21,6 +21,7 @@ object Dependencies {
         const val RecyclerView = "androidx.recyclerview.recyclerview:${Versions.AndroidX.RecyclerView}"
         const val Fragment = "androidx.fragment:fragment:${Versions.AndroidX.Fragment}"
         const val Browser = "androidx.browser:browser:1.3.0"
+        const val Room = "androidx.room:room-runtime:${Versions.AndroidX.Room}"
     }
     
     object JetBrains {
@@ -51,6 +52,7 @@ object Dependencies {
         const val Dagger = "com.google.dagger:dagger-compiler:${Versions.Di.Dagger}"
         const val Hilt = "com.google.dagger:hilt-android-compiler:${Versions.Di.Hilt}"
         const val GlideCompiler = "com.github.bumptech.glide:compiler:${Versions.Helpers.Glide}"
+        const val Room = "androidx.room:room-compiler:${Versions.AndroidX.Room}"
     }
 
     object Helpers {
@@ -82,6 +84,7 @@ object Dependencies {
 
     object Utils {
         const val Jsoup = "org.jsoup:jsoup:1.13.1"
+        const val RssParser = "com.prof18.rssparser:rssparser:3.1.3"
     }
     
     object DevOnly {

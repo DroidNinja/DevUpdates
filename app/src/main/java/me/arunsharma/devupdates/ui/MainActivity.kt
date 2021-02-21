@@ -8,6 +8,7 @@ import me.arunsharma.devupdates.app.DevUpdatesApp
 import me.arunsharma.devupdates.databinding.ActivityMainBinding
 import me.arunsharma.devupdates.di.activity.MainComponent
 import me.arunsharma.devupdates.ui.fragments.BookmarksFragment
+import me.arunsharma.devupdates.ui.fragments.addsource.AddDataSourceFragment
 import me.arunsharma.devupdates.ui.fragments.settings.SettingsFragment
 import me.arunsharma.devupdates.ui.fragments.feed.FeedFragment
 
@@ -50,8 +51,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.settings -> {
                     backStackManager.setFragment(
-                        SettingsFragment.TAG,
-                        SettingsFragment.newInstance()
+                        AddDataSourceFragment.TAG,
+                        AddDataSourceFragment.newInstance()
                     )
                     true
                 }
@@ -78,7 +79,9 @@ class MainActivity : AppCompatActivity() {
         if (!backStackManager.onBackPressed()) {
             finish()
         }
-        super.onBackPressed()
+        else {
+            super.onBackPressed()
+        }
     }
 
     companion object {

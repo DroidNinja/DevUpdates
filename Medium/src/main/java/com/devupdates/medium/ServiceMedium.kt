@@ -8,13 +8,22 @@ import retrofit2.http.*
 
 interface ServiceMedium {
 
-//    @POST("/{$USERNAME}/load-more?sortBy=latest")
-    @POST("https://run.mocky.io/v3/23e9a4a1-daf6-46b3-a154-fa02b408ab1d")
+    @GET("{$USERNAME}/load-more")
+//    @POST("https://run.mocky.io/v3/23e9a4a1-daf6-46b3-a154-fa02b408ab1d")
     @Headers("accept: application/json", "x-xsrf-token: 1")
     suspend fun getFeed(
-//        @Path(USERNAME) username: String,
-    @Query(USERNAME) username: String,
-    @Body request: MediumRequest
+        @Path(USERNAME) username: String,
+//    @Query(USERNAME) username: String,
+    @QueryMap request: MutableMap<String, String?>
+    ): Response<MediumResponse>
+
+
+    @GET("{$USERNAME}/load-more")
+    @Headers("accept: application/json", "x-xsrf-token: 1")
+    suspend fun getTaggedFeed(
+        @Path(USERNAME) username: String,
+//    @Query(USERNAME) username: String,
+        @QueryMap request: MutableMap<String, String?>
     ): Response<MediumResponse>
 
     companion object {

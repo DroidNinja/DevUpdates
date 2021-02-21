@@ -3,6 +3,7 @@ package com.devupdates.medium.models
 import com.google.gson.annotations.SerializedName
 
 data class Collection(
+    @SerializedName("latestPublishedAt")
     val createdAt: Long,
     val creatorId: String,
     val title: String,
