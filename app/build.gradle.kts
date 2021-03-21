@@ -29,7 +29,7 @@ android {
         }
         getByName("debug") {
             keyAlias = properties["debugKeyStorePass"].toString()
-            storeFile = rootProject.file(".keystores/debugKeyStore.jks")
+            storeFile = rootProject.file("debugKeyStore.jks")
             storePassword = properties["debugKeyStorePass"].toString()
             keyPassword = properties["debugKeyStorePass"].toString()
         }
