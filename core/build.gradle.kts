@@ -51,5 +51,6 @@ dependencies {
 
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestRunner)
+    androidTestImplementation(Dependencies.AndroidTest.TestExt)
     androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
 }

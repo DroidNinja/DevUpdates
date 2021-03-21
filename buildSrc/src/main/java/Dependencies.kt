@@ -72,6 +72,7 @@ object Dependencies {
         const val MockRetrofit="com.squareup.okhttp:mockwebserver:2.7.2"
         const val Junit="junit:junit:4.12"
         const val TestRunner="androidx.test:runner:1.2.0"
+        const val TestExt="androidx.test.ext:junit:1.1.2"
         const val EspressoCore="androidx.test.espresso:espresso-core:3.2.0"
         const val EspressoIntents="com.android.support.test.espresso:espresso-intents:3.0.1"
         const val KotlinCoroutineTest="org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
