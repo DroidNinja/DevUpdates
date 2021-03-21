@@ -36,10 +36,17 @@ class VMFeed @Inject constructor(
                             FeedListFragment.newInstance(
                                 item)
                         )
-                    } else {
+                    } else if (item.type == DataSource.GITHUB) {
                         FeedPagerItem(
                             item.name,
                             R.drawable.ic_github,
+                            FeedListFragment.newInstance(item)
+                        )
+                    }
+                    else{
+                        FeedPagerItem(
+                            item.name,
+                            R.drawable.ic_rss_feed,
                             FeedListFragment.newInstance(item)
                         )
                     }

@@ -29,7 +29,7 @@ data class AppCache(
             val lastUpdated = File(context.cacheDir, getCacheName()).lastModified()
             return (System.currentTimeMillis() - lastUpdated) >= expiration
         }
-        return false
+        return true
     }
 }
 

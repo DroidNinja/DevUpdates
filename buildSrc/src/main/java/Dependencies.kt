@@ -84,7 +84,15 @@ object Dependencies {
 
     object Utils {
         const val Jsoup = "org.jsoup:jsoup:1.13.1"
-        const val RssParser = "com.prof18.rssparser:rssparser:3.1.3"
+        const val RssParser = "com.tickaroo.tikxml:retrofit-converter:0.8.15"
+    }
+
+    object TikXML {
+        const val annotation = "com.tickaroo.tikxml:annotation:${Versions.Helpers.Tikxml}"
+        const val apt = "com.tickaroo.tikxml:processor:${Versions.Helpers.Tikxml}"
+        const val core = "com.tickaroo.tikxml:core:${Versions.Helpers.Tikxml}"
+        const val htmlEscape = "com.tickaroo.tikxml:converter-htmlescape:${Versions.Helpers.Tikxml}"
+        const val retrofit = "com.tickaroo.tikxml:retrofit-converter:${Versions.Helpers.Tikxml}"
     }
     
     object DevOnly {

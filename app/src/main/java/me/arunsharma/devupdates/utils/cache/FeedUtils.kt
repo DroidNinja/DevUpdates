@@ -9,8 +9,11 @@ object FeedUtils {
             DataSource.GITHUB -> {
                 R.drawable.ic_github
             }
-            else -> {
+            DataSource.MEDIUM -> {
                 R.drawable.ic_logo_medium
+            }
+            else -> {
+                R.drawable.ic_rss_feed
             }
         }
     }

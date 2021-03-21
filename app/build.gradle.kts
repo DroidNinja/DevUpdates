@@ -67,6 +67,7 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":Github"))
     implementation(project(":Medium"))
+    implementation(project(":RSS"))
     implementation(project(":services"))
     implementation(Dependencies.AndroidX.Material)
     implementation(Dependencies.Di.Dagger)

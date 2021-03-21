@@ -1,7 +1,9 @@
 buildscript {
     repositories {
         google()
+        mavenCentral()
         jcenter()
+        maven("http://oss.sonatype.org/content/repositories/snapshots")
     }
     dependencies {
         classpath(Dependencies.ClassPath.Gradle)
@@ -13,10 +15,12 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         maven { url = uri("https://jitpack.io") }
         maven { url = uri("https://maven.google.com") }
         maven { url = uri("https://oss.jfrog.org/libs-snapshot") }
+        maven("http://oss.sonatype.org/content/repositories/snapshots")
     }
 }
 

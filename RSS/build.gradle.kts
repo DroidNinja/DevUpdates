@@ -36,7 +36,12 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
     implementation(project(":services"))
-    implementation(Dependencies.Utils.RssParser)
+    implementation(Dependencies.Utils.Jsoup)
+    implementation(Dependencies.TikXML.annotation)
+    implementation(Dependencies.TikXML.core)
+    implementation(Dependencies.TikXML.retrofit)
+    api(Dependencies.TikXML.htmlEscape)
+    kapt(Dependencies.TikXML.apt)
 
     api(Dependencies.Di.Dagger)
     kapt(Dependencies.Compilers.Dagger)

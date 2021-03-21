@@ -1,6 +1,6 @@
 object Versions {
     object Gradle {
-        const val Gradle = "4.2.0-beta04"
+        const val Gradle = "7.0.0-alpha08"
         const val Kotlin = "1.4.30"
     }
 
@@ -36,6 +36,7 @@ object Versions {
 
     object Helpers {
         const val Glide = "4.11.0"
+        const val Tikxml = "0.8.13"
     }
 
     object JetBrains {

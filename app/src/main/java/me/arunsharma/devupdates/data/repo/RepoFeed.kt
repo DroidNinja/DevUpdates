@@ -16,23 +16,28 @@ class RepoFeed @Inject constructor(
 ) {
 
     suspend fun getData(request: ServiceRequest): ResponseStatus<List<ServiceItem>> {
-        return withContext(Dispatchers.IO) {
-            val cacheData =
-                database.feedDao().getFeedBySource(request.type.toString(), request.getGroupId())
-            if (!request.shouldUseCache || cacheData.isNullOrEmpty()) {
-                val result =
-                    serviceIntegration[request.type.toString()]?.getData(request)
-                if (result is ResponseStatus.Success) {
-                    if (request.shouldUseCache) {
-                        saveCache(result.data)
+        try {
+            return withContext(Dispatchers.IO) {
+                val cacheData =
+                    database.feedDao()
+                        .getFeedBySource(request.type.toString(), request.getGroupId())
+                if (!request.shouldUseCache || cacheData.isNullOrEmpty()) {
+                    val result =
+                        serviceIntegration[request.type.toString()]?.getData(request)
+                    if (result is ResponseStatus.Success) {
+                        if (request.shouldUseCache) {
+                            saveCache(result.data)
+                        }
                     }
-                }
-                return@withContext result
-                    ?: ResponseStatus.failure(APIErrorException.unexpectedError())
+                    return@withContext result
+                        ?: ResponseStatus.failure(APIErrorException.unexpectedError())
 
-            } else {
-                return@withContext ResponseStatus.success(cacheData)
+                } else {
+                    return@withContext ResponseStatus.success(cacheData)
+                }
             }
+        } catch (ex: Exception) {
+            return ResponseStatus.failure(APIErrorException.newInstance(ex))
         }
     }
 

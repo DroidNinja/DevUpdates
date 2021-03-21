@@ -1,5 +1,6 @@
 package com.devupdates.github
 
+import android.text.format.DateUtils
 import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem

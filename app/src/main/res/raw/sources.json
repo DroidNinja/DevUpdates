@@ -1,6 +1,15 @@
 {
   "data": [
     {
+      "name": "Official Android",
+      "type": "BLOGSPOT",
+      "metadata": {
+        "url": "https://android-developers.blogspot.com/feeds/posts/default?alt=rss"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
       "name": "Trending",
       "type": "GITHUB",
       "metadata": {
@@ -14,7 +23,7 @@
       "metadata": {
         "username": "androiddevelopers"
       },
-      "shouldUseCache": false,
+      "shouldUseCache": true,
       "hasPagingSupport": true
     },
     {
@@ -23,8 +32,35 @@
       "metadata": {
         "username": "proandroiddev"
       },
-      "shouldUseCache": false,
+      "shouldUseCache": true,
       "hasPagingSupport": true
+    },
+    {
+      "name": "Antonio Leiva",
+      "type": "RSS_CHANNEL",
+      "metadata": {
+        "url": "https://antonioleiva.com/category/blog/feed/"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
+      "name": "Chris Banes",
+      "type": "RSS_CHANNEL",
+      "metadata": {
+        "url": "https://chris.banes.dev/rss?format=xml"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
+      "name": "CommonsWare",
+      "type": "RSS",
+      "metadata": {
+        "url": "https://commonsware.com/blog/feed.atom"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
     },
     {
       "name": "Google Developers Experts",
