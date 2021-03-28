@@ -21,6 +21,7 @@ object Versions {
         const val RecyclerView = "1.1.0"
         const val Fragment = "1.2.4"
         const val Room = "2.2.6"
+        const val SwipeRefreshLayout = "1.1.0"
     }
 
     object Ktx {

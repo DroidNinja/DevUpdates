@@ -12,7 +12,7 @@ import com.dev.core.R
 
 object CustomTabHelper {
     private fun getDefaultBrowser(context: Context): String? {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.example.com"))
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.example.com"))
         val packageManager = context.packageManager
         val resolveInfo =
             packageManager.resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY)
@@ -23,7 +23,7 @@ object CustomTabHelper {
     private fun getCustomTabsPackages(context: Context): List<String> {
         val packageManager = context.packageManager
         val activityIntent =
-            Intent(Intent.ACTION_VIEW, Uri.parse("http://www.example.com"))
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://www.example.com"))
         val resolvedActivityList =
             packageManager.queryIntentActivities(activityIntent, 0)
         val packagesSupportingCustomTabs = mutableListOf<String>()

@@ -27,8 +27,10 @@ interface ApplicationComponent {
 
     fun mainComponent(): MainComponent.Factory
 
-    @Component.Factory
+    @Component.Builder
     interface Builder {
-        fun create(@BindsInstance application: Application): ApplicationComponent
+        @BindsInstance
+        fun create(application: Application): Builder
+        fun build(): ApplicationComponent
     }
 }

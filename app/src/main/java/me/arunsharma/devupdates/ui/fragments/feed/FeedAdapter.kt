@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.BaseViewHolder
 import com.dev.services.models.ServiceItem
+import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.ItemFeedItemBinding
 
 class VHFeedItem(val binding: ItemFeedItemBinding) : BaseViewHolder(binding.root)
@@ -17,10 +18,7 @@ class FeedAdapter(items: List<ServiceItem>) :
         helper.binding.tvTopTitle.text = item.author
         helper.binding.tvFooter.text = item.likes
         helper.binding.ivBookmark.isSelected = item.isBookmarked
-        helper.binding.ivBookmark.setOnClickListener {
-            item.isBookmarked = !item.isBookmarked
-            helper.binding.ivBookmark.isSelected = item.isBookmarked
-        }
+        helper.addOnClickListener(R.id.ivBookmark)
     }
 
     override fun createHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {

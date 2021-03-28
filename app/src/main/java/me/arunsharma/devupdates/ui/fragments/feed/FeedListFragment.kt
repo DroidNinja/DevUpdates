@@ -18,6 +18,7 @@ import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedListBinding
 import me.arunsharma.devupdates.ui.MainActivity
 import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
+import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
 class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInjectable {
@@ -42,6 +43,15 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                 setHasFixedSize(true)
             }
+
+            binding.srlView.setOnRefreshListener {
+                viewModel.getData(request, forceUpdate = true)
+            }
+
+            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString->
+                view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString) ) }
+            })
+
             viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
                 handleUIState(state)
             })
@@ -50,12 +60,13 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
         }
     }
 
-    private fun handleUIState(state: VMFeedList.FeedUIState?) {
+    private fun handleUIState(state: FeedUIState?) {
         when (state) {
-            is VMFeedList.FeedUIState.Loading -> {
+            is FeedUIState.Loading -> {
                 binding.progressLayout.showLoading(true, arrayOf(R.layout.skeleton_item_feed_item))
             }
-            is VMFeedList.FeedUIState.ShowList -> {
+            is FeedUIState.ShowList -> {
+                binding.srlView.isRefreshing = false
                 binding.progressLayout.showContent()
                 val data = state.list
                 setDataOnList(data)
@@ -71,6 +82,16 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                         BaseRecyclerViewAdapter.OnItemClickListener {
                         override fun onItemClick(view: View, position: Int) {
                             CustomTabHelper.open(view.context, getItem(position).actionUrl)
+                        }
+                    })
+                    setOnItemChildClickListener(object : BaseRecyclerViewAdapter.OnItemChildClickListener {
+                        override fun onItemChildClick(view: View, position: Int) {
+                            if(view.id == R.id.ivBookmark){
+                                val item = getItem(position)
+                                item.isBookmarked = !item.isBookmarked
+                                notifyItemChanged(position)
+                                viewModel.addBookmark(item)
+                            }
                         }
                     })
                     if (request.hasPagingSupport) {
@@ -110,7 +131,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
         (activity as MainActivity).mainComponent.inject(this)
     }
 
-    fun loadData() {
+    private fun loadData() {
         arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
             if (view != null && viewModel.lvUiState.value == null) {
                 viewModel.getData(request)

@@ -6,4 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_source">Add Source</string>
+    <string name="bookmark_added">Bookmarked added</string>
+    <string name="bookmark_removed">Bookmarked removed</string>
+
 </resources>

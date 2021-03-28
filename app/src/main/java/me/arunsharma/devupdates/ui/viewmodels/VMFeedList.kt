@@ -1,41 +1,45 @@
 package me.arunsharma.devupdates.ui.viewmodels
 
-import android.content.Context
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
-import com.dev.core.utils.StorageUtils
-import com.dev.network.model.APIErrorException
+import com.dev.core.di.annotations.IoDispatcher
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
-import com.dev.services.models.SourceConfig
-import com.devupdates.medium.ServiceMediumRequest
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.SourceConfigStore
 import me.arunsharma.devupdates.data.repo.RepoFeed
-import me.arunsharma.devupdates.utils.cache.AppCache
-import me.arunsharma.devupdates.utils.cache.CacheConstants
-import me.arunsharma.devupdates.utils.cache.CachingProvider
+import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
+import me.arunsharma.devupdates.utils.SingleLiveEvent
 import javax.inject.Inject
 
 class VMFeedList @Inject constructor(
     private val repoFeed: RepoFeed,
-    val sourceConfigStore: SourceConfigStore
+    val sourceConfigStore: SourceConfigStore,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    val context: Application
 ) :
     BaseViewModel() {
 
     private val _lvUIState = MutableLiveData<FeedUIState>()
     val lvUiState: LiveData<FeedUIState> = _lvUIState
 
-    fun getData(request: ServiceRequest, showLoading: Boolean = true) {
+    val lvShowMessage = SingleLiveEvent<Int>()
+
+    fun getData(
+        request: ServiceRequest,
+        forceUpdate: Boolean = false,
+        showLoading: Boolean = true
+    ) {
         launchDataLoad {
             if (showLoading) {
                 _lvUIState.value = FeedUIState.Loading
             }
-            val result = repoFeed.getData(request)
+            val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {
                 _lvUIState.value = FeedUIState.ShowList(result.data)
             } else if (result is ResponseStatus.Failure) {
@@ -47,13 +51,20 @@ class VMFeedList @Inject constructor(
     fun updateData(currentData: MutableList<ServiceItem>, request: ServiceRequest) {
         if (request.hasPagingSupport) {
             request.next = currentData.last().createdAt
-            getData(request, false)
+            getData(request, forceUpdate = false, showLoading = false)
         }
     }
 
-    sealed class FeedUIState {
-        object Loading : FeedUIState()
-        class ShowList(val list: List<ServiceItem>) : FeedUIState()
-        class ShowError(val list: APIErrorException) : FeedUIState()
+    fun addBookmark(item: ServiceItem) {
+        launchDataLoad {
+            withContext(ioDispatcher) {
+                repoFeed.addBookmark(item)
+                if (item.isBookmarked) {
+                    lvShowMessage.postValue(R.string.bookmark_added)
+                } else {
+                    lvShowMessage.postValue(R.string.bookmark_removed)
+                }
+            }
+        }
     }
 }

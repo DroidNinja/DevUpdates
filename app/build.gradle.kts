@@ -18,6 +18,12 @@ android {
         versionCode(AndroidVersion.VERSION_CODE)
         versionName(AndroidVersion.VERSION_NAME)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
+            }
+        }
     }
 
     signingConfigs {
@@ -75,6 +81,7 @@ dependencies {
     implementation(Dependencies.AndroidX.ConstraintLayout)
     implementation(Dependencies.AndroidX.Fragment)
     implementation(Dependencies.Ktx.Fragment)
+    implementation(Dependencies.AndroidX.SwipeRefreshLayout)
 
     implementation(Dependencies.AndroidX.Room)
     kapt(Dependencies.Compilers.Room)

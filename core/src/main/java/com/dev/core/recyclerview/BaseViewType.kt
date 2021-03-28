@@ -117,6 +117,10 @@ abstract class BaseRecyclerViewAdapter<T, K : BaseViewHolder>(var mData: Mutable
         mItemClickListener = listener
     }
 
+    fun setOnItemChildClickListener(listener: OnItemChildClickListener) {
+        mItemChildClickListener = listener
+    }
+
     private fun bindViewClickListener(baseViewHolder: BaseViewHolder?) {
         baseViewHolder?.let {
             baseViewHolder.itemView.setOnClickListener { v -> mItemClickListener?.onItemClick(v, baseViewHolder.layoutPosition) }

@@ -9,8 +9,9 @@ import javax.inject.Inject
 class DevUpdatesApp : Application() {
 
     val appComponent: ApplicationComponent by lazy {
-        DaggerApplicationComponent.factory()
+        DaggerApplicationComponent.builder()
             .create(this)
+            .build()
     }
 
     override fun onCreate() {
