@@ -3,6 +3,7 @@ package me.arunsharma.devupdates.app
 import android.app.Application
 import android.os.StrictMode
 import com.dev.core.extensions.d
+import com.dev.devik.di.DevikContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class DevUpdatesApp : Application() {
     override fun onCreate() {
         super.onCreate()
         appComponent.inject(this@DevUpdatesApp)
-
+        DevikContext(this)
         StrictMode.setThreadPolicy(
             StrictMode.ThreadPolicy.Builder()
                 .detectDiskReads()
@@ -30,7 +31,6 @@ class DevUpdatesApp : Application() {
         StrictMode.setVmPolicy(
             StrictMode.VmPolicy.Builder()
                 .detectLeakedSqlLiteObjects()
-                .detectLeakedClosableObjects()
                 .penaltyLog()
                 .penaltyDeath()
                 .build()

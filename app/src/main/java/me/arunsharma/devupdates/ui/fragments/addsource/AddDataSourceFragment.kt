@@ -50,7 +50,7 @@ class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source), D
     }
 
     companion object {
-        const val TAG = "BookmarksFragment"
+        const val TAG = "AddDataSourceFragment"
         fun newInstance(): AddDataSourceFragment = AddDataSourceFragment()
     }
 }

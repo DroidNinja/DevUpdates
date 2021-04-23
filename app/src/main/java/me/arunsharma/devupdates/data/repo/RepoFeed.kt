@@ -26,7 +26,7 @@ class RepoFeed @Inject constructor(
             return withContext(ioDispatcher) {
                 val cacheData =
                     database.feedDao()
-                        .getFeedBySource(request.type.toString(), request.getGroupId())
+                        .getFeedBySource(request.type.toString(), request.getGroupId(), request.next)
                 if ( forceUpdate || !request.shouldUseCache || cacheData.isNullOrEmpty()) {
                     val result =
                         serviceIntegration[request.type.toString()]?.getData(request)
@@ -47,7 +47,7 @@ class RepoFeed @Inject constructor(
         }
     }
 
-    private suspend fun saveCache(data: List<ServiceItem>) {
+    private fun saveCache(data: List<ServiceItem>) {
         database.feedDao().insertAll(data)
     }
 

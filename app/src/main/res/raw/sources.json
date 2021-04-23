@@ -36,6 +36,15 @@
       "hasPagingSupport": true
     },
     {
+      "name": "Styling Android",
+      "type": "RSS_CHANNEL",
+      "metadata": {
+        "url": "http://feeds.feedburner.com/StylingAndroid"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
       "name": "Antonio Leiva",
       "type": "RSS_CHANNEL",
       "metadata": {

@@ -48,8 +48,8 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 viewModel.getData(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString->
-                view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString) ) }
+            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
+                view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
             })
 
             viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
@@ -69,51 +69,50 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 binding.srlView.isRefreshing = false
                 binding.progressLayout.showContent()
                 val data = state.list
-                setDataOnList(data)
+                setDataOnList(state.request, data)
             }
         }
     }
 
-    private fun setDataOnList(data: List<ServiceItem>) =
-        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
-            if (binding.recyclerView.adapter == null) {
-                binding.recyclerView.adapter = FeedAdapter(data).apply {
-                    setOnItemClickListener(object :
-                        BaseRecyclerViewAdapter.OnItemClickListener {
-                        override fun onItemClick(view: View, position: Int) {
-                            CustomTabHelper.open(view.context, getItem(position).actionUrl)
-                        }
-                    })
-                    setOnItemChildClickListener(object : BaseRecyclerViewAdapter.OnItemChildClickListener {
-                        override fun onItemChildClick(view: View, position: Int) {
-                            if(view.id == R.id.ivBookmark){
-                                val item = getItem(position)
-                                item.isBookmarked = !item.isBookmarked
-                                notifyItemChanged(position)
-                                viewModel.addBookmark(item)
-                            }
-                        }
-                    })
-                    if (request.hasPagingSupport) {
-                        setOnLoadMoreListener(object : RequestLoadMoreListener {
-                            override fun onLoadMoreRequested() {
-                                viewModel.updateData(mData, request)
-                            }
-                        }, binding.recyclerView)
+    private fun setDataOnList(request: ServiceRequest, data: List<ServiceItem>) =
+        if (binding.recyclerView.adapter == null) {
+            binding.recyclerView.adapter = FeedAdapter(data).apply {
+                setOnItemClickListener(object :
+                    BaseRecyclerViewAdapter.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        CustomTabHelper.open(view.context, getItem(position).actionUrl)
                     }
+                })
+                setOnItemChildClickListener(object :
+                    BaseRecyclerViewAdapter.OnItemChildClickListener {
+                    override fun onItemChildClick(view: View, position: Int) {
+                        if (view.id == R.id.ivBookmark) {
+                            val item = getItem(position)
+                            item.isBookmarked = !item.isBookmarked
+                            notifyItemChanged(position)
+                            viewModel.addBookmark(item)
+                        }
+                    }
+                })
+                if (request.hasPagingSupport) {
+                    setOnLoadMoreListener(object : RequestLoadMoreListener {
+                        override fun onLoadMoreRequested() {
+                            viewModel.updateData(mData, request)
+                        }
+                    }, binding.recyclerView)
                 }
-            } else if (request.hasPagingSupport) {
-                val adapter = binding.recyclerView.adapter as FeedAdapter
+            }
+        } else {
+            val adapter = binding.recyclerView.adapter as FeedAdapter
+            if (request.hasPagingSupport) {
                 if (data.isNotEmpty()) {
-                    if (request.next > 0) {
                         adapter.addData(data)
-                    }
                     adapter.loadMoreComplete()
                 } else {
-                    if (request.next > 0) {
-                        adapter.loadMoreEnd()
-                    }
+                    adapter.loadMoreEnd()
                 }
+            } else {
+                adapter.setData(data)
             }
         }
 

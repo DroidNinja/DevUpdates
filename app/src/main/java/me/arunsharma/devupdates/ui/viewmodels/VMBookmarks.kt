@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
 import com.dev.network.model.ResponseStatus
+import com.dev.services.models.DataSource
+import com.dev.services.models.ServiceRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.data.AppDatabase
@@ -20,7 +22,7 @@ class VMBookmarks @Inject constructor(val database: AppDatabase): BaseViewModel(
             _lvUIState.value = FeedUIState.Loading
             withContext(Dispatchers.IO){
                 val data = database.feedDao().getBookmarks()
-                _lvUIState.postValue(FeedUIState.ShowList(data))
+                _lvUIState.postValue(FeedUIState.ShowList(ServiceRequest(DataSource.BLOGSPOT, "BM"), data))
             }
         }
     }

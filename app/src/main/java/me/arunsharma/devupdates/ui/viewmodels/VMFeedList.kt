@@ -41,7 +41,7 @@ class VMFeedList @Inject constructor(
             }
             val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {
-                _lvUIState.value = FeedUIState.ShowList(result.data)
+                _lvUIState.value = FeedUIState.ShowList(request, result.data)
             } else if (result is ResponseStatus.Failure) {
                 _lvUIState.value = FeedUIState.ShowError(result.exception)
             }
