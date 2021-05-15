@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsService
 import androidx.core.content.ContextCompat
 import com.dev.core.R
+import com.dev.core.extensions.e
 
 object CustomTabHelper {
     private fun getDefaultBrowser(context: Context): String? {
@@ -47,7 +49,7 @@ object CustomTabHelper {
         return preferredPackage ?: supportedPackages[0]
     }
 
-    fun getCustomTabIntent(context: Context): CustomTabsIntent? {
+    private fun getCustomTabIntent(context: Context): CustomTabsIntent? {
         val customTabsBuilder = CustomTabsIntent.Builder()
         customTabsBuilder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
         customTabsBuilder.setExitAnimations(
@@ -69,7 +71,11 @@ object CustomTabHelper {
     }
 
     fun open(context: Context, url: String?) {
-        val intent = getCustomTabIntent(context)
-        intent?.launchUrl(context, Uri.parse(url))
+        try {
+            val intent = getCustomTabIntent(context)
+            intent?.launchUrl(context, Uri.parse(url))
+        } catch (exception: Exception) {
+            e { exception.toString() }
+        }
     }
 }
