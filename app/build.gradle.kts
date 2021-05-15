@@ -65,6 +65,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        compose = true
     }
 }
 
@@ -76,6 +77,7 @@ dependencies {
     implementation(project(":source-rss"))
     implementation(project(":services"))
     debugImplementation(project(":devik"))
+    releaseImplementation(project(":devik-noop"))
     implementation(Dependencies.AndroidX.Material)
     implementation(Dependencies.Di.Dagger)
     implementation(Dependencies.AndroidX.AppCompat)
@@ -83,6 +85,19 @@ dependencies {
     implementation(Dependencies.AndroidX.Fragment)
     implementation(Dependencies.Ktx.Fragment)
     implementation(Dependencies.AndroidX.SwipeRefreshLayout)
+
+    implementation(Dependencies.Compose.UI)
+    implementation(Dependencies.Compose.ActivityCompose)
+    implementation(Dependencies.Compose.MaterialCompose)
+    implementation(Dependencies.Compose.MaterialIconsCompose)
+    implementation(Dependencies.Compose.Foundation)
+    implementation(Dependencies.Compose.FoundationLayout)
+    implementation(Dependencies.Compose.Animation)
+    implementation(Dependencies.Compose.Runtime)
+    implementation(Dependencies.Compose.RuntimeLivedata)
+    implementation(Dependencies.Compose.Navigation)
+    implementation(Dependencies.Compose.Tooling)
+    implementation(Dependencies.Compose.ConstraintLayout)
 
     implementation(Dependencies.AndroidX.Room)
     kapt(Dependencies.Compilers.Room)
@@ -94,4 +109,3 @@ dependencies {
     androidTestImplementation(Dependencies.AndroidTest.TestRunner)
     androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
 }
-

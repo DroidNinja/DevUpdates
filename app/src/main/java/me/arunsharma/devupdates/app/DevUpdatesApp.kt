@@ -3,7 +3,7 @@ package me.arunsharma.devupdates.app
 import android.app.Application
 import android.os.StrictMode
 import com.dev.core.extensions.d
-import com.dev.devik.di.DevikContext
+import com.dev.devik.DevikContext
 import timber.log.Timber
 import javax.inject.Inject
 

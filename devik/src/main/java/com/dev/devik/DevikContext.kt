@@ -1,4 +1,4 @@
-package com.dev.devik.di
+package com.dev.devik
 
 import android.content.Context
 import com.facebook.flipper.android.AndroidFlipperClient

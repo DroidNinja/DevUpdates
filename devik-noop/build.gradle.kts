@@ -33,17 +33,6 @@ android {
 }
 
 dependencies {
-    debugImplementation(Dependencies.DevOnly.Chuck)
-    implementation(Dependencies.DevOnly.Stetho)
-    implementation(Dependencies.DevOnly.StethoOkhttp)
-    debugImplementation(Dependencies.DevOnly.Flipper)
-    debugImplementation(Dependencies.DevOnly.FlipperSoLoader)
-    implementation(Dependencies.DevOnly.FlipperNetwork)
-    implementation(Dependencies.DevOnly.StethoOkhttp)
-    implementation(Dependencies.DevOnly.Leakcanary)
-    implementation(Dependencies.Di.Dagger)
-    kapt(Dependencies.Compilers.Dagger)
-
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)
     androidTestImplementation(Dependencies.AndroidTest.TestRunner)

@@ -29,7 +29,7 @@ class APIRSS @Inject constructor(val serviceRSS: ServiceRSS) : ServiceIntegratio
                     description = item.summary?.substring(0, min(256, item.summary.length)) + "...",
                     author = item.author?.name,
                     likes = DateUtils.getRelativeTimeSpanString(createdAt).toString(),
-                    actionUrl = item.link ?: "",
+                    actionUrl = item.link?.href ?: "",
                     sourceType = DataSource.RSS.toString(),
                     groupId = request.name
                 )

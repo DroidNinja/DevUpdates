@@ -40,8 +40,8 @@ object Dependencies {
     
     object LifeCycle {
         const val LifecycleExtensions="androidx.lifecycle:lifecycle-extensions:2.2.0"
-        const val LifecycleRuntime="androidx.lifecycle:lifecycle-runtime:2.2.0"
-        const val LifecycleCommonJava="androidx.lifecycle:lifecycle-common-java8:2.2.0"
+        const val LifecycleRuntime="androidx.lifecycle:lifecycle-runtime:2.3.1"
+        const val LifecycleCommonJava="androidx.lifecycle:lifecycle-common-java8:2.3.1"
     }
 
     object Di {
@@ -95,6 +95,21 @@ object Dependencies {
         const val core = "com.tickaroo.tikxml:core:${Versions.Helpers.Tikxml}"
         const val htmlEscape = "com.tickaroo.tikxml:converter-htmlescape:${Versions.Helpers.Tikxml}"
         const val retrofit = "com.tickaroo.tikxml:retrofit-converter:${Versions.Helpers.Tikxml}"
+    }
+
+    object Compose {
+        const val UI =  "androidx.compose.ui:ui:${Versions.Compose.ComposeVersion}"
+        const val ActivityCompose =  "androidx.activity:activity-compose:1.3.0-alpha07"
+        const val MaterialCompose = "androidx.compose.material:material:${Versions.Compose.ComposeVersion}"
+        const val MaterialIconsCompose = "androidx.compose.material:material-icons-extended:${Versions.Compose.ComposeVersion}"
+        const val Foundation = "androidx.compose.foundation:foundation:${Versions.Compose.ComposeVersion}"
+        const val FoundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.Compose.ComposeVersion}"
+        const val Animation = "androidx.compose.animation:animation:${Versions.Compose.ComposeVersion}"
+        const val Runtime = "androidx.compose.runtime:runtime:${Versions.Compose.ComposeVersion}"
+        const val RuntimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.Compose.ComposeVersion}"
+        const val Navigation = "androidx.navigation:navigation-compose:1.0.0-alpha10"
+        const val Tooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.ComposeVersion}"
+        const val ConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha06"
     }
     
     object DevOnly {

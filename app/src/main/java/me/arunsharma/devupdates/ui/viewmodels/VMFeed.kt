@@ -1,16 +1,13 @@
 package me.arunsharma.devupdates.ui.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
 import com.dev.services.models.DataSource
-import com.devupdates.medium.ServiceMediumRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.SourceConfigStore
-import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
 import me.arunsharma.devupdates.ui.fragments.feed.FeedPagerItem
 import javax.inject.Inject
 
@@ -31,23 +28,18 @@ class VMFeed @Inject constructor(
                     if (item.type == DataSource.MEDIUM) {
                         item.next = System.currentTimeMillis()
                         FeedPagerItem(
-                            item.name,
                             R.drawable.ic_logo_medium,
-                            FeedListFragment.newInstance(
-                                item)
+                            item
                         )
                     } else if (item.type == DataSource.GITHUB) {
                         FeedPagerItem(
-                            item.name,
                             R.drawable.ic_github,
-                            FeedListFragment.newInstance(item)
+                            item
                         )
-                    }
-                    else{
+                    } else {
                         FeedPagerItem(
-                            item.name,
                             R.drawable.ic_rss_feed,
-                            FeedListFragment.newInstance(item)
+                            item
                         )
                     }
                 })
