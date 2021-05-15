@@ -5,5 +5,6 @@ enum class DataSource {
     MEDIUM,
     BLOGSPOT,
     RSS,
-    RSS_CHANNEL
+    RSS_CHANNEL,
+    ANDROID_WEEKLY
 }

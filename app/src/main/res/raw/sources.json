@@ -1,6 +1,15 @@
 {
   "data": [
     {
+      "name": "Android Weekly",
+      "type": "ANDROID_WEEKLY",
+      "metadata": {
+        "url": "https://chris.banes.dev/rss?format=xml"
+      },
+      "shouldUseCache": false,
+      "hasPagingSupport": true
+    },
+    {
       "name": "Official Android",
       "type": "BLOGSPOT",
       "metadata": {
@@ -45,24 +54,6 @@
       "hasPagingSupport": false
     },
     {
-      "name": "Antonio Leiva",
-      "type": "RSS_CHANNEL",
-      "metadata": {
-        "url": "https://antonioleiva.com/category/blog/feed/"
-      },
-      "shouldUseCache": true,
-      "hasPagingSupport": false
-    },
-    {
-      "name": "Chris Banes",
-      "type": "RSS_CHANNEL",
-      "metadata": {
-        "url": "https://chris.banes.dev/rss?format=xml"
-      },
-      "shouldUseCache": true,
-      "hasPagingSupport": false
-    },
-    {
       "name": "CommonsWare",
       "type": "RSS",
       "metadata": {
@@ -80,6 +71,24 @@
       },
       "shouldUseCache": false,
       "hasPagingSupport": true
+    },
+    {
+      "name": "Antonio Leiva",
+      "type": "RSS_CHANNEL",
+      "metadata": {
+        "url": "https://antonioleiva.com/category/blog/feed/"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
+      "name": "Chris Banes",
+      "type": "RSS_CHANNEL",
+      "metadata": {
+        "url": "https://chris.banes.dev/rss?format=xml"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
     }
   ]
 }
