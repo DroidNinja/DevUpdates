@@ -29,7 +29,7 @@ android {
     signingConfigs {
         create("release") {
             keyAlias = properties["releaseKeyStorePass"].toString()
-            storeFile = rootProject.file(".keystores/releaseKeyStore.jks")
+            storeFile = rootProject.file("app/releaseKeyStore.jks")
             storePassword = properties["releaseKeyStorePass"].toString()
             keyPassword = properties["releaseKeyStorePass"].toString()
         }
