@@ -176,7 +176,7 @@ class ProgressLayout : RelativeLayout {
 //
 //            errorTextView = errorGroup?.findViewById(R.id.tvError)
 //            errorButton = errorGroup?.findViewById(R.id.tvRetry)
-
+//
 //            layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 //                ViewGroup.LayoutParams.MATCH_PARENT)
 

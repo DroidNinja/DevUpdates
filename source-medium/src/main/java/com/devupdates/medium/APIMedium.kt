@@ -69,7 +69,8 @@ class APIMedium @Inject constructor(val service: ServiceMedium) : ServiceIntegra
         return ServiceItem(
             title = item?.title ?: "",
             description = item?.getDescription(),
-            author = response?.payload?.getAuthorName(item?.creatorId ?: "") + " ● " + DateUtils.getRelativeTimeSpanString(item?.createdAt ?: 0),
+            author = response?.payload?.getAuthorName(item?.creatorId ?: ""),
+            topTitleText = response?.payload?.getAuthorName(item?.creatorId ?: "") + " ● " + DateUtils.getRelativeTimeSpanString(item?.createdAt ?: 0),
             likes = "♥︎ " + item?.virtuals?.totalClapCount,
             actionUrl = ServiceMedium.ENDPOINT + username + "/" + item?.uniqueSlug,
             sourceType = DataSource.MEDIUM.toString(),

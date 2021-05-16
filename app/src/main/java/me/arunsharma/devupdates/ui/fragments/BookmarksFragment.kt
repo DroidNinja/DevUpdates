@@ -1,11 +1,13 @@
 package me.arunsharma.devupdates.ui.fragments
 
+import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
+import com.dev.core.databinding.LayoutProgressErrorBinding
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.utils.CustomTabHelper
@@ -59,6 +61,14 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks), DaggerInjec
                 binding.progressLayout.showContent()
                 val data = state.list
                 setDataOnList(data)
+            }
+            is FeedUIState.ShowError -> {
+                LayoutProgressErrorBinding.inflate(LayoutInflater.from(requireContext())).apply {
+                    tvTitle.text = state.errorTitle
+                    tvSubtitle.text = state.errorSubtitle
+
+                    binding.progressLayout.showError(root)
+                }
             }
         }
     }

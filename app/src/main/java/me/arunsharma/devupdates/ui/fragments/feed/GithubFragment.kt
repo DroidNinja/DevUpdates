@@ -3,6 +3,7 @@ package me.arunsharma.devupdates.ui.fragments.feed
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,16 +17,18 @@ import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.devupdates.github.ServiceGithub
 import me.arunsharma.devupdates.R
-import me.arunsharma.devupdates.databinding.FragmentFeedListBinding
+import me.arunsharma.devupdates.databinding.FragmentFeedGithubBinding
+import me.arunsharma.devupdates.databinding.LayoutChipBinding
 import me.arunsharma.devupdates.ui.MainActivity
 import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
 import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
-class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInjectable {
+class GithubFragment : BaseFragment(R.layout.fragment_feed_github), DaggerInjectable {
 
-    private val binding by viewBinding(FragmentFeedListBinding::bind)
+    private val binding by viewBinding(FragmentFeedGithubBinding::bind)
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -44,6 +47,30 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 layoutManager = LinearLayoutManager(context)
                 addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                 setHasFixedSize(true)
+            }
+
+            request.metadata?.get("language")?.let { language ->
+                val langs = language.split(",")
+                langs.forEach { lang ->
+                    val chipView =
+                        LayoutChipBinding.inflate(LayoutInflater.from(requireContext())).apply {
+                            if (lang == DEFAULT_LANG) {
+                                chip.isChecked = true
+                            }
+                            chip.text = lang
+                            chip.id = ViewCompat.generateViewId()
+                            chip.setOnCheckedChangeListener { buttonView, isChecked ->
+                                if(isChecked) {
+                                    val lang = buttonView.text.toString()
+                                    if (lang != DEFAULT_LANG) {
+                                        request.metadata?.put(ServiceGithub.SELECTED_LANGUAGE, lang)
+                                    }
+                                    viewModel.getData(request, forceUpdate = true)
+                                }
+                            }
+                        }
+                    binding.chipGroupLanguage.addView(chipView.root)
+                }
             }
 
             binding.srlView.setOnRefreshListener {
@@ -116,7 +143,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
             val adapter = binding.recyclerView.adapter as FeedAdapter
             if (request.hasPagingSupport) {
                 if (data.isNotEmpty()) {
-                        adapter.addData(data)
+                    adapter.addData(data)
                     adapter.loadMoreComplete()
                 } else {
                     adapter.loadMoreEnd()
@@ -127,9 +154,10 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
         }
 
     companion object {
-        const val TAG = "FeedListFragment"
+        const val TAG = "GithubFragment"
         const val EXTRA_SERVICE_REQUEST = "EXTRA_SERVICE_REQUEST"
-        fun newInstance(request: ServiceRequest): FeedListFragment = FeedListFragment().apply {
+        const val DEFAULT_LANG = "all"
+        fun newInstance(request: ServiceRequest): GithubFragment = GithubFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
             }

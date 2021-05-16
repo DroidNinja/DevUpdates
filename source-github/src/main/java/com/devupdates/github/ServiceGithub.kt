@@ -1,6 +1,5 @@
 package com.devupdates.github
 
-import com.dev.services.models.DataSource
 import com.devupdates.github.models.GithubTrendingResponseItem
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,6 +15,7 @@ interface ServiceGithub {
 
     companion object {
         private const val LANGUAGE = "language"
+        const val SELECTED_LANGUAGE = "selectedLang"
         const val ENDPOINT = "https://github.com/"
         const val SERVICE_KEY = "GITHUB"
     }

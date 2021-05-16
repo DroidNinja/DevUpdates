@@ -25,18 +25,8 @@
         android:textSize="@dimen/_16ssp"
         app:layout_constraintStart_toEndOf="@+id/ivServiceLogo"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ivServiceLogo"
         tools:text="androiddevelopers" />
-
-    <TextView
-        android:id="@+id/tvSubTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/arimo"
-        android:textColor="@color/colorPrimaryDarkAlt"
-        android:textSize="@dimen/_14ssp"
-        app:layout_constraintStart_toStartOf="@+id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        tools:text="Android Developers" />
 
 
     <ImageButton
@@ -46,6 +36,7 @@
         android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

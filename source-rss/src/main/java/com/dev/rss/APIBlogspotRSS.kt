@@ -35,7 +35,9 @@ class APIBlogspotRSS @Inject constructor(val serviceRSS: ServiceRSS) : ServiceIn
                     likes = DateUtils.getRelativeTimeSpanString(createdAt).toString(),
                     actionUrl = item.link ?: "",
                     sourceType = DataSource.BLOGSPOT.toString(),
-                    groupId = request.name
+                    groupId = request.name,
+                    createdAt = createdAt,
+                    topTitleText = author
                 )
             })
         }

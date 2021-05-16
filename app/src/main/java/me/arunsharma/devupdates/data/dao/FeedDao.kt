@@ -12,6 +12,9 @@ interface FeedDao {
     @Query("SELECT * FROM serviceItem WHERE sourceType = :type AND groupId= :groupId AND createdAt < :time order by createdAt DESC")
     fun getFeedBySource(type: String, groupId: String, time: Long): List<ServiceItem>
 
+    @Query("SELECT * FROM serviceItem WHERE createdAt < :time order by createdAt DESC LIMIT 25")
+    fun getAllFeed(time: Long): List<ServiceItem>
+
     @Query("SELECT * FROM serviceItem WHERE isBookmarked = 1 order by createdAt")
     fun getBookmarks(): List<ServiceItem>
 

@@ -11,6 +11,8 @@ import me.arunsharma.devupdates.ui.fragments.BookmarksFragment
 import me.arunsharma.devupdates.ui.fragments.addsource.AddDataSourceFragment
 import me.arunsharma.devupdates.ui.fragments.feed.FeedFragment
 import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
+import me.arunsharma.devupdates.ui.fragments.feed.GithubFragment
+import me.arunsharma.devupdates.ui.fragments.feed.HomeFeedFragment
 
 @ActivityScope
 @Subcomponent(modules = [
@@ -28,6 +30,8 @@ interface MainComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(feedListFragment: FeedListFragment)
     fun inject(feedFragment: FeedFragment)
+    fun inject(feedFragment: GithubFragment)
+    fun inject(feedFragment: HomeFeedFragment)
     fun inject(fragment: BookmarksFragment)
     fun inject(feedFragment: AddDataSourceFragment)
 }

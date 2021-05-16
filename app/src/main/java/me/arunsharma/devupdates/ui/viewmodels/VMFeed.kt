@@ -36,6 +36,12 @@ class VMFeed @Inject constructor(
                             R.drawable.ic_github,
                             item
                         )
+                    }
+                    else if (item.type == DataSource.ALL) {
+                        FeedPagerItem(
+                            R.drawable.ic_home_feed,
+                            item
+                        )
                     } else {
                         FeedPagerItem(
                             R.drawable.ic_rss_feed,

@@ -29,7 +29,7 @@ data class AppCache(
             val lastUpdated = File(context.cacheDir, getCacheName()).lastModified()
             return (System.currentTimeMillis() - lastUpdated) >= expiration
         }
-        return true
+        return false
     }
 }
 
@@ -57,6 +57,16 @@ class CachingProvider @Inject constructor(@ApplicationContext val context: Conte
                 }
             }
         }
+    }
+
+    inline fun <reified T> writeCacheData(
+        appCache: AppCache,
+        result: T
+    ): T {
+        if (result != null) {
+            writeCache(context, appCache.getCacheName(), result)
+        }
+        return result
     }
 
     inline fun <reified T> doNetworkCall(

@@ -31,7 +31,9 @@ class APIRSS @Inject constructor(val serviceRSS: ServiceRSS) : ServiceIntegratio
                     likes = DateUtils.getRelativeTimeSpanString(createdAt).toString(),
                     actionUrl = item.link?.href ?: "",
                     sourceType = DataSource.RSS.toString(),
-                    groupId = request.name
+                    groupId = request.name,
+                    createdAt = createdAt,
+                    topTitleText = item.author?.name
                 )
             })
         } else {

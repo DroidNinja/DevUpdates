@@ -4,15 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dev.core.view.ProgressLayout
-        android:id="@+id/progressLayout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srlView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srlView"
+        <com.dev.core.view.ProgressLayout
+            android:id="@+id/progressLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -20,7 +21,7 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_feed_item" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.dev.core.view.ProgressLayout>
 
-    </com.dev.core.view.ProgressLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

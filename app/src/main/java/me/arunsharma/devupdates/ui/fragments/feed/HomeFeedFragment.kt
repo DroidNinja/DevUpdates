@@ -23,7 +23,7 @@ import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
 import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
-class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInjectable {
+class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInjectable {
 
     private val binding by viewBinding(FragmentFeedListBinding::bind)
 
@@ -47,7 +47,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
             }
 
             binding.srlView.setOnRefreshListener {
-                viewModel.getData(request, forceUpdate = true)
+                viewModel.getHomeFeed(request, forceUpdate = true)
             }
 
             viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
@@ -107,7 +107,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 if (request.hasPagingSupport) {
                     setOnLoadMoreListener(object : RequestLoadMoreListener {
                         override fun onLoadMoreRequested() {
-                            viewModel.updateData(mData, request)
+                            viewModel.updateHomeFeedData(mData, request)
                         }
                     }, binding.recyclerView)
                 }
@@ -116,7 +116,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
             val adapter = binding.recyclerView.adapter as FeedAdapter
             if (request.hasPagingSupport) {
                 if (data.isNotEmpty()) {
-                        adapter.addData(data)
+                    adapter.addData(data)
                     adapter.loadMoreComplete()
                 } else {
                     adapter.loadMoreEnd()
@@ -127,9 +127,9 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
         }
 
     companion object {
-        const val TAG = "FeedListFragment"
+        const val TAG = "HomeFeedFragment"
         const val EXTRA_SERVICE_REQUEST = "EXTRA_SERVICE_REQUEST"
-        fun newInstance(request: ServiceRequest): FeedListFragment = FeedListFragment().apply {
+        fun newInstance(request: ServiceRequest): HomeFeedFragment = HomeFeedFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
             }
@@ -143,7 +143,8 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
     private fun loadData() {
         arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
             if (view != null && viewModel.lvUiState.value == null) {
-                viewModel.getData(request)
+                request.next = System.currentTimeMillis()
+                viewModel.getHomeFeed(request)
             }
         }
     }

@@ -1,12 +1,23 @@
 {
   "data": [
     {
+      "name": "Home",
+      "type": "ALL",
+      "shouldUseCache": true,
+      "hasPagingSupport": true
+    },
+    {
+      "name": "Trending",
+      "type": "GITHUB",
+      "metadata": {
+        "language": "all,kotlin,java,javascript"
+      },
+      "shouldUseCache": false
+    },
+    {
       "name": "Android Weekly",
       "type": "ANDROID_WEEKLY",
-      "metadata": {
-        "url": "https://chris.banes.dev/rss?format=xml"
-      },
-      "shouldUseCache": false,
+      "shouldUseCache": true,
       "hasPagingSupport": true
     },
     {
@@ -17,14 +28,6 @@
       },
       "shouldUseCache": true,
       "hasPagingSupport": false
-    },
-    {
-      "name": "Trending",
-      "type": "GITHUB",
-      "metadata": {
-        "language": "kotlin"
-      },
-      "shouldUseCache": false
     },
     {
       "name": "Android Developers",

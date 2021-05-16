@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 interface SourceConfigStore {
     suspend fun getData(): List<ServiceRequest>
+    suspend fun save(data: List<ServiceRequest>)
     suspend fun addSource(serviceRequest: ServiceRequest)
 }
 
@@ -21,14 +22,20 @@ class SourceConfigStoreImpl @Inject constructor(
     @ApplicationContext val context: Context,
     val cachingProvider: CachingProvider
 ) : SourceConfigStore{
+
+    val appCache = AppCache(CacheConstants.CACHE_DATASOURCES)
+
     override suspend fun getData(): List<ServiceRequest> {
-        val appCache = AppCache(CacheConstants.CACHE_DATASOURCES)
         val config = cachingProvider.cacheData<SourceConfig>(appCache) {
             val result = StorageUtils.getRawData(context, R.raw.sources)
             Gson().fromJson(result, SourceConfig::class.java)
         }
 
         return config.data
+    }
+
+    override suspend fun save(data: List<ServiceRequest>) {
+        cachingProvider.writeCacheData(appCache, SourceConfig(data = data))
     }
 
     override suspend fun addSource(serviceRequest: ServiceRequest) {

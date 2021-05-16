@@ -1,6 +1,7 @@
 package me.arunsharma.devupdates.ui.viewmodels
 
 import android.app.Application
+import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
@@ -41,10 +42,62 @@ class VMFeedList @Inject constructor(
             }
             val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {
-                _lvUIState.value = FeedUIState.ShowList(request, result.data)
+                if (!showLoading || result.data.isNotEmpty()) {
+                    _lvUIState.value = FeedUIState.ShowList(request, result.data)
+                } else {
+                    _lvUIState.value = FeedUIState.ShowError(
+                        context.getString(R.string.empty_feed),
+                        context.getString(R.string.swipe_down_to_refresh_the_feed)
+                    )
+                }
             } else if (result is ResponseStatus.Failure) {
-                _lvUIState.value = FeedUIState.ShowError(result.exception)
+                _lvUIState.value = FeedUIState.ShowError(result.exception.message)
             }
+        }
+    }
+
+    fun getHomeFeed(
+        request: ServiceRequest,
+        forceUpdate: Boolean = false,
+        showLoading: Boolean = true
+    ) {
+        launchDataLoad {
+            if (showLoading) {
+                _lvUIState.value = FeedUIState.Loading
+            }
+            if (forceUpdate) {
+                request.next = System.currentTimeMillis()
+            }
+            val result = repoFeed.getHomeFeed(request)
+            if (result is ResponseStatus.Success) {
+                val data: List<ServiceItem> = result.data.map { item ->
+                    var topTitle = item.author
+                    if (item.createdAt > 0) {
+                        topTitle =
+                            topTitle + " ● " + DateUtils.getRelativeTimeSpanString(item.createdAt)
+                    }
+                    item.topTitleText = topTitle
+                    item.likes = item.groupId
+                    item
+                }
+                if (!showLoading || data.isNotEmpty()) {
+                    _lvUIState.value = FeedUIState.ShowList(request, data)
+                } else {
+                    _lvUIState.value = FeedUIState.ShowError(
+                        context.getString(R.string.empty_feed),
+                        context.getString(R.string.swipe_down_to_refresh_the_feed)
+                    )
+                }
+            } else if (result is ResponseStatus.Failure) {
+                _lvUIState.value = FeedUIState.ShowError(result.exception.message)
+            }
+        }
+    }
+
+    fun updateHomeFeedData(currentData: MutableList<ServiceItem>, request: ServiceRequest) {
+        if (request.hasPagingSupport) {
+            request.next = currentData.last().createdAt
+            getHomeFeed(request, forceUpdate = false, showLoading = false)
         }
     }
 

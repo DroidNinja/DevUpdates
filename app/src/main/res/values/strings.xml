@@ -8,5 +8,8 @@
     <string name="add_source">Add Source</string>
     <string name="bookmark_added">Bookmarked added</string>
     <string name="bookmark_removed">Bookmarked removed</string>
+    <string name="changes_saved">Changes saved.</string>
+    <string name="data_sources">Data Sources</string>
+    <string name="drag_text">Drag data sources to get them in order</string>
 
 </resources>

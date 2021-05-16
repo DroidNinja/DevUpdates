@@ -27,9 +27,11 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/arimo"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_35sdp"
             tools:text="Kotlin" />
 
         <TextView

@@ -30,7 +30,8 @@ class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : 
                     ServiceItem(
                         title = item.title,
                         description = item.description,
-                        author = item.issue + " ● " + DateUtils.getRelativeTimeSpanString(item.createdAt ?: 0),
+                        author = item.issue,
+                        topTitleText = item.issue + " ● " + DateUtils.getRelativeTimeSpanString(item.createdAt ?: 0),
                         likes = item.baseLink,
                         actionUrl = item.link,
                         sourceType = request.type.toString(),
@@ -44,7 +45,7 @@ class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : 
         }
     }
 
-    fun isPagination(request: ServiceRequest): Boolean {
+    private fun isPagination(request: ServiceRequest): Boolean {
         return request.next > 0
     }
 

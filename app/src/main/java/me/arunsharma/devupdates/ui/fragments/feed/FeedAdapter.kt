@@ -15,7 +15,7 @@ class FeedAdapter(items: List<ServiceItem>) :
     override fun convert(helper: VHFeedItem, item: ServiceItem) {
         helper.binding.tvTitle.text = item.title
         helper.binding.tvSubTitle.text = item.description
-        helper.binding.tvTopTitle.text = item.author
+        helper.binding.tvTopTitle.text = item.topTitleText
         helper.binding.tvFooter.text = item.likes
         helper.binding.ivBookmark.isSelected = item.isBookmarked
         helper.addOnClickListener(R.id.ivBookmark)

@@ -1,5 +1,6 @@
 package com.dev.services.models
 
+import android.text.format.DateUtils
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -23,5 +24,7 @@ data class ServiceItem(
     @ColumnInfo(name = "sourceType")
     var sourceType: String?,
     @ColumnInfo(name = "groupId")
-    var groupId: String?
+    var groupId: String?,
+    @ColumnInfo(name = "topTitleText")
+    var topTitleText: String?,
 )

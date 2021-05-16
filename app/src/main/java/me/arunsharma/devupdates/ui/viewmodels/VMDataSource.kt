@@ -27,4 +27,12 @@ class VMDataSource @Inject constructor(
             }
         }
     }
+
+    fun saveConfig(data: List<ServiceRequest>){
+        launchDataLoad {
+            withContext(Dispatchers.IO) {
+                sourceConfigStore.save(data = data)
+            }
+        }
+    }
 }
