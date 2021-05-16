@@ -16,6 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Restore keystore
+        run: |
+            echo '${{secrets.RELEASE_KEYSTORE}}' > release.keystore.asc
+            gpg -d --passphrase '${{secrets.RELEASE_KEYSTORE_PASSPHRASE}}' --batch release.keystore.asc > .keystores/releaseKeyStore.jks
+
       - name: Create branch
         run: git checkout -b release/v${{ github.event.inputs.versionName }}
 
@@ -28,7 +33,7 @@ jobs:
           java-version: 11
 
       - name: Build project
-        run: ./gradlew assembleDebug lintDebug --stacktrace
+        run: ./gradlew assembleRelease lintDebug --stacktrace
 
       - name: Upload build outputs (APKs)
         uses: actions/upload-artifact@v2
@@ -40,5 +45,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ github.event.inputs.versionName }}
-          artifacts: "app/build/outputs/apk/debug/app-debug.apk"
+          artifacts: "app/build/outputs/apk/debug/app-release.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
