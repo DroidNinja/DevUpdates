@@ -35,7 +35,39 @@
     </style>
 
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+        <item name="colorControlActivated">@color/colorAccent</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+        <!--Default Swipe fling style-->
+        <item name="actionModeBackground">@color/colorPrimary</item>
+        <item name="actionModeStyle">@style/ActionModeStyle</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="snackbarStyle">@style/SnackbarStyle</item>
+        <item name="materialAlertDialogTheme">@style/AppTheme.AlertDialogStyle</item>
+        <item name="radioButtonStyle">@style/AppTheme.RadioButtonStyle</item>
+        <item name="checkboxStyle">@style/AppTheme.CheckboxStyle</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow</item>
+        <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
+        <item name="switchStyle">@style/AppTheme.SwitchStyle</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="@style/Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/window_bg</item>
         <item name="android:textCursorDrawable">@null</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

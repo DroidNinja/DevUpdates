@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    <color name="colorPrimary">#FF4600</color>-->
+<!--    <color name="colorAccent">#FF4600</color>-->
+<!--    <color name="colorPrimaryDark">#343434</color>-->
+<!--    <color name="colorPrimaryAlt">#343434</color>-->
+<!--    <color name="colorPrimaryDarkAlt">#282828</color>-->
+<!--    <color name="window_bg">#ffffff</color>-->
+
+<!--    <color name="text_black">#222222</color>-->
+<!--    <color name="text_gray">#666666</color>-->
+<!--    <color name="shimmer_gray">#CDC9C9</color>-->
+<!--    <color name="white">#ffffff</color>-->
+
     <color name="colorPrimary">#FF4600</color>
-    <color name="colorAccent">#FF4600</color>
+    <color name="colorAccent">#ffffff</color>
     <color name="colorPrimaryDark">#343434</color>
     <color name="colorPrimaryAlt">#343434</color>
     <color name="colorPrimaryDarkAlt">#282828</color>
+    <color name="window_bg">#121212</color>
+
 
     <color name="text_black">#222222</color>
     <color name="text_gray">#666666</color>
     <color name="shimmer_gray">#CDC9C9</color>
     <color name="white">#ffffff</color>
+
+    <color name="feed_top_title">#A6A6A6</color>
+    <color name="feed_title">#6A6565</color>
+
 </resources>

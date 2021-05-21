@@ -3,20 +3,19 @@ plugins {
     kotlin(Plugins.KOTLIN_ANDROID)
     kotlin(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_PARCELIZE)
-    id("kotlin-android")
 }
 
 val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
 
 android {
-    compileSdkVersion(AndroidVersion.COMPILE_SDK_VERSION)
+    compileSdk = AndroidVersion.COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId(AndroidVersion.APPLICATION_ID)
-        minSdkVersion(AndroidVersion.MIN_SDK_VERSION)
-        targetSdkVersion(AndroidVersion.TARGET_SDK_VERSION)
-        versionCode(AndroidVersion.VERSION_CODE)
-        versionName(AndroidVersion.VERSION_NAME)
+        applicationId = AndroidVersion.APPLICATION_ID
+        minSdk = AndroidVersion.MIN_SDK_VERSION
+        targetSdk = AndroidVersion.TARGET_SDK_VERSION
+        versionCode = AndroidVersion.VERSION_CODE
+        versionName = AndroidVersion.VERSION_NAME
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -28,16 +27,16 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = properties["releaseKeyStorePass"].toString()
+            keyAlias = rootProject.properties["releaseKeyStorePass"].toString()
             storeFile = rootProject.file("app/releaseKeyStore.jks")
-            storePassword = properties["releaseKeyStorePass"].toString()
-            keyPassword = properties["releaseKeyStorePass"].toString()
+            storePassword = rootProject.properties["releaseKeyStorePass"].toString()
+            keyPassword = rootProject.properties["releaseKeyStorePass"].toString()
         }
         getByName("debug") {
-            keyAlias = properties["debugKeyStorePass"].toString()
+            keyAlias = rootProject.properties["debugKeyStorePass"].toString()
             storeFile = rootProject.file("debugKeyStore.jks")
-            storePassword = properties["debugKeyStorePass"].toString()
-            keyPassword = properties["debugKeyStorePass"].toString()
+            storePassword = rootProject.properties["debugKeyStorePass"].toString()
+            keyPassword = rootProject.properties["debugKeyStorePass"].toString()
         }
     }
 

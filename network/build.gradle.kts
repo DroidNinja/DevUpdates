@@ -8,19 +8,12 @@ plugins {
 val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
 
 android {
-    compileSdkVersion(AndroidVersion.COMPILE_SDK_VERSION)
+    compileSdk = AndroidVersion.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion(AndroidVersion.MIN_SDK_VERSION)
-        targetSdkVersion(AndroidVersion.TARGET_SDK_VERSION)
-        versionCode(AndroidVersion.VERSION_CODE)
-        versionName(AndroidVersion.VERSION_NAME)
+        minSdk = AndroidVersion.MIN_SDK_VERSION
+        targetSdk = AndroidVersion.TARGET_SDK_VERSION
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
     }
 
     kotlinOptions {

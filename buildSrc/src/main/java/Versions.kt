@@ -1,7 +1,7 @@
 object Versions {
     object Gradle {
-        const val Gradle = "7.0.0-alpha08"
-        const val Kotlin = "1.4.30"
+        const val Gradle = "7.0.0-beta02"
+        const val Kotlin = "1.4.32"
     }
 
     object Network {
@@ -36,7 +36,7 @@ object Versions {
     }
 
     object Compose {
-        const val ComposeVersion = "1.0.0-beta06"
+        const val ComposeVersion = "1.0.0-beta07"
     }
 
     object Helpers {
