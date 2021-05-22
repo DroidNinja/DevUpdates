@@ -19,9 +19,11 @@ class VMBookmarks @Inject constructor(val database: AppDatabase, val context: Ap
     private val _lvUIState = MutableLiveData<FeedUIState>()
     val lvUiState: LiveData<FeedUIState> = _lvUIState
 
-    fun getBookmarks() {
+    fun getBookmarks(forceUpdate: Boolean = false) {
         launchDataLoad {
-            _lvUIState.value = FeedUIState.Loading
+            if(!forceUpdate) {
+                _lvUIState.value = FeedUIState.Loading
+            }
             withContext(Dispatchers.IO) {
                 val data = database.feedDao().getBookmarks()
                 if (data.isNotEmpty()) {

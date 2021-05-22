@@ -12,19 +12,19 @@
 <!--    <color name="shimmer_gray">#CDC9C9</color>-->
 <!--    <color name="white">#ffffff</color>-->
 
-    <color name="colorPrimary">#FF4600</color>
-    <color name="colorPrimaryVariant">#FF4600</color>
-    <color name="colorOnPrimary">@color/white</color>
-    <color name="colorOnPrimary_80">#80FFFFFF</color>
+    <color name="colorPrimary">#FD9A06</color>
+    <color name="colorPrimaryVariant">#FD9A06</color>
+    <color name="colorOnPrimary">@color/text_black</color>
+    <color name="colorOnPrimary_80">#80222222</color>
     <color name="colorSecondary">#FFFFFF</color>
     <color name="colorSecondaryVariant">#FFFFFF</color>
-    <color name="colorOnSecondary">#FF4600</color>
-    <color name="colorOnSecondary_80">#80FF4600</color>
+    <color name="colorOnSecondary">#FD9A06</color>
+    <color name="colorOnSecondary_80">#80FFCC80</color>
     <color name="colorError">@color/error</color>
     <color name="colorOnError">#ffffff</color>
-    <color name="colorOnBackground">@color/text_black</color>
-    <color name="colorOnSurface">@color/text_black</color>
-    <color name="colorSurface">@color/white</color>
+    <color name="colorOnBackground">@color/white</color>
+    <color name="colorOnSurface">@color/white</color>
+    <color name="colorSurface">@color/text_black</color>
 
 
     <color name="text_black">#222222</color>

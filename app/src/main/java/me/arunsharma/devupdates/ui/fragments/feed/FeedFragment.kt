@@ -52,7 +52,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed), DaggerInjectable {
     }
 
     override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
+        (activity as MainActivity).mainComponent?.inject(this)
     }
 
     companion object {

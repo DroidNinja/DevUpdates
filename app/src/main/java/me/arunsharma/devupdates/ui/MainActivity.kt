@@ -15,7 +15,10 @@ import me.arunsharma.devupdates.ui.fragments.feed.FeedFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var backStackManager: BackStackManager
-    lateinit var mainComponent: MainComponent
+    val mainComponent: MainComponent by lazy {
+        (applicationContext as DevUpdatesApp)
+            .appComponent.mainComponent().create()
+    }
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -24,8 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        mainComponent = (applicationContext as DevUpdatesApp)
-            .appComponent.mainComponent().create()
         mainComponent.inject(this)
         backStackManager = BackStackManager(this, R.id.fragment_container)
 

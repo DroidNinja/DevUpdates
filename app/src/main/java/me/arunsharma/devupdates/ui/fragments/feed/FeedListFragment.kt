@@ -137,7 +137,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
     }
 
     override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
+        (activity as MainActivity).mainComponent?.inject(this)
     }
 
     private fun loadData() {

@@ -11,6 +11,7 @@
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:src="@drawable/ic_github"
+        app:tint="?attr/colorOnSurface"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,9 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
-        android:fontFamily="@font/arimo_bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/_16ssp"
+        style="@style/TextAppearance.H1"
         app:layout_constraintStart_toEndOf="@+id/ivServiceLogo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/ivServiceLogo"

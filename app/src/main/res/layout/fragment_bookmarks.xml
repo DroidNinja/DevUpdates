@@ -13,7 +13,7 @@
             android:id="@+id/appbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="?attr/colorSurface"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -23,7 +23,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:elevation="@dimen/_5sdp"
                 app:title="@string/bookmarks"
-                app:titleTextColor="@color/colorAccent" />
+                app:titleTextColor="?attr/colorPrimary" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

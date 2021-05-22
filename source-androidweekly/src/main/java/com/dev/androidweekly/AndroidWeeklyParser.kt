@@ -23,8 +23,11 @@ object AndroidWeeklyParser {
             }
             .filter {
                 it.title.isNotEmpty()
-            }
+            }.toMutableList()
 
+        //removing sponsored post
+        allList.removeAt(2)
+        allList.removeAt(4)
 
         return allList.subList(0, allList.indexOfFirst { it.title.contains("Place a") })
     }

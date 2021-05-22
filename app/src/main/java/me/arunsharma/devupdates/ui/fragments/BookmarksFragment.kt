@@ -49,6 +49,10 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks), DaggerInjec
 
             viewModel.getBookmarks()
         }
+
+        binding.srlView.setOnRefreshListener {
+            viewModel.getBookmarks(forceUpdate = true)
+        }
     }
 
     private fun handleUIState(state: FeedUIState?) {
