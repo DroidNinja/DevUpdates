@@ -20,6 +20,7 @@ abstract class BaseFragment(@LayoutRes fragLayout: Int) : Fragment(fragLayout) {
         if(this is DaggerInjectable) {
             injectDagger()
         }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

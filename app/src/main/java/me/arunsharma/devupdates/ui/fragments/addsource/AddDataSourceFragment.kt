@@ -3,9 +3,7 @@ package me.arunsharma.devupdates.ui.fragments.addsource
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.dev.core.base.BaseFragment
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
@@ -33,6 +31,10 @@ class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source), D
     }
 
     override fun initView() {
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
@@ -40,18 +42,22 @@ class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source), D
         }
 
         viewModel.lvFetchConfig.observe(viewLifecycleOwner, { listItems ->
-            binding.recyclerView.adapter = DataSourceAdapter(listItems, object: DataSourceAdapter.DataSourceAdapterListener {
-                override fun onDragComplete() {
-                    val adapter = binding.recyclerView.adapter as? DataSourceAdapter
-                    adapter?.let {
-                        viewModel.saveConfig(it.mData)
-                        SnackbarUtil.showBarShortTime(requireView(), getString(R.string.changes_saved))
+            binding.recyclerView.adapter =
+                DataSourceAdapter(listItems, object : DataSourceAdapter.DataSourceAdapterListener {
+                    override fun onDragComplete() {
+                        val adapter = binding.recyclerView.adapter as? DataSourceAdapter
+                        adapter?.let {
+                            viewModel.saveConfig(it.mData)
+                            SnackbarUtil.showBarShortTime(
+                                requireView(),
+                                getString(R.string.changes_saved)
+                            )
+                        }
                     }
+                }).apply {
+                    val itemTouchHelper = RecyclerViewMoveHelper.create(this)
+                    itemTouchHelper.attachToRecyclerView(binding.recyclerView)
                 }
-            }).apply {
-                val itemTouchHelper = RecyclerViewMoveHelper.create(this)
-                itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-            }
 
         })
 

@@ -1,6 +1,7 @@
 package me.arunsharma.devupdates.di.data
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.dev.core.di.annotations.ApplicationContext
 import dagger.Module
@@ -34,5 +35,10 @@ class DataModule {
             context,
             AppDatabase::class.java, AppDatabase.DATABASE_NAME
         ).fallbackToDestructiveMigration().build()
+    }
+
+    @Provides
+    fun provideSharedPrefs(@ApplicationContext context: Context): SharedPreferences {
+        return context.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     }
 }

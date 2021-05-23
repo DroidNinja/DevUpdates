@@ -7,6 +7,7 @@ import com.dev.core.utils.AppViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import me.arunsharma.devupdates.ui.fragments.settings.VMSettings
 import me.arunsharma.devupdates.ui.viewmodels.VMBookmarks
 import me.arunsharma.devupdates.ui.viewmodels.VMDataSource
 import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
@@ -40,4 +41,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(VMBookmarks::class)
     internal abstract fun VcBookmarks(viewModel: VMBookmarks): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VMSettings::class)
+    internal abstract fun cMSettings(viewModel: VMSettings): ViewModel
 }

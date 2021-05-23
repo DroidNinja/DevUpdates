@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        style="@style/TextAppearance.IOSched.Tab"
+        style="@style/TextAppearance.Tab"
         android:gravity="center"
         android:textColor="@color/tab_item_selector"
         app:layout_constraintEnd_toEndOf="parent"

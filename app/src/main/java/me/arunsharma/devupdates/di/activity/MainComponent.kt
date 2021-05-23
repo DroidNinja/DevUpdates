@@ -13,11 +13,14 @@ import me.arunsharma.devupdates.ui.fragments.feed.FeedFragment
 import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
 import me.arunsharma.devupdates.ui.fragments.feed.GithubFragment
 import me.arunsharma.devupdates.ui.fragments.feed.HomeFeedFragment
+import me.arunsharma.devupdates.ui.fragments.settings.SettingsFragment
+import me.arunsharma.devupdates.ui.fragments.settings.ThemeSettingDialogFragment
 
 @ActivityScope
 @Subcomponent(modules = [
     DispatcherModule::class,
     ViewModelModule::class,
+    MainModule::class,
     ServiceModule::class])
 interface MainComponent {
 
@@ -34,4 +37,6 @@ interface MainComponent {
     fun inject(feedFragment: HomeFeedFragment)
     fun inject(fragment: BookmarksFragment)
     fun inject(feedFragment: AddDataSourceFragment)
+    fun inject(feedFragment: SettingsFragment)
+    fun inject(feedFragment: ThemeSettingDialogFragment)
 }

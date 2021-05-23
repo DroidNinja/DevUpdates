@@ -11,5 +11,11 @@
     <string name="changes_saved">Changes saved.</string>
     <string name="data_sources">Data Sources</string>
     <string name="drag_text">Drag data sources to get them in order</string>
+    <string name="choose_theme">Choose Theme</string>
+    <string name="manage_data_sources">Manage Data Sources</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system">System</string>
+    <string name="battery_saver">Battery Saver</string>
 
 </resources>
