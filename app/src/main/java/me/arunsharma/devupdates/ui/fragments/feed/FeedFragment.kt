@@ -8,23 +8,19 @@ import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedBinding
 import me.arunsharma.devupdates.ui.MainActivity
 import me.arunsharma.devupdates.ui.viewmodels.VMFeed
 import javax.inject.Inject
 
-
-class FeedFragment : BaseFragment(R.layout.fragment_feed), DaggerInjectable {
+@AndroidEntryPoint
+class FeedFragment : BaseFragment(R.layout.fragment_feed) {
 
     private val binding by viewBinding(FragmentFeedBinding::bind)
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
-    val viewModel: VMFeed by viewModels {
-        factory
-    }
+    val viewModel: VMFeed by viewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -49,10 +45,6 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed), DaggerInjectable {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.customView = adapter.getTabView(position)
         }.attach()
-    }
-
-    override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
     }
 
     companion object {

@@ -5,11 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.data.SourceConfigStore
 import javax.inject.Inject
 
+@HiltViewModel
 class VMDataSource @Inject constructor(
     val sourceConfigStore: SourceConfigStore
 ) :

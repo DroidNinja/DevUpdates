@@ -18,6 +18,7 @@ import com.dev.core.utils.viewBinding
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import com.devupdates.github.ServiceGithub
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedGithubBinding
 import me.arunsharma.devupdates.databinding.LayoutChipBinding
@@ -26,16 +27,12 @@ import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
 import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
-class GithubFragment : BaseFragment(R.layout.fragment_feed_github), DaggerInjectable {
+@AndroidEntryPoint
+class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
 
     private val binding by viewBinding(FragmentFeedGithubBinding::bind)
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
-    val viewModel: VMFeedList by viewModels {
-        factory
-    }
+    val viewModel: VMFeedList by viewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -162,10 +159,6 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github), DaggerInject
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
             }
         }
-    }
-
-    override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
     }
 
     private fun loadData() {

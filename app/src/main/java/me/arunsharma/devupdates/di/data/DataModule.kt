@@ -3,14 +3,17 @@ package me.arunsharma.devupdates.di.data
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.dev.core.di.annotations.ApplicationContext
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import me.arunsharma.devupdates.data.AppDatabase
 import me.arunsharma.devupdates.data.SourceConfigStore
 import me.arunsharma.devupdates.data.SourceConfigStoreImpl
 import me.arunsharma.devupdates.utils.cache.CachingProvider
 
+@InstallIn(SingletonComponent::class)
 @Module
 class DataModule {
 

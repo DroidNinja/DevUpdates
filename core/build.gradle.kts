@@ -44,8 +44,9 @@ dependencies {
     api(Dependencies.LifeCycle.LifecycleCommonJava)
     api(Dependencies.LifeCycle.LifecycleCommonJava)
     api(Dependencies.DevOnly.Timber)
-    api(Dependencies.Di.Dagger)
-    kapt(Dependencies.Compilers.Dagger)
+
+    implementation(Dependencies.Di.Hilt)
+    kapt(Dependencies.Compilers.Hilt)
 
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestRunner)

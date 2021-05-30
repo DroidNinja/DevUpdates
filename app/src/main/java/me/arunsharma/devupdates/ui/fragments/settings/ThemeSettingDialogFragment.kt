@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.dev.core.di.utils.DaggerInjectable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.ui.MainActivity
 import javax.inject.Inject
@@ -21,19 +22,14 @@ enum class Theme(val storageKey: String) {
     BATTERY_SAVER("battery_saver")
 }
 
-class ThemeSettingDialogFragment : AppCompatDialogFragment(), DaggerInjectable {
+@AndroidEntryPoint
+class ThemeSettingDialogFragment : AppCompatDialogFragment() {
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
-    private val viewModel: VMSettings by viewModels {
-        factory
-    }
+    private val viewModel: VMSettings by viewModels()
 
     private lateinit var listAdapter: ArrayAdapter<ThemeHolder>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        injectDagger()
         listAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_single_choice,
@@ -74,10 +70,6 @@ class ThemeSettingDialogFragment : AppCompatDialogFragment(), DaggerInjectable {
 
     private data class ThemeHolder(val theme: Theme, val title: String) {
         override fun toString(): String = title
-    }
-
-    override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
     }
 
     companion object {

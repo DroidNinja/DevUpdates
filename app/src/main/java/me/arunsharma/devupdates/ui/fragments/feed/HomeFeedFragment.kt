@@ -16,6 +16,7 @@ import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedListBinding
 import me.arunsharma.devupdates.ui.MainActivity
@@ -23,16 +24,12 @@ import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
 import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
-class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInjectable {
+@AndroidEntryPoint
+class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list) {
 
     private val binding by viewBinding(FragmentFeedListBinding::bind)
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
-    val viewModel: VMFeedList by viewModels {
-        factory
-    }
+    val viewModel: VMFeedList by viewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -134,10 +131,6 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list), DaggerInject
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
             }
         }
-    }
-
-    override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
     }
 
     private fun loadData() {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentAddDataSourceBinding
 import me.arunsharma.devupdates.ui.MainActivity
@@ -14,17 +15,12 @@ import me.arunsharma.devupdates.ui.viewmodels.VMDataSource
 import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
-
-class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source), DaggerInjectable {
+@AndroidEntryPoint
+class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source) {
 
     private val binding by viewBinding(FragmentAddDataSourceBinding::bind)
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
-    val viewModel: VMDataSource by viewModels {
-        factory
-    }
+    val viewModel: VMDataSource by viewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -62,10 +58,6 @@ class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source), D
         })
 
         viewModel.getServices()
-    }
-
-    override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
     }
 
     companion object {

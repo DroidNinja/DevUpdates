@@ -4,20 +4,15 @@ import android.app.Application
 import android.os.StrictMode
 import com.dev.core.extensions.d
 import com.dev.devik.DevikContext
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import javax.inject.Inject
 
+@HiltAndroidApp
 class DevUpdatesApp : Application() {
-
-    val appComponent: ApplicationComponent by lazy {
-        DaggerApplicationComponent.builder()
-            .create(this)
-            .build()
-    }
 
     override fun onCreate() {
         super.onCreate()
-        appComponent.inject(this@DevUpdatesApp)
         DevikContext(this)
         StrictMode.setThreadPolicy(
             StrictMode.ThreadPolicy.Builder()

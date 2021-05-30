@@ -5,13 +5,14 @@ import androidx.fragment.app.viewModels
 import com.dev.core.base.BaseFragment
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentSettingsBinding
 import me.arunsharma.devupdates.ui.MainActivityListener
 import me.arunsharma.devupdates.ui.fragments.addsource.AddDataSourceFragment
 
-
-class SettingsFragment : BaseFragment(R.layout.fragment_settings), DaggerInjectable {
+@AndroidEntryPoint
+class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     private var mActivityListener: MainActivityListener? = null
 
@@ -45,10 +46,6 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings), DaggerInjecta
             mActivityListener?.getNavigator()
                 ?.openAddDataSourceFragment(activity, AddDataSourceFragment.newInstance())
         }
-    }
-
-    override fun injectDagger() {
-
     }
 
     companion object {

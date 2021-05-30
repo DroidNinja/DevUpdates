@@ -41,8 +41,8 @@ dependencies {
     api(Dependencies.TikXML.htmlEscape)
     kapt(Dependencies.TikXML.apt)
 
-    api(Dependencies.Di.Dagger)
-    kapt(Dependencies.Compilers.Dagger)
+    implementation(Dependencies.Di.Hilt)
+    kapt(Dependencies.Compilers.Hilt)
 
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)

@@ -9,6 +9,7 @@ import com.dev.core.di.annotations.IoDispatcher
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
@@ -18,9 +19,9 @@ import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.utils.SingleLiveEvent
 import javax.inject.Inject
 
+@HiltViewModel
 class VMFeedList @Inject constructor(
     private val repoFeed: RepoFeed,
-    val sourceConfigStore: SourceConfigStore,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     val context: Application
 ) :

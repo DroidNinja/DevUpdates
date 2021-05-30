@@ -11,11 +11,15 @@ import com.dev.services.repo.ServiceIntegration
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
+@InstallIn(SingletonComponent::class)
 @Module(includes = [NetworkModule::class])
 abstract class GithubModule {
 

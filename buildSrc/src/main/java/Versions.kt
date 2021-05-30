@@ -1,6 +1,6 @@
 object Versions {
     object Gradle {
-        const val Gradle = "7.0.0-beta02"
+        const val Gradle = "7.0.0-beta03"
         const val Kotlin = "1.4.32"
     }
 
@@ -32,7 +32,7 @@ object Versions {
 
     object Di {
         const val Dagger = "2.35.1"
-        const val Hilt = "2.35"
+        const val Hilt = "2.36"
     }
 
     object Compose {

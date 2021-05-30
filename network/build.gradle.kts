@@ -33,8 +33,9 @@ dependencies {
     api(Dependencies.Network.LoggingInterceptor)
     debugApi(Dependencies.DevOnly.Chuck)
     releaseApi(Dependencies.DevOnly.ChuckNoOp)
-    api(Dependencies.Di.Dagger)
-    kapt(Dependencies.Compilers.Dagger)
+
+    implementation(Dependencies.Di.Hilt)
+    kapt(Dependencies.Compilers.Hilt)
 
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)

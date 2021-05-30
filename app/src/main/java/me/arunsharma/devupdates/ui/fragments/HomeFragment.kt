@@ -3,11 +3,13 @@ package me.arunsharma.devupdates.ui.fragments
 import androidx.viewpager.widget.ViewPager
 import com.dev.core.base.BaseFragment
 import com.dev.core.utils.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentHomeBinding
 import me.arunsharma.devupdates.ui.fragments.feed.FeedFragment
 import me.arunsharma.devupdates.ui.fragments.settings.SettingsFragment
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)

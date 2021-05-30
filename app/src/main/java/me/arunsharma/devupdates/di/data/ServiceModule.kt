@@ -7,8 +7,12 @@ import com.devupdates.github.di.GithubModule
 
 import com.devupdates.medium.di.MediumModule
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.Multibinds
 
+@InstallIn(SingletonComponent::class)
 @Module(includes = [AndroidWeeklyModule::class, MediumModule::class, RSSModule::class, GithubModule::class])
 abstract class ServiceModule {
     @Multibinds

@@ -1,11 +1,11 @@
 package me.arunsharma.devupdates.data
 
 import android.content.Context
-import com.dev.core.di.annotations.ApplicationContext
 import com.dev.core.utils.StorageUtils
 import com.dev.services.models.ServiceRequest
 import com.dev.services.models.SourceConfig
 import com.google.gson.Gson
+import dagger.hilt.android.qualifiers.ApplicationContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.utils.cache.AppCache
 import me.arunsharma.devupdates.utils.cache.CacheConstants

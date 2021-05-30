@@ -1,9 +1,9 @@
 package me.arunsharma.devupdates.utils.cache
 
 import android.content.Context
-import com.dev.core.di.annotations.ApplicationContext
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.*
 import javax.inject.Inject
 

@@ -3,6 +3,7 @@ plugins {
     kotlin(Plugins.KOTLIN_ANDROID)
     kotlin(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_PARCELIZE)
+    id("dagger.hilt.android.plugin")
 }
 
 val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
@@ -79,7 +80,7 @@ dependencies {
     debugImplementation(project(":devik"))
     releaseImplementation(project(":devik-noop"))
     implementation(Dependencies.AndroidX.Material)
-    implementation(Dependencies.Di.Dagger)
+    implementation(Dependencies.Di.Hilt)
     implementation(Dependencies.AndroidX.AppCompat)
     implementation(Dependencies.AndroidX.ConstraintLayout)
     implementation(Dependencies.AndroidX.Fragment)
@@ -102,7 +103,7 @@ dependencies {
     implementation(Dependencies.AndroidX.Room)
     kapt(Dependencies.Compilers.Room)
 
-    kapt(Dependencies.Compilers.Dagger)
+    kapt(Dependencies.Compilers.Hilt)
 
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)

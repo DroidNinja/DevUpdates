@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
 import com.dev.services.models.DataSource
 import com.dev.services.models.ServiceRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
@@ -13,6 +14,7 @@ import me.arunsharma.devupdates.data.AppDatabase
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import javax.inject.Inject
 
+@HiltViewModel
 class VMBookmarks @Inject constructor(val database: AppDatabase, val context: Application) :
     BaseViewModel() {
 

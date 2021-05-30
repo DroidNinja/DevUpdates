@@ -2,10 +2,12 @@ package me.arunsharma.devupdates.ui.fragments.settings
 
 import android.os.Build
 import com.dev.core.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import me.arunsharma.devupdates.prefs.AppPrefs
 import me.arunsharma.devupdates.utils.ThemeSetter
 import javax.inject.Inject
 
+@HiltViewModel
 class VMSettings @Inject constructor(val prefs: AppPrefs) : BaseViewModel() {
 
     fun getAvailableThemes(): List<Theme> = when {

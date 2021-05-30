@@ -13,6 +13,7 @@ import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
 import com.dev.services.models.ServiceItem
+import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentBookmarksBinding
 import me.arunsharma.devupdates.ui.MainActivity
@@ -21,17 +22,12 @@ import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.viewmodels.VMBookmarks
 import javax.inject.Inject
 
-
-class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks), DaggerInjectable {
+@AndroidEntryPoint
+class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
 
     private val binding by viewBinding(FragmentBookmarksBinding::bind)
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
-    val viewModel: VMBookmarks by viewModels {
-        factory
-    }
+    val viewModel: VMBookmarks by viewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -86,11 +82,6 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks), DaggerInjec
                 }
             })
         }
-    }
-
-
-    override fun injectDagger() {
-        (activity as MainActivity).mainComponent.inject(this)
     }
 
     companion object {

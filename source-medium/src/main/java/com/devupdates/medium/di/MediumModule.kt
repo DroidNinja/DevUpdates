@@ -10,6 +10,9 @@ import com.devupdates.medium.ServiceMediumRequest
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -18,7 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+@InstallIn(SingletonComponent::class)
 @Module(includes = [NetworkModule::class])
 abstract class MediumModule {
 
