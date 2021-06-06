@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.viewmodels
+package me.arunsharma.devupdates.ui.fragments.feed.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.SourceConfigStore
-import me.arunsharma.devupdates.ui.fragments.feed.FeedPagerItem
+import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import javax.inject.Inject
 
 @HiltViewModel

@@ -8,6 +8,7 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import com.dev.services.repo.ServiceIntegration
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
@@ -100,8 +101,13 @@ class RepoFeed @Inject constructor(
         database.feedDao().insertAll(data)
     }
 
+    fun getBookmarks(): Flow<List<ServiceItem>> {
+        return database.feedDao().getBookmarks()
+    }
+
     suspend fun addBookmark(item: ServiceItem) {
         withContext(ioDispatcher) {
+            Timber.d("RepoFeed  addBookmark " + item.isBookmarked)
             database.feedDao().setBookmark(item.isBookmarked, item.actionUrl)
         }
     }

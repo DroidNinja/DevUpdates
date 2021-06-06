@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
 import com.dev.core.databinding.LayoutProgressErrorBinding
-import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
@@ -22,10 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedGithubBinding
 import me.arunsharma.devupdates.databinding.LayoutChipBinding
-import me.arunsharma.devupdates.ui.MainActivity
-import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
+import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
+import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeedList
 import me.arunsharma.devupdates.utils.SnackbarUtil
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {

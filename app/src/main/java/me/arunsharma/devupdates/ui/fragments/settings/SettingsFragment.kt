@@ -6,6 +6,7 @@ import com.dev.core.base.BaseFragment
 import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import me.arunsharma.devupdates.BuildConfig
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentSettingsBinding
 import me.arunsharma.devupdates.ui.MainActivityListener
@@ -46,6 +47,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             mActivityListener?.getNavigator()
                 ?.openAddDataSourceFragment(activity, AddDataSourceFragment.newInstance())
         }
+
+        binding.tvVersionInfo.text = String.format("Version: %s-%d", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
     }
 
     companion object {

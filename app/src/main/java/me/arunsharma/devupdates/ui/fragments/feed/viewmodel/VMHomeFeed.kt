@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.viewmodels
+package me.arunsharma.devupdates.ui.fragments.feed.viewmodel
 
 import android.app.Application
 import com.dev.core.di.annotations.IoDispatcher

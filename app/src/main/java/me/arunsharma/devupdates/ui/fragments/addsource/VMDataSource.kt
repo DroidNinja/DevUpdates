@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.viewmodels
+package me.arunsharma.devupdates.ui.fragments.addsource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

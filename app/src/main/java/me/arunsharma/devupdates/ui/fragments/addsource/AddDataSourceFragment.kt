@@ -1,19 +1,14 @@
 package me.arunsharma.devupdates.ui.fragments.addsource
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
-import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentAddDataSourceBinding
-import me.arunsharma.devupdates.ui.MainActivity
-import me.arunsharma.devupdates.ui.viewmodels.VMDataSource
 import me.arunsharma.devupdates.utils.SnackbarUtil
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddDataSourceFragment : BaseFragment(R.layout.fragment_add_data_source) {

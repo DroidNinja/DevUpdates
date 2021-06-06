@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.fragments;
+package me.arunsharma.devupdates.ui.fragments.home;
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

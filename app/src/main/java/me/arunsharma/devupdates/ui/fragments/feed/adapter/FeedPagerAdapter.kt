@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.fragments.feed
+package me.arunsharma.devupdates.ui.fragments.feed.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dev.services.models.DataSource
 import com.dev.services.models.ServiceRequest
 import me.arunsharma.devupdates.databinding.LayoutTabViewBinding
+import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
+import me.arunsharma.devupdates.ui.fragments.feed.GithubFragment
+import me.arunsharma.devupdates.ui.fragments.feed.HomeFeedFragment
 
 data class FeedPagerItem(
     val icon: Int,

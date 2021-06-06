@@ -13,7 +13,7 @@ class DevUpdatesApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        DevikContext(this)
+        DevikContext(this)
         StrictMode.setThreadPolicy(
             StrictMode.ThreadPolicy.Builder()
                 .detectDiskReads()

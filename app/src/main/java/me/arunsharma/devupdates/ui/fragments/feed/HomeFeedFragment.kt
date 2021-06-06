@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
@@ -15,10 +16,15 @@ import com.dev.core.utils.viewBinding
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentHomeFeedListBinding
-import me.arunsharma.devupdates.ui.viewmodels.VMHomeFeed
+import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
+import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMHomeFeed
+import me.arunsharma.devupdates.utils.BookmarkEvent
+import me.arunsharma.devupdates.utils.EventBus
 import me.arunsharma.devupdates.utils.SnackbarUtil
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
@@ -26,6 +32,9 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
     private val binding by viewBinding(FragmentHomeFeedListBinding::bind)
 
     val viewModel: VMHomeFeed by viewModels()
+
+    @Inject
+    lateinit var eventBus: EventBus
 
     override fun getFragmentTag(): String {
         return TAG
@@ -55,6 +64,14 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
             viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
                 handleUIState(state)
             })
+
+            lifecycleScope.launchWhenStarted {
+                eventBus.observe().collect { data->
+                    if(data is BookmarkEvent){
+                        (binding.recyclerView.adapter as? FeedAdapter)?.updateItem(data.item)
+                    }
+                }
+            }
 
             loadData()
         }

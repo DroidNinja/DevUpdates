@@ -1,18 +1,16 @@
 package me.arunsharma.devupdates.ui.fragments.feed
 
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.dev.core.base.BaseFragment
-import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.utils.viewBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedBinding
-import me.arunsharma.devupdates.ui.MainActivity
-import me.arunsharma.devupdates.ui.viewmodels.VMFeed
+import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerAdapter
+import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
+import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeed
+import me.arunsharma.devupdates.utils.EventBus
 import javax.inject.Inject
 
 @AndroidEntryPoint

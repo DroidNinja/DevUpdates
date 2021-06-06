@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dev.core.extensions.addFragment
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
-import me.arunsharma.devupdates.app.DevUpdatesApp
 import me.arunsharma.devupdates.databinding.ActivityMainBinding
 import me.arunsharma.devupdates.navigator.MainNavigator
-import me.arunsharma.devupdates.ui.fragments.HomeFragment
+import me.arunsharma.devupdates.ui.fragments.home.HomeFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint

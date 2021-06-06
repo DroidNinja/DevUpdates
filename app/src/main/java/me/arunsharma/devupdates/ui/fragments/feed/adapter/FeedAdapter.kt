@@ -1,4 +1,4 @@
-package me.arunsharma.devupdates.ui.fragments.feed
+package me.arunsharma.devupdates.ui.fragments.feed.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,6 +29,16 @@ class FeedAdapter(items: List<ServiceItem>) :
                 false
             )
         )
+    }
+
+    fun updateItem(item: ServiceItem) {
+        val index = mData.indexOfFirst {
+            item.actionUrl == it.actionUrl
+        }
+        if (index > 0) {
+            mData[index] = item
+            notifyItemChanged(index)
+        }
     }
 
 }

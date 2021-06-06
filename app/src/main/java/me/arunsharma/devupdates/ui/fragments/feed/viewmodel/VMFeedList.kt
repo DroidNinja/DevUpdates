@@ -1,7 +1,6 @@
-package me.arunsharma.devupdates.ui.viewmodels
+package me.arunsharma.devupdates.ui.fragments.feed.viewmodel
 
 import android.app.Application
-import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
@@ -11,12 +10,13 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.utils.SingleLiveEvent
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

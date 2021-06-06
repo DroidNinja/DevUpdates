@@ -21,7 +21,7 @@ interface FeedDao {
     fun observeFeed(): Flow<List<ServiceItem>>
 
     @Query("SELECT * FROM serviceItem WHERE isBookmarked = 1 order by createdAt")
-    fun getBookmarks(): List<ServiceItem>
+    fun getBookmarks(): Flow<List<ServiceItem>>
 
     @Query("UPDATE serviceItem SET isBookmarked = :isBookmarked WHERE actionUrl = :actionUrl")
     fun setBookmark(isBookmarked: Boolean, actionUrl: String)
