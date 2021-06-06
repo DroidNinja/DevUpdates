@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "137367451879",
+    "project_id": "devupdates-275d4",
+    "storage_bucket": "devupdates-275d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137367451879:android:7f428d04136cb7c3744a42",
+        "android_client_info": {
+          "package_name": "me.arunsharma.devupdates"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137367451879-62kmtda5dhtld8jmnvb7r949jfk85sor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMpoXNji0EbeKU3eHMwTaulDMTMLcSlJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137367451879-62kmtda5dhtld8jmnvb7r949jfk85sor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

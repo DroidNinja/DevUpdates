@@ -100,7 +100,11 @@ dependencies {
     implementation(Dependencies.Compose.Tooling)
     implementation(Dependencies.Compose.ConstraintLayout)
 
+    implementation(platform(Dependencies.Firebase.Bom))
+    implementation(Dependencies.Firebase.AnalyticsKtx)
+
     implementation(Dependencies.AndroidX.Room)
+    implementation(Dependencies.Ktx.Room)
     kapt(Dependencies.Compilers.Room)
 
     kapt(Dependencies.Compilers.Hilt)

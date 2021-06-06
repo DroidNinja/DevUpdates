@@ -11,6 +11,12 @@ object Versions {
         const val GsonConverter = "2.9.0"
     }
 
+    object Firebase{
+        const val GoogleServices="4.3.8"
+
+
+    }
+
     object AndroidX {
         const val AppCompat = "1.2.0"
         const val CardView = "1.0.0"

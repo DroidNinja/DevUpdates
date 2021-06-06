@@ -18,19 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="@dimen/_5sdp"
-            app:navigationIcon="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="@string/data_sources"
-            app:titleTextColor="?attr/colorPrimary"/>
+            app:titleTextColor="?attr/colorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
         android:id="@+id/tvTooltip"
+        style="@style/TextAppearance.H2.Subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_35sdp"
-        style="@style/TextAppearance.H2.Subtitle"
         android:gravity="center"
         android:padding="@dimen/_5sdp"
         android:text="@string/drag_text"

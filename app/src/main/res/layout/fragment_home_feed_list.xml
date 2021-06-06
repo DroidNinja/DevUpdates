@@ -23,4 +23,16 @@
         </com.dev.core.view.ProgressLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/btnCheckUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/btn_check_update"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/check_new_updates"
+        android:textColor="?attr/colorOnPrimary"
+        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

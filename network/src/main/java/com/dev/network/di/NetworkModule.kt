@@ -20,8 +20,8 @@ class NetworkModule {
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .addInterceptor(
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-                )
+//            .addInterceptor(
+//                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+//                )
     }
 }

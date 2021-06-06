@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
 import com.dev.core.databinding.LayoutProgressErrorBinding
-import com.dev.core.di.utils.DaggerInjectable
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
@@ -18,18 +16,16 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
-import me.arunsharma.devupdates.databinding.FragmentFeedListBinding
-import me.arunsharma.devupdates.ui.MainActivity
-import me.arunsharma.devupdates.ui.viewmodels.VMFeedList
+import me.arunsharma.devupdates.databinding.FragmentHomeFeedListBinding
+import me.arunsharma.devupdates.ui.viewmodels.VMHomeFeed
 import me.arunsharma.devupdates.utils.SnackbarUtil
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list) {
+class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
 
-    private val binding by viewBinding(FragmentFeedListBinding::bind)
+    private val binding by viewBinding(FragmentHomeFeedListBinding::bind)
 
-    val viewModel: VMFeedList by viewModels()
+    val viewModel: VMHomeFeed by viewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -45,6 +41,11 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list) {
 
             binding.srlView.setOnRefreshListener {
                 viewModel.getHomeFeed(request, forceUpdate = true)
+            }
+
+            binding.btnCheckUpdate.setOnClickListener {
+                binding.btnCheckUpdate.visibility = View.GONE
+                loadData()
             }
 
             viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
@@ -77,6 +78,11 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list) {
 
                     binding.progressLayout.showError(root)
                 }
+            }
+            is FeedUIState.HasNewItems -> {
+                binding.btnCheckUpdate.visibility = View.VISIBLE
+                binding.btnCheckUpdate.animate()
+                    .translationY(binding.btnCheckUpdate.height.toFloat())
             }
         }
     }
@@ -137,7 +143,8 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_feed_list) {
         arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
             if (view != null && viewModel.lvUiState.value == null) {
                 request.next = System.currentTimeMillis()
-                viewModel.getHomeFeed(request)
+                viewModel.observeHomeFeed(request)
+//                viewModel.getHomeFeed(request)
             }
         }
     }

@@ -12,11 +12,13 @@ import me.arunsharma.devupdates.data.AppDatabase
 import me.arunsharma.devupdates.data.SourceConfigStore
 import me.arunsharma.devupdates.data.SourceConfigStoreImpl
 import me.arunsharma.devupdates.utils.cache.CachingProvider
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 class DataModule {
 
+    @Singleton
     @Provides
     fun provideSourceConfigStore(
         @ApplicationContext context: Context,
@@ -25,6 +27,7 @@ class DataModule {
         return SourceConfigStoreImpl(context, cachingProvider)
     }
 
+    @Singleton
     @Provides
     fun provideCachingProvider(
         @ApplicationContext context: Context,
@@ -32,6 +35,7 @@ class DataModule {
         return CachingProvider(context)
     }
 
+    @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
@@ -40,6 +44,7 @@ class DataModule {
         ).fallbackToDestructiveMigration().build()
     }
 
+    @Singleton
     @Provides
     fun provideSharedPrefs(@ApplicationContext context: Context): SharedPreferences {
         return context.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)

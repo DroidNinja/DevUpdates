@@ -18,30 +18,38 @@ object Dependencies {
         const val ConstraintLayout =
             "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.ConstraintLayout}"
         const val Material = "com.google.android.material:material:${Versions.AndroidX.Material}"
-        const val RecyclerView = "androidx.recyclerview.recyclerview:${Versions.AndroidX.RecyclerView}"
+        const val RecyclerView =
+            "androidx.recyclerview.recyclerview:${Versions.AndroidX.RecyclerView}"
         const val Fragment = "androidx.fragment:fragment:${Versions.AndroidX.Fragment}"
         const val Browser = "androidx.browser:browser:1.3.0"
         const val Room = "androidx.room:room-runtime:${Versions.AndroidX.Room}"
-        const val SwipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.AndroidX.SwipeRefreshLayout}"
+        const val SwipeRefreshLayout =
+            "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.AndroidX.SwipeRefreshLayout}"
     }
-    
+
     object JetBrains {
-        const val Coroutines="org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.JetBrains.Coroutines}"
-        const val CoroutinesAndroid="org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.JetBrains.Coroutines}"
-        const val Kotlin="org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.Gradle.Kotlin}"
-        const val KotlinExtensions="org.jetbrains.kotlin:kotlin-android-extensions:${Versions.Gradle.Kotlin}"
+        const val Coroutines =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.JetBrains.Coroutines}"
+        const val CoroutinesAndroid =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.JetBrains.Coroutines}"
+        const val Kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.Gradle.Kotlin}"
+        const val KotlinExtensions =
+            "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.Gradle.Kotlin}"
     }
 
     object Ktx {
         const val Core = "androidx.core:core-ktx:${Versions.Ktx.Core}"
-        const val FragmentNavigation = "androidx.navigation:navigation-fragment-ktx:${Versions.Ktx.Fragment}"
+        const val FragmentNavigation =
+            "androidx.navigation:navigation-fragment-ktx:${Versions.Ktx.Fragment}"
         const val Fragment = "androidx.fragment:fragment-ktx:${Versions.Ktx.Fragment}"
+        const val Room = "androidx.room:room-ktx:${Versions.AndroidX.Room}"
+
     }
-    
+
     object LifeCycle {
-        const val LifecycleExtensions="androidx.lifecycle:lifecycle-extensions:2.2.0"
-        const val LifecycleRuntime="androidx.lifecycle:lifecycle-runtime:2.3.1"
-        const val LifecycleCommonJava="androidx.lifecycle:lifecycle-common-java8:2.3.1"
+        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+        const val LifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.3.1"
+        const val LifecycleCommonJava = "androidx.lifecycle:lifecycle-common-java8:2.3.1"
     }
 
     object Di {
@@ -65,23 +73,24 @@ object Dependencies {
         const val Gradle = "com.android.tools.build:gradle:${Versions.Gradle.Gradle}"
         const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.Gradle.Kotlin}"
         const val Hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.Di.Hilt}"
+        const val Firebase = "com.google.gms:google-services:${Versions.Firebase.GoogleServices}"
     }
 
     object AndroidTest {
-        const val ArchCore="androidx.arch.core:core-testing:2.1.0"
-        const val Hamcrest="org.hamcrest:hamcrest-all:1.3"
-        const val MockRetrofit="com.squareup.okhttp:mockwebserver:2.7.2"
-        const val Junit="junit:junit:4.12"
-        const val TestRunner="androidx.test:runner:1.2.0"
-        const val TestExt="androidx.test.ext:junit:1.1.2"
-        const val EspressoCore="androidx.test.espresso:espresso-core:3.2.0"
-        const val EspressoIntents="com.android.support.test.espresso:espresso-intents:3.0.1"
-        const val KotlinCoroutineTest="org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
+        const val ArchCore = "androidx.arch.core:core-testing:2.1.0"
+        const val Hamcrest = "org.hamcrest:hamcrest-all:1.3"
+        const val MockRetrofit = "com.squareup.okhttp:mockwebserver:2.7.2"
+        const val Junit = "junit:junit:4.12"
+        const val TestRunner = "androidx.test:runner:1.2.0"
+        const val TestExt = "androidx.test.ext:junit:1.1.2"
+        const val EspressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+        const val EspressoIntents = "com.android.support.test.espresso:espresso-intents:3.0.1"
+        const val KotlinCoroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
     }
 
     object Mockito {
-        const val Core="org.mockito:mockito-core:${Versions.Test.Mockito}"
-        const val Android="org.mockito:mockito-android:${Versions.Test.Mockito}"
+        const val Core = "org.mockito:mockito-core:${Versions.Test.Mockito}"
+        const val Android = "org.mockito:mockito-android:${Versions.Test.Mockito}"
     }
 
     object Utils {
@@ -98,32 +107,45 @@ object Dependencies {
     }
 
     object Compose {
-        const val UI =  "androidx.compose.ui:ui:${Versions.Compose.ComposeVersion}"
-        const val ActivityCompose =  "androidx.activity:activity-compose:1.3.0-alpha07"
-        const val MaterialCompose = "androidx.compose.material:material:${Versions.Compose.ComposeVersion}"
-        const val MaterialIconsCompose = "androidx.compose.material:material-icons-extended:${Versions.Compose.ComposeVersion}"
-        const val Foundation = "androidx.compose.foundation:foundation:${Versions.Compose.ComposeVersion}"
-        const val FoundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.Compose.ComposeVersion}"
-        const val Animation = "androidx.compose.animation:animation:${Versions.Compose.ComposeVersion}"
+        const val UI = "androidx.compose.ui:ui:${Versions.Compose.ComposeVersion}"
+        const val ActivityCompose = "androidx.activity:activity-compose:1.3.0-alpha07"
+        const val MaterialCompose =
+            "androidx.compose.material:material:${Versions.Compose.ComposeVersion}"
+        const val MaterialIconsCompose =
+            "androidx.compose.material:material-icons-extended:${Versions.Compose.ComposeVersion}"
+        const val Foundation =
+            "androidx.compose.foundation:foundation:${Versions.Compose.ComposeVersion}"
+        const val FoundationLayout =
+            "androidx.compose.foundation:foundation-layout:${Versions.Compose.ComposeVersion}"
+        const val Animation =
+            "androidx.compose.animation:animation:${Versions.Compose.ComposeVersion}"
         const val Runtime = "androidx.compose.runtime:runtime:${Versions.Compose.ComposeVersion}"
-        const val RuntimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.Compose.ComposeVersion}"
+        const val RuntimeLivedata =
+            "androidx.compose.runtime:runtime-livedata:${Versions.Compose.ComposeVersion}"
         const val Navigation = "androidx.navigation:navigation-compose:1.0.0-alpha10"
         const val Tooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.ComposeVersion}"
-        const val ConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha06"
+        const val ConstraintLayout =
+            "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha06"
     }
-    
+
+    object Firebase {
+        const val Bom = "com.google.firebase:firebase-bom:28.1.0"
+        const val AnalyticsKtx = "com.google.firebase:firebase-analytics-ktx"
+    }
+
+
     object DevOnly {
-        const val Leakcanary="com.squareup.leakcanary:leakcanary-android:2.7"
-        const val Stetho="com.facebook.stetho:stetho:1.6.0"
-        const val StethoOkhttp="com.facebook.stetho:stetho-okhttp3:1.6.0"
+        const val Leakcanary = "com.squareup.leakcanary:leakcanary-android:2.7"
+        const val Stetho = "com.facebook.stetho:stetho:1.6.0"
+        const val StethoOkhttp = "com.facebook.stetho:stetho-okhttp3:1.6.0"
         const val Chuck = "com.github.ChuckerTeam.Chucker:library:3.2.0"
         const val ChuckNoOp = "com.github.ChuckerTeam.Chucker:library-no-op:3.2.0"
         const val Timber = "com.jakewharton.timber:timber:4.7.1"
 
         //flipper
-        const val Flipper="com.facebook.flipper:flipper:0.85.0"
-        const val FlipperSoLoader="com.facebook.soloader:soloader:0.10.1"
-        const val FlipperNoOp="com.facebook.flipper:flipper-noop:0.85.0"
-        const val FlipperNetwork="com.facebook.flipper:flipper-network-plugin:0.85.0"
+        const val Flipper = "com.facebook.flipper:flipper:0.85.0"
+        const val FlipperSoLoader = "com.facebook.soloader:soloader:0.10.1"
+        const val FlipperNoOp = "com.facebook.flipper:flipper-noop:0.85.0"
+        const val FlipperNetwork = "com.facebook.flipper:flipper-network-plugin:0.85.0"
     }
 }

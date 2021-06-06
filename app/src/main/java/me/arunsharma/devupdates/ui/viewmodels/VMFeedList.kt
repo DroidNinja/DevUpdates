@@ -13,21 +13,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
-import me.arunsharma.devupdates.data.SourceConfigStore
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.utils.SingleLiveEvent
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class VMFeedList @Inject constructor(
+open class VMFeedList @Inject constructor(
     private val repoFeed: RepoFeed,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    val context: Application
+    open val context: Application
 ) :
     BaseViewModel() {
 
-    private val _lvUIState = MutableLiveData<FeedUIState>()
+    protected open val _lvUIState = MutableLiveData<FeedUIState>()
     val lvUiState: LiveData<FeedUIState> = _lvUIState
 
     val lvShowMessage = SingleLiveEvent<Int>()
@@ -54,51 +54,6 @@ class VMFeedList @Inject constructor(
             } else if (result is ResponseStatus.Failure) {
                 _lvUIState.value = FeedUIState.ShowError(result.exception.message)
             }
-        }
-    }
-
-    fun getHomeFeed(
-        request: ServiceRequest,
-        forceUpdate: Boolean = false,
-        showLoading: Boolean = true
-    ) {
-        launchDataLoad {
-            if (showLoading) {
-                _lvUIState.value = FeedUIState.Loading
-            }
-            if (forceUpdate) {
-                request.next = System.currentTimeMillis()
-            }
-            val result = repoFeed.getHomeFeed(request)
-            if (result is ResponseStatus.Success) {
-                val data: List<ServiceItem> = result.data.map { item ->
-                    var topTitle = item.author
-                    if (item.createdAt > 0) {
-                        topTitle =
-                            topTitle + " ● " + DateUtils.getRelativeTimeSpanString(item.createdAt)
-                    }
-                    item.topTitleText = topTitle
-                    item.likes = item.groupId
-                    item
-                }
-                if (!showLoading || data.isNotEmpty()) {
-                    _lvUIState.value = FeedUIState.ShowList(request, data)
-                } else {
-                    _lvUIState.value = FeedUIState.ShowError(
-                        context.getString(R.string.empty_feed),
-                        context.getString(R.string.swipe_down_to_refresh_the_feed)
-                    )
-                }
-            } else if (result is ResponseStatus.Failure) {
-                _lvUIState.value = FeedUIState.ShowError(result.exception.message)
-            }
-        }
-    }
-
-    fun updateHomeFeedData(currentData: MutableList<ServiceItem>, request: ServiceRequest) {
-        if (request.hasPagingSupport) {
-            request.next = currentData.last().createdAt
-            getHomeFeed(request, forceUpdate = false, showLoading = false)
         }
     }
 

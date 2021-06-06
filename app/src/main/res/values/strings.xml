@@ -17,5 +17,6 @@
     <string name="dark">Dark</string>
     <string name="system">System</string>
     <string name="battery_saver">Battery Saver</string>
+    <string name="check_new_updates">Check new updates</string>
 
 </resources>

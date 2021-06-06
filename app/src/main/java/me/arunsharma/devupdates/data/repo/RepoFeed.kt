@@ -1,5 +1,6 @@
 package me.arunsharma.devupdates.data.repo
 
+import android.text.format.DateUtils
 import com.dev.core.di.annotations.IoDispatcher
 import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
@@ -7,6 +8,8 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import com.dev.services.repo.ServiceIntegration
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.data.AppDatabase
 import timber.log.Timber
@@ -34,7 +37,6 @@ class RepoFeed @Inject constructor(
                 if (forceUpdate || !request.shouldUseCache || cacheData.isNullOrEmpty()) {
                     val result =
                         serviceIntegration[request.type.toString()]?.getData(request)
-                    Timber.d("Debug--${request.type.toString()}"+ result.toString())
                     if (result is ResponseStatus.Success) {
                         if (request.shouldUseCache) {
                             saveCache(result.data)
@@ -59,10 +61,38 @@ class RepoFeed @Inject constructor(
                     database.feedDao()
                         .getAllFeed(request.next)
 
-                return@withContext ResponseStatus.success(cacheData)
+                return@withContext ResponseStatus.success(mapHomeFeed(cacheData))
             }
         } catch (ex: Exception) {
             return ResponseStatus.failure(APIErrorException.newInstance(ex))
+        }
+    }
+
+    private fun mapHomeFeed(data : List<ServiceItem>): List<ServiceItem> {
+        return data.map { item ->
+            var topTitle = item.author
+            if (item.createdAt > 0) {
+                topTitle =
+                    topTitle + " ● " + DateUtils.getRelativeTimeSpanString(item.createdAt)
+            }
+            item.topTitleText = topTitle
+            item.likes = item.groupId
+            item
+        }
+    }
+
+    suspend fun observeHomeFeed(onNewData: suspend (List<ServiceItem>) -> Unit) {
+        try {
+            return withContext(ioDispatcher) {
+                database.feedDao()
+                    .observeFeed().distinctUntilChanged().collect { data->
+                        if(data.isNotEmpty()) {
+                            onNewData(data)
+                        }
+                    }
+            }
+        } catch (ex: Exception) {
+            Timber.e(ex)
         }
     }
 
