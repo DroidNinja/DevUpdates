@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,6 +34,7 @@ class VMHomeFeed @Inject constructor(
                         _lvUIState.postValue(FeedUIState.HasNewItems)
                     }
                 } else {
+                    Timber.e("fetchHomeFeed")
                     fetchHomeFeed(request)
                 }
             }

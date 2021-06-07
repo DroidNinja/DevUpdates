@@ -74,6 +74,7 @@ object Dependencies {
         const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.Gradle.Kotlin}"
         const val Hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.Di.Hilt}"
         const val Firebase = "com.google.gms:google-services:${Versions.Firebase.GoogleServices}"
+        const val Crashlytics = "com.google.firebase:firebase-crashlytics-gradle:${Versions.Firebase.Crashlytics}"
     }
 
     object AndroidTest {
@@ -131,6 +132,7 @@ object Dependencies {
     object Firebase {
         const val Bom = "com.google.firebase:firebase-bom:28.1.0"
         const val AnalyticsKtx = "com.google.firebase:firebase-analytics-ktx"
+        const val CrashlyticsKtx = "com.google.firebase:firebase-crashlytics-ktx"
     }
 
 

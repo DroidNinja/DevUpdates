@@ -1,6 +1,7 @@
 package me.arunsharma.devupdates.ui.fragments.feed.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.BaseViewHolder
@@ -10,15 +11,20 @@ import me.arunsharma.devupdates.databinding.ItemFeedItemBinding
 
 class VHFeedItem(val binding: ItemFeedItemBinding) : BaseViewHolder(binding.root)
 
-class FeedAdapter(items: List<ServiceItem>) :
+class FeedAdapter(items: List<ServiceItem>, val allowBookmarks: Boolean = true) :
     BaseRecyclerViewAdapter<ServiceItem, VHFeedItem>(items.toMutableList()) {
     override fun convert(helper: VHFeedItem, item: ServiceItem) {
         helper.binding.tvTitle.text = item.title
         helper.binding.tvSubTitle.text = item.description
         helper.binding.tvTopTitle.text = item.topTitleText
         helper.binding.tvFooter.text = item.likes
-        helper.binding.ivBookmark.isSelected = item.isBookmarked
-        helper.addOnClickListener(R.id.ivBookmark)
+        if (allowBookmarks) {
+            helper.binding.ivBookmark.visibility = View.VISIBLE
+            helper.binding.ivBookmark.isSelected = item.isBookmarked
+            helper.addOnClickListener(R.id.ivBookmark)
+        } else {
+            helper.binding.ivBookmark.visibility = View.GONE
+        }
     }
 
     override fun createHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {

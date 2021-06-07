@@ -21,6 +21,7 @@ import me.arunsharma.devupdates.utils.BookmarkEvent
 import me.arunsharma.devupdates.utils.Event
 import me.arunsharma.devupdates.utils.EventBus
 import me.arunsharma.devupdates.utils.SingleLiveEvent
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,8 +43,10 @@ class VMBookmarks @Inject constructor(
             if (!forceUpdate) {
                 _lvUIState.value = FeedUIState.Loading
             }
+            Timber.d("get Bookmarks ")
             withContext(Dispatchers.IO) {
                 repoFeed.getBookmarks().distinctUntilChanged().collect { data ->
+                    Timber.d("Bookmarks changed" + data.size)
                     if (data.isNotEmpty()) {
                         _lvUIState.postValue(
                             FeedUIState.ShowList(

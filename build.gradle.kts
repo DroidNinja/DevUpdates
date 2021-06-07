@@ -9,6 +9,7 @@ buildscript {
         classpath(Dependencies.ClassPath.Kotlin)
         classpath(Dependencies.ClassPath.Hilt)
         classpath(Dependencies.ClassPath.Firebase)
+        classpath(Dependencies.ClassPath.Crashlytics)
     }
 }
 

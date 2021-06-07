@@ -3,7 +3,9 @@ plugins {
     kotlin(Plugins.KOTLIN_ANDROID)
     kotlin(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_PARCELIZE)
-    id("dagger.hilt.android.plugin")
+    id(Plugins.HILT)
+    id(Plugins.GOOGLE_SERVICES)
+    id(Plugins.CRASHLYTICS)
 }
 
 val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
@@ -102,6 +104,7 @@ dependencies {
 
     implementation(platform(Dependencies.Firebase.Bom))
     implementation(Dependencies.Firebase.AnalyticsKtx)
+    implementation(Dependencies.Firebase.CrashlyticsKtx)
 
     implementation(Dependencies.AndroidX.Room)
     implementation(Dependencies.Ktx.Room)

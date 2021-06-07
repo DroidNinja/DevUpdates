@@ -54,7 +54,7 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                             chip.text = lang
                             chip.id = ViewCompat.generateViewId()
                             chip.setOnCheckedChangeListener { buttonView, isChecked ->
-                                if(isChecked) {
+                                if (isChecked) {
                                     val lang = buttonView.text.toString()
                                     if (lang != DEFAULT_LANG) {
                                         request.metadata?.put(ServiceGithub.SELECTED_LANGUAGE, lang)
@@ -107,22 +107,11 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
 
     private fun setDataOnList(request: ServiceRequest, data: List<ServiceItem>) =
         if (binding.recyclerView.adapter == null) {
-            binding.recyclerView.adapter = FeedAdapter(data).apply {
+            binding.recyclerView.adapter = FeedAdapter(data, false).apply {
                 setOnItemClickListener(object :
                     BaseRecyclerViewAdapter.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
                         CustomTabHelper.open(view.context, getItem(position).actionUrl)
-                    }
-                })
-                setOnItemChildClickListener(object :
-                    BaseRecyclerViewAdapter.OnItemChildClickListener {
-                    override fun onItemChildClick(view: View, position: Int) {
-                        if (view.id == R.id.ivBookmark) {
-                            val item = getItem(position)
-                            item.isBookmarked = !item.isBookmarked
-                            notifyItemChanged(position)
-                            viewModel.addBookmark(item)
-                        }
                     }
                 })
                 if (request.hasPagingSupport) {

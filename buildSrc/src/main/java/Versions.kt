@@ -11,10 +11,9 @@ object Versions {
         const val GsonConverter = "2.9.0"
     }
 
-    object Firebase{
-        const val GoogleServices="4.3.8"
-
-
+    object Firebase {
+        const val GoogleServices = "4.3.8"
+        const val Crashlytics = "2.7.0"
     }
 
     object AndroidX {
