@@ -1,5 +1,6 @@
 package com.dev.network.di
 
+import com.dev.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,12 +17,15 @@ class NetworkModule {
 
     @Provides
     fun provideFCOKHttpAuth(): OkHttpClient.Builder {
-        return OkHttpClient.Builder()
+        val builder = OkHttpClient.Builder()
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-//            .addInterceptor(
-//                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-//                )
+        if(BuildConfig.DEBUG){
+            builder.addInterceptor(
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
+        }
+        return builder
     }
 }
