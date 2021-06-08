@@ -4,6 +4,7 @@
 
 <p>
 <img src="https://github.com/DroidNinja/DevUpdates/blob/master/art/light_theme.png?raw=true"/>
+
 <img src="https://github.com/DroidNinja/DevUpdates/blob/master/art/dark_theme.png?raw=true"/>
 </p>
 
@@ -42,9 +43,12 @@ Although If you have some suggestions regarding data sources, I will try to add 
 - Drag/Drop order of services
 
 ## TODO
+- Integrate Work manager to fetch updates at periodic time
+- Show notifications  
 - Gson to Moshi
 - Jetpack pagination
 - More polished architecture
+- Convert UI to Jetpack Compose
 - Devik module - Make this development only module more usable
 
 
