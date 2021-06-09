@@ -1,5 +1,8 @@
 package com.devupdates.medium.models
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class StreamItem(
     val createdAt: Long,
     val itemType: String,
@@ -8,6 +11,7 @@ data class StreamItem(
     val type: String
 )
 
+@JsonClass(generateAdapter = true)
 data class PostPreview(
     val postId: String
 )

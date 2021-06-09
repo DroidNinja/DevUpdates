@@ -25,7 +25,7 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
     }
 
     override fun initView() {
-        binding.viewPager.offscreenPageLimit = 2
+        binding.viewPager.offscreenPageLimit = 5
         viewModel.lvFetchConfig.observe(viewLifecycleOwner, {
             setUpViewPager(it)
         })

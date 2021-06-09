@@ -1,16 +1,18 @@
 package com.devupdates.medium.models
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Collection(
-    @SerializedName("firstPublishedAt")
+    @Json(name = "firstPublishedAt")
     val createdAt: Long,
     val creatorId: String,
     val title: String,
     val type: String,
     val uniqueSlug: String,
     val updatedAt: Long,
-    @SerializedName("virtuals")
+    @Json(name = "virtuals")
     var virtuals: Virtuals
 ) {
     fun getDescription(): String {

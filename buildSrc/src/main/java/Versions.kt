@@ -9,6 +9,8 @@ object Versions {
         const val OkHttp = "4.8.1"
         const val LoggingInterceptor = "4.8.1"
         const val GsonConverter = "2.9.0"
+        const val MoshiConverter = "2.9.0"
+        const val Moshi = "1.12.0"
     }
 
     object Firebase {
@@ -22,6 +24,7 @@ object Versions {
         const val ConstraintLayout = "2.0.4"
         const val LifeCycleViewModel = "2.2.0"
         const val LifeCycleExtensions = "2.2.0"
+        const val LifeCycleRuntime = "2.4.0-alpha01"
         const val Material = "1.3.0"
         const val RecyclerView = "1.2.0"
         const val Fragment = "1.3.3"

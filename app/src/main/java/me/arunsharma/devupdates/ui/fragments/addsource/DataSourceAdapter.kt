@@ -3,11 +3,13 @@ package me.arunsharma.devupdates.ui.fragments.addsource
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.BaseViewHolder
 import com.dev.services.models.DataSource
 import com.dev.services.models.ServiceRequest
+import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.ItemDataSourceBinding
 import me.arunsharma.devupdates.utils.cache.FeedUtils
 
@@ -43,11 +45,11 @@ class DataSourceAdapter(items: List<ServiceRequest>, val mListener: DataSourceAd
     }
 
     override fun onRowSelected(viewHolder: RecyclerView.ViewHolder) {
-        viewHolder.itemView.setBackgroundColor(Color.LTGRAY)
+        viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.context, R.color.colorOnPrimary_80))
     }
 
     override fun onRowClear(viewHolder: RecyclerView.ViewHolder) {
-        viewHolder.itemView.setBackgroundColor(Color.WHITE)
+        viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.context, R.color.colorOnPrimary))
         mListener.onDragComplete()
     }
 

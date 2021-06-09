@@ -1,9 +1,9 @@
 package me.arunsharma.devupdates.utils.cache
 
 import android.content.Context
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
+import me.arunsharma.devupdates.utils.TypeToken
 import java.io.*
 import javax.inject.Inject
 
@@ -33,7 +33,7 @@ data class AppCache(
     }
 }
 
-class CachingProvider @Inject constructor(@ApplicationContext val context: Context) {
+class CachingProvider @Inject constructor(@ApplicationContext val context: Context, val moshi: Moshi) {
 
     /**
      * @param appCache Provide cache config - expiration, fileName and policy
@@ -89,7 +89,7 @@ class CachingProvider @Inject constructor(@ApplicationContext val context: Conte
                 fr.close()
                 if (!json.isNullOrEmpty()) {
                     val cacheEntryType = object : TypeToken<T>() {}.type
-                    return Gson().fromJson(json, cacheEntryType)
+                    return moshi.adapter<T>(cacheEntryType).fromJson(json)
                 }
             }
         } catch (e: IOException) {
@@ -100,7 +100,8 @@ class CachingProvider @Inject constructor(@ApplicationContext val context: Conte
 
     inline fun <reified T> writeCache(context: Context, fileName: String, data: T) {
         try {
-            val json = Gson().toJson(data)
+            val cacheEntryType = object : TypeToken<T>() {}.type
+            val json = moshi.adapter<T>(cacheEntryType).toJson(data)
             val file = File(context.cacheDir, fileName)
             val fw = FileWriter(file.absoluteFile)
             val bw = BufferedWriter(fw)

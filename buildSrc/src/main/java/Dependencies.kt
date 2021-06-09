@@ -6,14 +6,14 @@ object Dependencies {
         const val Retrofit = "com.squareup.retrofit2:retrofit:${Versions.Network.Retrofit}"
         const val GsonConverter =
             "com.squareup.retrofit2:converter-gson:${Versions.Network.GsonConverter}"
+        const val MoshiConverter =
+            "com.squareup.retrofit2:converter-moshi:${Versions.Network.MoshiConverter}"
+        const val Moshi =
+            "com.squareup.moshi:moshi:${Versions.Network.Moshi}"
     }
 
     object AndroidX {
         const val AppCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.AppCompat}"
-        const val LifeCycleExtensions =
-            "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.LifeCycleExtensions}"
-        const val LifeCycleViewModel =
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.LifeCycleViewModel}"
         const val CardView = "androidx.cardview:cardview:${Versions.AndroidX.CardView}"
         const val ConstraintLayout =
             "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.ConstraintLayout}"
@@ -47,9 +47,13 @@ object Dependencies {
     }
 
     object LifeCycle {
-        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-        const val LifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.3.1"
+        const val LifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.LifeCycleExtensions}"
+        const val LifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.AndroidX.LifeCycleRuntime}"
         const val LifecycleCommonJava = "androidx.lifecycle:lifecycle-common-java8:2.3.1"
+        const val LifeCycleViewModel =
+            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.LifeCycleViewModel}"
+        const val LifeCycleOnly =
+            "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.LifeCycleRuntime}"
     }
 
     object Di {
@@ -62,6 +66,8 @@ object Dependencies {
         const val Hilt = "com.google.dagger:hilt-android-compiler:${Versions.Di.Hilt}"
         const val GlideCompiler = "com.github.bumptech.glide:compiler:${Versions.Helpers.Glide}"
         const val Room = "androidx.room:room-compiler:${Versions.AndroidX.Room}"
+        const val Moshi =
+            "com.squareup.moshi:moshi-kotlin-codegen:${Versions.Network.Moshi}"
     }
 
     object Helpers {
@@ -74,7 +80,8 @@ object Dependencies {
         const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.Gradle.Kotlin}"
         const val Hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.Di.Hilt}"
         const val Firebase = "com.google.gms:google-services:${Versions.Firebase.GoogleServices}"
-        const val Crashlytics = "com.google.firebase:firebase-crashlytics-gradle:${Versions.Firebase.Crashlytics}"
+        const val Crashlytics =
+            "com.google.firebase:firebase-crashlytics-gradle:${Versions.Firebase.Crashlytics}"
     }
 
     object AndroidTest {
@@ -97,6 +104,7 @@ object Dependencies {
     object Utils {
         const val Jsoup = "org.jsoup:jsoup:1.13.1"
         const val RssParser = "com.tickaroo.tikxml:retrofit-converter:0.8.15"
+        const val Gson = "com.google.code.gson:gson:2.8.7"
     }
 
     object TikXML {

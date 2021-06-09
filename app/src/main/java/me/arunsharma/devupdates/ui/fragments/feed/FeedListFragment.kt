@@ -91,9 +91,6 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
                     binding.progressLayout.showError(root)
                 }
             }
-            is FeedUIState.RefreshList -> {
-
-            }
         }
     }
 
@@ -128,7 +125,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
         } else {
             val adapter = binding.recyclerView.adapter as FeedAdapter
             if (request.hasPagingSupport) {
-                if (data.isNotEmpty()) {
+                if (request.next > 0 && data.isNotEmpty()) {
                         adapter.addData(data)
                     adapter.loadMoreComplete()
                 } else {

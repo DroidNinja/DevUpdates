@@ -3,6 +3,7 @@ package me.arunsharma.devupdates.di.data
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,17 +23,19 @@ class DataModule {
     @Provides
     fun provideSourceConfigStore(
         @ApplicationContext context: Context,
-        cachingProvider: CachingProvider
+        cachingProvider: CachingProvider,
+        moshi: Moshi
     ): SourceConfigStore {
-        return SourceConfigStoreImpl(context, cachingProvider)
+        return SourceConfigStoreImpl(context, cachingProvider, moshi)
     }
 
     @Singleton
     @Provides
     fun provideCachingProvider(
         @ApplicationContext context: Context,
+        moshi: Moshi
     ): CachingProvider {
-        return CachingProvider(context)
+        return CachingProvider(context, moshi)
     }
 
     @Singleton

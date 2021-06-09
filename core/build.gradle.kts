@@ -42,7 +42,7 @@ dependencies {
     api(Dependencies.LifeCycle.LifecycleExtensions)
     api(Dependencies.LifeCycle.LifecycleRuntime)
     api(Dependencies.LifeCycle.LifecycleCommonJava)
-    api(Dependencies.LifeCycle.LifecycleCommonJava)
+    api(Dependencies.LifeCycle.LifeCycleOnly)
     api(Dependencies.DevOnly.Timber)
 
     implementation(Dependencies.Di.Hilt)

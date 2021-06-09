@@ -21,7 +21,7 @@ class NetworkModule {
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-        if(BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             builder.addInterceptor(
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             )

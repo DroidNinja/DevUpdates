@@ -8,9 +8,11 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.dev.core.di.utils.DaggerInjectable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.ui.MainActivity
 import javax.inject.Inject
@@ -40,7 +42,7 @@ class ThemeSettingDialogFragment : AppCompatDialogFragment() {
 
         return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.choose_theme)
-            .setSingleChoiceItems(listAdapter, 0) { dialog, position ->
+            .setSingleChoiceItems(listAdapter, updateSelectedItem(viewModel.getTheme())) { dialog, position ->
                 listAdapter.getItem(position)?.theme?.let {
                     viewModel.setTheme(it)
                 }
@@ -49,16 +51,11 @@ class ThemeSettingDialogFragment : AppCompatDialogFragment() {
             .create()
     }
 
-    override fun onStart() {
-        super.onStart()
-        updateSelectedItem(viewModel.getTheme())
-    }
-
-    private fun updateSelectedItem(selected: Theme?) {
+    private fun updateSelectedItem(selected: Theme?): Int {
         val selectedPosition = (0 until listAdapter.count).indexOfFirst { index ->
             listAdapter.getItem(index)?.theme == selected
         }
-        (dialog as? AlertDialog)?.listView?.setItemChecked(selectedPosition, true)
+        return selectedPosition
     }
 
     private fun getTitleForTheme(theme: Theme) = when (theme) {

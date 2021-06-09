@@ -36,6 +36,9 @@ dependencies {
     implementation(project(":services"))
     implementation(Dependencies.Utils.Jsoup)
 
+    implementation(Dependencies.Network.Moshi)
+    kapt(Dependencies.Compilers.Moshi)
+
     implementation(Dependencies.Di.Hilt)
     kapt(Dependencies.Compilers.Hilt)
 

@@ -4,7 +4,7 @@ import android.content.Context
 import com.dev.core.utils.StorageUtils
 import com.dev.services.models.ServiceRequest
 import com.dev.services.models.SourceConfig
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.utils.cache.AppCache
@@ -20,15 +20,17 @@ interface SourceConfigStore {
 
 class SourceConfigStoreImpl @Inject constructor(
     @ApplicationContext val context: Context,
-    val cachingProvider: CachingProvider
+    val cachingProvider: CachingProvider,
+    val moshi: Moshi
 ) : SourceConfigStore{
 
     val appCache = AppCache(CacheConstants.CACHE_DATASOURCES)
 
     override suspend fun getData(): List<ServiceRequest> {
-        val config = cachingProvider.cacheData<SourceConfig>(appCache) {
+        val config = cachingProvider.cacheData(appCache) {
             val result = StorageUtils.getRawData(context, R.raw.sources)
-            Gson().fromJson(result, SourceConfig::class.java)
+            val jsonAdapter = moshi.adapter(SourceConfig::class.java)
+            jsonAdapter.fromJson(result)!!
         }
 
         return config.data

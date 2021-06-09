@@ -1,23 +1,25 @@
 package com.devupdates.medium.models
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class PayLoad(
-    @SerializedName("value")
-    val values: List<Collection>,
-    @SerializedName("references")
-    val references: References,
-    @SerializedName("streamItems")
-    val streamItems: List<StreamItem>
+    @Json(name = "value")
+    var values: List<Collection>?,
+    @Json(name = "references")
+    val references: References?,
+    @Json(name = "streamItems")
+    val streamItems: List<StreamItem>?
 ) {
 
     fun getAuthorName(authorId: String): String? {
-        return references.user[authorId]?.name
+        return references?.user?.get(authorId)?.name
     }
 
-    fun getTaggedPosts(): List<Collection?> {
-        return streamItems.map {
-            references.post[it.postPreview.postId]
+    fun getTaggedPosts(): List<Collection?>? {
+        return streamItems?.map {
+            references?.post?.get(it.postPreview.postId)
         }
     }
 }

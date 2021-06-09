@@ -29,7 +29,7 @@ dependencies {
     api(Dependencies.JetBrains.Coroutines)
     api(Dependencies.JetBrains.CoroutinesAndroid)
     api(Dependencies.Network.Retrofit)
-    api(Dependencies.Network.GsonConverter)
+    api(Dependencies.Network.MoshiConverter)
     api(Dependencies.Network.LoggingInterceptor)
     debugApi(Dependencies.DevOnly.Chuck)
     releaseApi(Dependencies.DevOnly.ChuckNoOp)

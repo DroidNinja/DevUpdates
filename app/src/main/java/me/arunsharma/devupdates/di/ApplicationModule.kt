@@ -1,5 +1,6 @@
 package me.arunsharma.devupdates.di
 
+import com.squareup.moshi.Moshi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -22,4 +23,9 @@ abstract class ApplicationModule {
     @Binds
     @Singleton
     abstract fun provideEventBus(eventBus: EventBusImpl): EventBus
+
+    companion object {
+        @Provides
+        fun providesMoshi() = Moshi.Builder().build()
+    }
 }

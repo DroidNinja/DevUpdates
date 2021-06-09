@@ -106,6 +106,8 @@ dependencies {
     implementation(Dependencies.Firebase.AnalyticsKtx)
     implementation(Dependencies.Firebase.CrashlyticsKtx)
 
+//    implementation(Dependencies.Utils.Gson)
+
     implementation(Dependencies.AndroidX.Room)
     implementation(Dependencies.Ktx.Room)
     kapt(Dependencies.Compilers.Room)
