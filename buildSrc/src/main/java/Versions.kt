@@ -30,6 +30,7 @@ object Versions {
         const val Fragment = "1.3.3"
         const val Room = "2.4.0-alpha02"
         const val SwipeRefreshLayout = "1.1.0"
+        const val WorkManager = "2.5.0"
     }
 
     object Ktx {

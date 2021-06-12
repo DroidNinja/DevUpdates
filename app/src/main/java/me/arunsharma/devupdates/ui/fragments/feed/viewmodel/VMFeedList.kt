@@ -10,8 +10,6 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
@@ -40,6 +38,7 @@ open class VMFeedList @Inject constructor(
         launchDataLoad {
             if (showLoading) {
                 _lvUIState.value = FeedUIState.Loading
+                request.next = System.currentTimeMillis()
             }
             val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {

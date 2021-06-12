@@ -7,6 +7,7 @@ import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import com.dev.services.repo.ServiceIntegration
+import com.devupdates.github.ServiceGithub
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -35,7 +36,7 @@ class RepoFeed @Inject constructor(
                             request.getGroupId(),
                             request.next
                         )
-                if (forceUpdate || !request.shouldUseCache || cacheData.isNullOrEmpty()) {
+                if (forceUpdate || cacheData.isNullOrEmpty()) {
                     val result =
                         serviceIntegration[request.type.toString()]?.getData(request)
                     if (result is ResponseStatus.Success) {
@@ -69,7 +70,7 @@ class RepoFeed @Inject constructor(
         }
     }
 
-    private fun mapHomeFeed(data : List<ServiceItem>): List<ServiceItem> {
+    private fun mapHomeFeed(data: List<ServiceItem>): List<ServiceItem> {
         return data.map { item ->
             var topTitle = item.author
             if (item.createdAt > 0) {
@@ -86,8 +87,8 @@ class RepoFeed @Inject constructor(
         try {
             return withContext(ioDispatcher) {
                 database.feedDao()
-                    .observeFeed().distinctUntilChanged().collect { data->
-                        if(data.isNotEmpty()) {
+                    .observeFeed().distinctUntilChanged().collect { data ->
+                        if (data.isNotEmpty()) {
                             onNewData(data)
                         }
                     }
@@ -107,8 +108,40 @@ class RepoFeed @Inject constructor(
 
     suspend fun addBookmark(item: ServiceItem) {
         withContext(ioDispatcher) {
-            Timber.d("RepoFeed  addBookmark " + item.isBookmarked)
             database.feedDao().setBookmark(item.isBookmarked, item.actionUrl)
+        }
+    }
+
+    suspend fun refreshSources(sources: List<ServiceRequest>) {
+        serviceIntegration.forEach { entry ->
+            if (entry.key != ServiceGithub.SERVICE_KEY) {
+                sources.find {
+                    it.type.toString() == entry.key
+                }?.let { request ->
+
+                    //check current data
+                    val cacheData =
+                        database.feedDao()
+                            .getFeedBySource(
+                                request.type.toString(),
+                                request.getGroupId(),
+                                System.currentTimeMillis()
+                            )
+
+                    //get data
+                    val result =
+                        entry.value.getData(request)
+                    if (result is ResponseStatus.Success) {
+                        if (result.data.first().createdAt > cacheData.firstOrNull()?.createdAt ?: 0) {
+                            Timber.d("New item in ${request.type}")
+                            //TODO show notification
+                        }
+                        if (request.shouldUseCache) {
+                            saveCache(result.data)
+                        }
+                    }
+                }
+            }
         }
     }
 }

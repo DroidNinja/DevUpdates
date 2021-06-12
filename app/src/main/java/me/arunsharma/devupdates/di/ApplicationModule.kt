@@ -1,5 +1,6 @@
 package me.arunsharma.devupdates.di
 
+import androidx.work.Configuration
 import com.squareup.moshi.Moshi
 import dagger.Binds
 import dagger.Module
@@ -10,6 +11,7 @@ import me.arunsharma.devupdates.prefs.AppPrefs
 import me.arunsharma.devupdates.prefs.BasePrefs
 import me.arunsharma.devupdates.utils.EventBus
 import me.arunsharma.devupdates.utils.EventBusImpl
+import me.arunsharma.devupdates.workers.DevUpdatesWorkerFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -27,5 +29,16 @@ abstract class ApplicationModule {
     companion object {
         @Provides
         fun providesMoshi() = Moshi.Builder().build()
+
+        @Singleton
+        @Provides
+        fun provideWorkManagerConfiguration(
+            devUpdatesWorkerFactory: DevUpdatesWorkerFactory
+        ): Configuration {
+            return Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.DEBUG)
+                .setWorkerFactory(devUpdatesWorkerFactory)
+                .build()
+        }
     }
 }

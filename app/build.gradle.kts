@@ -106,7 +106,7 @@ dependencies {
     implementation(Dependencies.Firebase.AnalyticsKtx)
     implementation(Dependencies.Firebase.CrashlyticsKtx)
 
-//    implementation(Dependencies.Utils.Gson)
+    implementation(Dependencies.AndroidX.WorkManager)
 
     implementation(Dependencies.AndroidX.Room)
     implementation(Dependencies.Ktx.Room)

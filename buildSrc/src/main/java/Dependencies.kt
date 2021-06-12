@@ -23,6 +23,7 @@ object Dependencies {
         const val Fragment = "androidx.fragment:fragment:${Versions.AndroidX.Fragment}"
         const val Browser = "androidx.browser:browser:1.3.0"
         const val Room = "androidx.room:room-runtime:${Versions.AndroidX.Room}"
+        const val WorkManager = "androidx.work:work-runtime-ktx:${Versions.AndroidX.WorkManager}"
         const val SwipeRefreshLayout =
             "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.AndroidX.SwipeRefreshLayout}"
     }

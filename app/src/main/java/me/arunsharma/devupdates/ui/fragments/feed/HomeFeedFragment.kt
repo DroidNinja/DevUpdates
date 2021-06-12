@@ -54,7 +54,8 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
 
             binding.btnCheckUpdate.setOnClickListener {
                 binding.btnCheckUpdate.visibility = View.GONE
-                loadData()
+                binding.srlView.isRefreshing = true
+                viewModel.getHomeFeed(request, forceUpdate = true)
             }
 
             viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->

@@ -1,6 +1,5 @@
 package com.dev.services.models
 
-import android.text.format.DateUtils
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
