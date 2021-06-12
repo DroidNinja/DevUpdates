@@ -41,6 +41,9 @@ dependencies {
     implementation(Dependencies.Di.Hilt)
     kapt(Dependencies.Compilers.Hilt)
 
+    implementation(Dependencies.Network.Moshi)
+    kapt(Dependencies.Compilers.Moshi)
+
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)
     androidTestImplementation(Dependencies.AndroidTest.TestRunner)

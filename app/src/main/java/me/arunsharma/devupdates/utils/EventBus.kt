@@ -23,6 +23,6 @@ class EventBusImpl @Inject constructor() : EventBus {
     }
 }
 
-sealed class Event()
+sealed class Event
 
 class BookmarkEvent(val item: ServiceItem) : Event()

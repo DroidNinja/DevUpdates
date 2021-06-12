@@ -2,6 +2,7 @@ package com.dev.services.models
 
 import android.os.Parcelable
 import com.dev.services.R
+import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 interface Pageable {
@@ -9,6 +10,7 @@ interface Pageable {
     var next: Long
 }
 
+@JsonClass(generateAdapter = true)
 @Parcelize
 open class ServiceRequest(
     var type: DataSource,

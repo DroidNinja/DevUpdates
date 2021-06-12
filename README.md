@@ -44,8 +44,7 @@ Although If you have some suggestions regarding data sources, I will try to add 
 
 ## TODO
 - Integrate Work manager to fetch updates at periodic time
-- Show notifications  
-- Gson to Moshi
+- Show notifications
 - Jetpack pagination
 - More polished architecture
 - Convert UI to Jetpack Compose
