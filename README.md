@@ -43,7 +43,6 @@ Although If you have some suggestions regarding data sources, I will try to add 
 - Drag/Drop order of services
 
 ## TODO
-- Integrate Work manager to fetch updates at periodic time
 - Show notifications
 - Jetpack pagination
 - More polished architecture
