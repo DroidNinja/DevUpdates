@@ -2,16 +2,18 @@ package com.devupdates.medium
 
 import com.devupdates.medium.models.MediumResponse
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.Path
+import retrofit2.http.QueryMap
 
 interface ServiceMedium {
 
-    @GET("https://run.mocky.io/v3/e4d0b8ec-a106-4d02-a037-d77445afaa03")
+    @GET("{$USERNAME}/load-more")
     @Headers("accept: application/json", "x-xsrf-token: 1")
     suspend fun getFeed(
-        @Query(USERNAME) username: String,
-//        @Path(USERNAME) username: String,
-        @QueryMap request: MutableMap<String, String?>
+        @Path(USERNAME) username: String,
+    @QueryMap request: MutableMap<String, String?>
     ): Response<MediumResponse>
 
 

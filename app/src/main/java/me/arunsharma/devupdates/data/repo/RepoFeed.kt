@@ -112,7 +112,7 @@ class RepoFeed @Inject constructor(
         }
     }
 
-    suspend fun refreshSources(sources: List<ServiceRequest>) {
+    suspend fun refreshSources(sources: List<ServiceRequest>, checkForUpdate: (ServiceRequest, List<ServiceItem>, List<ServiceItem>) -> Unit) {
         serviceIntegration.forEach { entry ->
             if (entry.key != ServiceGithub.SERVICE_KEY) {
                 sources.find {
@@ -132,10 +132,7 @@ class RepoFeed @Inject constructor(
                     val result =
                         entry.value.getData(request)
                     if (result is ResponseStatus.Success) {
-                        if (result.data.first().createdAt > cacheData.firstOrNull()?.createdAt ?: 0) {
-                            Timber.d("New item in ${request.type}")
-                            //TODO show notification
-                        }
+                        checkForUpdate(request, result.data, cacheData)
                         if (request.shouldUseCache) {
                             saveCache(result.data)
                         }

@@ -7,9 +7,9 @@ import com.dev.services.models.DataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.SourceConfigStore
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
+import me.arunsharma.devupdates.utils.getDrawable
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,27 +29,11 @@ class VMFeed @Inject constructor(
                 _lvFetchConfig.postValue(configList.map { item ->
                     if (item.type == DataSource.MEDIUM) {
                         item.next = System.currentTimeMillis()
-                        FeedPagerItem(
-                            R.drawable.ic_logo_medium,
-                            item
-                        )
-                    } else if (item.type == DataSource.GITHUB) {
-                        FeedPagerItem(
-                            R.drawable.ic_github,
-                            item
-                        )
                     }
-                    else if (item.type == DataSource.ALL) {
-                        FeedPagerItem(
-                            R.drawable.ic_home_feed,
-                            item
-                        )
-                    } else {
-                        FeedPagerItem(
-                            R.drawable.ic_rss_feed,
-                            item
-                        )
-                    }
+                    FeedPagerItem(
+                        item.getDrawable(),
+                        item
+                    )
                 })
             }
         }
