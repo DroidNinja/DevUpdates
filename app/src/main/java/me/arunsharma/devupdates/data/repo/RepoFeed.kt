@@ -112,7 +112,10 @@ class RepoFeed @Inject constructor(
         }
     }
 
-    suspend fun refreshSources(sources: List<ServiceRequest>, checkForUpdate: (ServiceRequest, List<ServiceItem>, List<ServiceItem>) -> Unit) {
+    suspend fun refreshSources(
+        sources: List<ServiceRequest>,
+        checkForUpdate: (ServiceRequest, List<ServiceItem>, List<ServiceItem>) -> Unit
+    ) {
         serviceIntegration.forEach { entry ->
             if (entry.key != ServiceGithub.SERVICE_KEY) {
                 sources.find {
@@ -128,6 +131,7 @@ class RepoFeed @Inject constructor(
                                 System.currentTimeMillis()
                             )
 
+                    Timber.d(cacheData.firstOrNull()?.title)
                     //get data
                     val result =
                         entry.value.getData(request)

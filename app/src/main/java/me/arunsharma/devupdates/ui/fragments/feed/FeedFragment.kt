@@ -7,11 +7,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedBinding
+import me.arunsharma.devupdates.helpers.deeplink.DeepLinkGenerator
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerAdapter
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeed
-import me.arunsharma.devupdates.utils.EventBus
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FeedFragment : BaseFragment(R.layout.fragment_feed) {
@@ -40,6 +39,8 @@ class FeedFragment : BaseFragment(R.layout.fragment_feed) {
             requireActivity(), items
         )
         binding.viewPager.adapter = adapter
+        val position = activity?.intent?.getStringExtra(DeepLinkGenerator.QUERY_POSITION)?.toIntOrNull() ?: 0
+        binding.viewPager.currentItem = position
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.customView = adapter.getTabView(position)
         }.attach()

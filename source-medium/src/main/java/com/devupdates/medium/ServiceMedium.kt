@@ -10,9 +10,11 @@ import retrofit2.http.QueryMap
 interface ServiceMedium {
 
     @GET("{$USERNAME}/load-more")
+//    @GET("https://run.mocky.io/v3/e0134e7b-a6fd-4688-9a85-ff6056497daf")
     @Headers("accept: application/json", "x-xsrf-token: 1")
     suspend fun getFeed(
-        @Path(USERNAME) username: String,
+//    @Query(USERNAME) username: String,
+    @Path(USERNAME) username: String,
     @QueryMap request: MutableMap<String, String?>
     ): Response<MediumResponse>
 

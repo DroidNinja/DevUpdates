@@ -33,7 +33,7 @@ class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : 
                         author = item.issue,
                         topTitleText = item.issue + " ● " + DateUtils.getRelativeTimeSpanString(item.createdAt),
                         likes = item.baseLink,
-                        actionUrl = item.link,
+                        actionUrl = item.link + "?from=aw",
                         sourceType = request.type.toString(),
                         createdAt = item.createdAt,
                         groupId = request.name

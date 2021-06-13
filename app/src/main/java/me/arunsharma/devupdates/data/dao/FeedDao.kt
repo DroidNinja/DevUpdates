@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.dev.services.models.ServiceItem
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Dao
 interface FeedDao {
@@ -26,6 +25,6 @@ interface FeedDao {
     @Query("UPDATE serviceItem SET isBookmarked = :isBookmarked WHERE actionUrl = :actionUrl")
     fun setBookmark(isBookmarked: Boolean, actionUrl: String)
 
-    @Insert(onConflict = OnConflictStrategy. REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(users: List<ServiceItem>)
 }

@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
-import me.arunsharma.devupdates.ui.MainActivity
 import javax.inject.Inject
 
 class NotificationUtils @Inject constructor(@ApplicationContext private val context: Context) {
@@ -22,7 +21,12 @@ class NotificationUtils @Inject constructor(@ApplicationContext private val cont
             channel = createNotificationChannel(
                 DEFAULT_CHANNEL_ID,
                 DEFAULT_CHANNEL_NAME
-            )
+            ).apply {
+                // Register the channel with the system
+                val notificationManager: NotificationManager =
+                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(this)
+            }
         }
     }
 
@@ -34,13 +38,12 @@ class NotificationUtils @Inject constructor(@ApplicationContext private val cont
     fun sendNotification(
         title: String,
         content: String,
-        icon: Int
-    ) {
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
+        icon: Int,
+        intent: Intent,
+        id: Int = 0
+        ) {
         val pendingIntent =
-            PendingIntent.getActivity(context, 0, intent, 0)
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val notification = NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(content)
@@ -49,7 +52,7 @@ class NotificationUtils @Inject constructor(@ApplicationContext private val cont
             .setContentIntent(pendingIntent)
             .build()
 
-        NotificationManagerCompat.from(context).notify(0, notification)
+        NotificationManagerCompat.from(context).notify(id, notification)
     }
 
     companion object {

@@ -1,11 +1,13 @@
 package me.arunsharma.devupdates.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dev.core.extensions.addFragment
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.ActivityMainBinding
+import me.arunsharma.devupdates.helpers.deeplink.DeepLinkHandler
 import me.arunsharma.devupdates.navigator.MainNavigator
 import me.arunsharma.devupdates.ui.fragments.home.HomeFragment
 import me.arunsharma.devupdates.workers.RefreshSourcesWorker
@@ -21,6 +23,11 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        DeepLinkHandler.handleDeepLink(this, intent?.data)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -30,6 +37,11 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         }
 
         RefreshSourcesWorker.scheduleFetchEventData(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        DeepLinkHandler.handleDeepLink(this, intent?.data)
     }
 
     override fun onBackPressed() {
