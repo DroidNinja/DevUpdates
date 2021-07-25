@@ -30,6 +30,26 @@
       "hasPagingSupport": false
     },
     {
+      "name": "Swiggy Eng",
+      "type": "MEDIUM",
+      "metadata": {
+        "username": "swiggy-bytes",
+        "tag":"swiggy-mobile"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": true
+    },
+    {
+      "name": "Pinterest Eng",
+      "type": "MEDIUM",
+      "metadata": {
+        "username": "pinterest-engineering",
+        "tag": "mobile"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": true
+    },
+    {
       "name": "Android Developers",
       "type": "MEDIUM",
       "metadata": {
