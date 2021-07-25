@@ -7,16 +7,21 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dagger.multibindings.Multibinds
 import me.arunsharma.devupdates.prefs.AppPrefs
 import me.arunsharma.devupdates.prefs.BasePrefs
 import me.arunsharma.devupdates.utils.EventBus
 import me.arunsharma.devupdates.utils.EventBusImpl
 import me.arunsharma.devupdates.workers.DevUpdatesWorkerFactory
+import okhttp3.Interceptor
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class ApplicationModule {
+
+    @Multibinds
+    internal abstract fun provideInterceptors(): Set<Interceptor>
 
     @Binds
     @Singleton

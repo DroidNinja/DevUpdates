@@ -1,12 +1,11 @@
 package com.dev.network.di
 
-import com.dev.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 private const val TIME_OUT: Long = 30
@@ -16,15 +15,15 @@ private const val TIME_OUT: Long = 30
 class NetworkModule {
 
     @Provides
-    fun provideFCOKHttpAuth(): OkHttpClient.Builder {
+    fun provideFCOKHttpAuth(interceptors: Set<@JvmSuppressWildcards Interceptor>): OkHttpClient.Builder {
         val builder = OkHttpClient.Builder()
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            )
+        if (interceptors.isNotEmpty()) {
+            interceptors.forEach {
+                builder.addInterceptor(it)
+            }
         }
         return builder
     }

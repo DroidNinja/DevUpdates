@@ -39,8 +39,10 @@ dependencies {
     implementation(Dependencies.DevOnly.FlipperNetwork)
     implementation(Dependencies.DevOnly.StethoOkhttp)
     implementation(Dependencies.DevOnly.Leakcanary)
-    implementation(Dependencies.Di.Dagger)
-    kapt(Dependencies.Compilers.Dagger)
+    implementation(Dependencies.Network.LoggingInterceptor)
+
+    implementation(Dependencies.Di.Hilt)
+    kapt(Dependencies.Compilers.Hilt)
 
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)
