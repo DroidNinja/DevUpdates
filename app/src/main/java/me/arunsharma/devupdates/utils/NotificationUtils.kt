@@ -43,7 +43,7 @@ class NotificationUtils @Inject constructor(@ApplicationContext private val cont
         id: Int = 0
         ) {
         val pendingIntent =
-            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(content)

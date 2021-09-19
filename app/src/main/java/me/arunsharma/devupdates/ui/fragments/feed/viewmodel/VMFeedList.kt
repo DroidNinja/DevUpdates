@@ -30,12 +30,15 @@ open class VMFeedList @Inject constructor(
 
     val lvShowMessage = SingleLiveEvent<Int>()
 
+    val map = mutableMapOf<String, List<ServiceItem>>()
+
     fun getData(
         request: ServiceRequest,
         forceUpdate: Boolean = false,
         showLoading: Boolean = true
     ) {
         launchDataLoad {
+
             if (showLoading) {
                 _lvUIState.value = FeedUIState.Loading
                 request.next = System.currentTimeMillis()
@@ -43,6 +46,7 @@ open class VMFeedList @Inject constructor(
             val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {
                 if (!showLoading || result.data.isNotEmpty()) {
+                    map[request.name] = result.data
                     _lvUIState.value = FeedUIState.ShowList(request, result.data)
                 } else {
                     _lvUIState.value = FeedUIState.ShowError(
@@ -53,6 +57,7 @@ open class VMFeedList @Inject constructor(
             } else if (result is ResponseStatus.Failure) {
                 _lvUIState.value = FeedUIState.ShowError(result.exception.message)
             }
+
         }
     }
 
@@ -61,6 +66,20 @@ open class VMFeedList @Inject constructor(
             request.next = currentData.last().createdAt
             getData(request, forceUpdate = false, showLoading = false)
         }
+    }
+
+    fun getFeed(
+        request: ServiceRequest,
+        forceUpdate: Boolean = false,
+        showLoading: Boolean = true
+    ) {
+        val mapList = map[request.name]
+        if (mapList == null) {
+            getData(request, forceUpdate, showLoading)
+        } else {
+            _lvUIState.value = FeedUIState.ShowList(request, mapList)
+        }
+
     }
 
     fun addBookmark(item: ServiceItem) {

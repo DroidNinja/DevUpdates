@@ -87,7 +87,10 @@ class RepoFeed @Inject constructor(
         try {
             return withContext(ioDispatcher) {
                 database.feedDao()
-                    .observeFeed().distinctUntilChanged().collect { data ->
+                    .observeFeed()
+                    .distinctUntilChanged { old, new ->
+                        old.size != new.size
+                    }.collect { data ->
                         if (data.isNotEmpty()) {
                             onNewData(data)
                         }

@@ -27,11 +27,6 @@
         <activity android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -40,6 +35,16 @@
                 <!-- Accepts URIs that begin with "example://gizmos” -->
                 <data android:scheme="devupdates"
                     android:host="app" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".compose.ComposeMainActivity"
+            android:theme="@style/ComposeAppTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

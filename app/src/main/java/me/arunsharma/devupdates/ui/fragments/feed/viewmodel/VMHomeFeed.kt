@@ -1,6 +1,7 @@
 package me.arunsharma.devupdates.ui.fragments.feed.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.dev.core.di.annotations.IoDispatcher
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
@@ -25,20 +26,26 @@ class VMHomeFeed @Inject constructor(
 
     fun observeHomeFeed(
         request: ServiceRequest,
-    ) {
+    ): LiveData<FeedUIState> {
         launchDataLoad {
             _lvUIState.value = FeedUIState.Loading
             repoFeed.observeHomeFeed { data ->
-                if (_lvUIState.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
-                    if (data.first().createdAt > currentFeedList.first().createdAt) {
-                        _lvUIState.postValue(FeedUIState.HasNewItems)
+                if(currentFeedList.size != data.size) {
+                    if (_lvUIState.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
+                        if (data.first().createdAt > currentFeedList.first().createdAt) {
+                            _lvUIState.postValue(FeedUIState.HasNewItems)
+                        }
+                    } else {
+                        Timber.e("fetchHomeFeed")
+//                        currentFeedList.addAll(data)
+//                        _lvUIState.postValue(FeedUIState.ShowList(request, data))
+                        request.next = System.currentTimeMillis()
+                        fetchHomeFeed(request)
                     }
-                } else {
-                    Timber.e("fetchHomeFeed")
-                    fetchHomeFeed(request)
                 }
             }
         }
+        return lvUiState
     }
 
     fun getHomeFeed(

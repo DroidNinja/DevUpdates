@@ -22,7 +22,7 @@ class DevUpdatesApp : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        enableStrictMode()
+//        enableStrictMode()
         DevikContext(this)
     }
 

@@ -118,7 +118,7 @@ object Dependencies {
 
     object Compose {
         const val UI = "androidx.compose.ui:ui:${Versions.Compose.ComposeVersion}"
-        const val ActivityCompose = "androidx.activity:activity-compose:1.3.0-alpha07"
+        const val ActivityCompose = "androidx.activity:activity-compose:1.4.0-alpha01"
         const val MaterialCompose =
             "androidx.compose.material:material:${Versions.Compose.ComposeVersion}"
         const val MaterialIconsCompose =
@@ -132,10 +132,19 @@ object Dependencies {
         const val Runtime = "androidx.compose.runtime:runtime:${Versions.Compose.ComposeVersion}"
         const val RuntimeLivedata =
             "androidx.compose.runtime:runtime-livedata:${Versions.Compose.ComposeVersion}"
-        const val Navigation = "androidx.navigation:navigation-compose:1.0.0-alpha10"
+        const val Navigation = "androidx.navigation:navigation-compose:2.4.0-alpha08"
         const val Tooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.ComposeVersion}"
         const val ConstraintLayout =
-            "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha06"
+            "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
+        const val Hilt = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+    }
+
+    object Accompanist {
+        const val SwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.Compose.Accompanist}"
+        const val Insets = "com.google.accompanist:accompanist-insets:${Versions.Compose.Accompanist}"
+        const val SystemUIController = "com.google.accompanist:accompanist-systemuicontroller:${Versions.Compose.Accompanist}"
+        const val Pager = "com.google.accompanist:accompanist-pager:${Versions.Compose.Accompanist}"
+        const val PagerIndicator = "com.google.accompanist:accompanist-pager-indicators:${Versions.Compose.Accompanist}"
     }
 
     object Firebase {

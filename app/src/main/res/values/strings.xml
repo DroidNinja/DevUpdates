@@ -18,5 +18,6 @@
     <string name="system">System</string>
     <string name="battery_saver">Battery Saver</string>
     <string name="check_new_updates">Check new updates</string>
+    <string name="bottom_navigation_bar">bnb</string>
 
 </resources>

@@ -69,6 +69,10 @@ android {
         viewBinding = true
         compose = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.Compose.ComposeVersion
+    }
 }
 
 dependencies {
@@ -101,6 +105,13 @@ dependencies {
     implementation(Dependencies.Compose.Navigation)
     implementation(Dependencies.Compose.Tooling)
     implementation(Dependencies.Compose.ConstraintLayout)
+    implementation(Dependencies.Compose.Hilt)
+
+    implementation(Dependencies.Accompanist.SystemUIController)
+    implementation(Dependencies.Accompanist.Insets)
+    implementation(Dependencies.Accompanist.SwipeRefresh)
+    implementation(Dependencies.Accompanist.Pager)
+    implementation(Dependencies.Accompanist.PagerIndicator)
 
     implementation(platform(Dependencies.Firebase.Bom))
     implementation(Dependencies.Firebase.AnalyticsKtx)
