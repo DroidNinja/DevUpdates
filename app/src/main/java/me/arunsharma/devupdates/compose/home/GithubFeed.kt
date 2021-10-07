@@ -40,5 +40,5 @@ fun GithubFeed(viewModel: VMFeedList) {
     FeedPagerViewItem(
         feedUIState = state,
         modifier = Modifier.fillMaxSize()
-    )
+    ) { }
 }

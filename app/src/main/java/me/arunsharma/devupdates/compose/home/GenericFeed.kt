@@ -8,6 +8,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dev.services.models.ServiceItem
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.flow.collect
@@ -23,7 +24,9 @@ fun GenericFeed(pagerState: PagerState, feedPagerItems: List<FeedPagerItem>) {
     Timber.d("Recomposition:GithubFeed")
     val feedListViewModel = hiltViewModel<VMFeedList>()
 
-    GenericFeed(viewModel = feedListViewModel)
+    GenericFeed(viewModel = feedListViewModel) { item->
+        feedListViewModel.addBookmark(item)
+    }
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
@@ -34,12 +37,13 @@ fun GenericFeed(pagerState: PagerState, feedPagerItems: List<FeedPagerItem>) {
 }
 
 @Composable
-fun GenericFeed(viewModel: VMFeedList) {
+fun GenericFeed(viewModel: VMFeedList, onBookmarkClick: (ServiceItem) -> Unit) {
     Timber.d("Recomposition:GenericFeed")
     val state: FeedUIState? by viewModel.lvUiState.observeAsState()
 
     FeedPagerViewItem(
         feedUIState = state,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        onBookmarkClick
     )
 }

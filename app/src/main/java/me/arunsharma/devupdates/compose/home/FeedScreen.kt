@@ -19,14 +19,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dev.core.utils.CustomTabHelper
+import com.dev.services.models.ServiceItem
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 import me.arunsharma.devupdates.compose.theme.ArimoFamily
+import me.arunsharma.devupdates.compose.theme.PlaceHolder
 import me.arunsharma.devupdates.compose.theme.getTabTextColorSelector
 import me.arunsharma.devupdates.compose.utils.rememberFlowWithLifecycle
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeed
+import me.vponomarenko.compose.shimmer.shimmer
 import timber.log.Timber
 
 @OptIn(ExperimentalPagerApi::class)
@@ -36,7 +39,7 @@ fun FeedScreen(
 ) {
     val config: List<FeedPagerItem> by rememberFlowWithLifecycle(viewModel.flowFetchConfig)
         .collectAsState(initial = mutableListOf())
-    val pagerState = rememberPagerState(pageCount = config.size)
+    val pagerState = rememberPagerState(0)
     FeedScreen(pagerState, config)
     Timber.d("Recomposition:FeedScreen")
 }
@@ -152,16 +155,19 @@ fun FeedPager(
     HorizontalPager(
         state = pagerState,
         modifier = modifier,
+        count = feedPagerItems.size
     ) { page ->
         Timber.d("page:$page")
-        if (page == 0) {
-            HomeFeed(pagerState, feedPagerItems)
-//            homeViewModel.observeHomeFeed(feedPagerItems[page].request)
-        } else if (page == 1) {
-            GithubFeed(pagerState, feedPagerItems)
-//            feedListViewModel.getData(feedPagerItems[page].request)
-        } else {
-            GenericFeed(pagerState, feedPagerItems)
+        when (page) {
+            0 -> {
+                HomeFeed(pagerState, feedPagerItems)
+            }
+            1 -> {
+                GithubFeed(pagerState, feedPagerItems)
+            }
+            else -> {
+                GenericFeed(pagerState, feedPagerItems)
+            }
         }
     }
 }
@@ -170,18 +176,21 @@ fun FeedPager(
 @Composable
 fun FeedPagerViewItem(
     feedUIState: FeedUIState?,
-    modifier: Modifier
+    modifier: Modifier,
+    onBookmarkClick: (ServiceItem) -> Unit?
 ) {
-    Timber.d("Recomposition:FeedPagerViewItem" + feedUIState.toString())
     val context = LocalContext.current
     when (feedUIState) {
         is FeedUIState.Loading -> {
+            PlaceHolder(modifier.shimmer())
         }
         is FeedUIState.ShowList -> {
             Timber.d("size:" + feedUIState.list.size)
-            FeedList(items = feedUIState.list, modifier) { item ->
+            FeedList(items = feedUIState.list, modifier, { item ->
                 CustomTabHelper.open(context, item.actionUrl)
-            }
+            }, {
+                onBookmarkClick(it)
+            })
         }
         is FeedUIState.ShowError -> {
 

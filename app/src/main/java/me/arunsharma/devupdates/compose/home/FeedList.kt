@@ -15,7 +15,8 @@ import com.dev.services.models.ServiceItem
 fun FeedList(
     items: List<ServiceItem>,
     modifier: Modifier,
-    onItemClick: (ServiceItem) -> Unit
+    onItemClick: (ServiceItem) -> Unit,
+    onBookmarkClick: (ServiceItem) -> Unit
 ) {
     Scaffold(
         modifier = modifier
@@ -25,11 +26,13 @@ fun FeedList(
                 count = items.size,
                 itemContent = { index ->
                     FeedListItem(items[index],
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            onItemClick(items[index])
-                        })
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                onItemClick(items[index])
+                            }) {
+                        onBookmarkClick(it)
+                    }
                     Divider()
                 }
             )
@@ -56,8 +59,8 @@ fun PreviewDemoUis() {
                 topTitleText = ""
             )
         ),
-        modifier = Modifier.fillMaxSize()
-    ){
+        modifier = Modifier.fillMaxSize(),
+        {
 
-    }
+        },{})
 }

@@ -137,6 +137,7 @@ object Dependencies {
         const val ConstraintLayout =
             "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
         const val Hilt = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+        const val Shimmer = "me.vponomarenko:compose-shimmer:1.0.0"
     }
 
     object Accompanist {

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dev.services.models.ServiceItem
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +21,9 @@ import timber.log.Timber
 fun HomeFeed(pagerState: PagerState, feedPagerItems: List<FeedPagerItem>) {
     val homeViewModel = hiltViewModel<HomeScreenViewModel>()
 
-    HomeFeed(homeViewModel.state)
+    HomeFeed(homeViewModel.state) { item->
+        homeViewModel.addBookmark(item)
+    }
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { page ->
@@ -33,7 +36,7 @@ fun HomeFeed(pagerState: PagerState, feedPagerItems: List<FeedPagerItem>) {
 }
 
 @Composable
-fun HomeFeed(item1: StateFlow<FeedUIState>) {
+fun HomeFeed(item1: StateFlow<FeedUIState>, onBookmarkClick: (ServiceItem) -> Unit) {
     Timber.d("Recomposition:HomeFeed")
     val feedUIState: FeedUIState by rememberFlowWithLifecycle(item1)
         .collectAsState(initial = FeedUIState.Loading)
@@ -41,5 +44,7 @@ fun HomeFeed(item1: StateFlow<FeedUIState>) {
     FeedPagerViewItem(
         feedUIState = feedUIState,
         modifier = Modifier.fillMaxSize()
-    )
+    ) {
+        onBookmarkClick(it)
+    }
 }

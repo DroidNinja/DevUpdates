@@ -106,6 +106,7 @@ dependencies {
     implementation(Dependencies.Compose.Tooling)
     implementation(Dependencies.Compose.ConstraintLayout)
     implementation(Dependencies.Compose.Hilt)
+    implementation(Dependencies.Compose.Shimmer)
 
     implementation(Dependencies.Accompanist.SystemUIController)
     implementation(Dependencies.Accompanist.Insets)
