@@ -158,14 +158,14 @@ object Dependencies {
         const val Leakcanary = "com.squareup.leakcanary:leakcanary-android:2.7"
         const val Stetho = "com.facebook.stetho:stetho:1.6.0"
         const val StethoOkhttp = "com.facebook.stetho:stetho-okhttp3:1.6.0"
-        const val Chuck = "com.github.ChuckerTeam.Chucker:library:3.2.0"
-        const val ChuckNoOp = "com.github.ChuckerTeam.Chucker:library-no-op:3.2.0"
+        const val Chuck = "com.github.ChuckerTeam.Chucker:library:3.5.2"
+        const val ChuckNoOp = "com.github.ChuckerTeam.Chucker:library-no-op:3.5.2"
         const val Timber = "com.jakewharton.timber:timber:4.7.1"
 
         //flipper
-        const val Flipper = "com.facebook.flipper:flipper:0.85.0"
+        const val Flipper = "com.facebook.flipper:flipper:0.114.0"
         const val FlipperSoLoader = "com.facebook.soloader:soloader:0.10.1"
-        const val FlipperNoOp = "com.facebook.flipper:flipper-noop:0.85.0"
-        const val FlipperNetwork = "com.facebook.flipper:flipper-network-plugin:0.85.0"
+        const val FlipperNoOp = "com.facebook.flipper:flipper-noop:0.114.0"
+        const val FlipperNetwork = "com.facebook.flipper:flipper-network-plugin:0.114.0"
     }
 }

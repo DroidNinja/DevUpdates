@@ -1,7 +1,7 @@
 object Versions {
     object Gradle {
-        const val Gradle = "7.1.0-alpha11"
-        const val Kotlin = "1.5.10"
+        const val Gradle = "7.1.0-alpha13"
+        const val Kotlin = "1.5.30"
     }
 
     object Network {
