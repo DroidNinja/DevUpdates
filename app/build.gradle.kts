@@ -67,7 +67,6 @@ android {
 
     buildFeatures{
         viewBinding = true
-        compose = true
     }
 }
 
@@ -88,19 +87,6 @@ dependencies {
     implementation(Dependencies.AndroidX.Fragment)
     implementation(Dependencies.Ktx.Fragment)
     implementation(Dependencies.AndroidX.SwipeRefreshLayout)
-
-    implementation(Dependencies.Compose.UI)
-    implementation(Dependencies.Compose.ActivityCompose)
-    implementation(Dependencies.Compose.MaterialCompose)
-    implementation(Dependencies.Compose.MaterialIconsCompose)
-    implementation(Dependencies.Compose.Foundation)
-    implementation(Dependencies.Compose.FoundationLayout)
-    implementation(Dependencies.Compose.Animation)
-    implementation(Dependencies.Compose.Runtime)
-    implementation(Dependencies.Compose.RuntimeLivedata)
-    implementation(Dependencies.Compose.Navigation)
-    implementation(Dependencies.Compose.Tooling)
-    implementation(Dependencies.Compose.ConstraintLayout)
 
     implementation(platform(Dependencies.Firebase.Bom))
     implementation(Dependencies.Firebase.AnalyticsKtx)
