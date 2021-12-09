@@ -13,6 +13,9 @@ import me.arunsharma.devupdates.data.AppDatabase
 import me.arunsharma.devupdates.data.SourceConfigStore
 import me.arunsharma.devupdates.data.SourceConfigStoreImpl
 import me.arunsharma.devupdates.utils.cache.CachingProvider
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -24,9 +27,10 @@ class DataModule {
     fun provideSourceConfigStore(
         @ApplicationContext context: Context,
         cachingProvider: CachingProvider,
-        moshi: Moshi
+        moshi: Moshi,
+        serviceConfig: ServiceConfig,
     ): SourceConfigStore {
-        return SourceConfigStoreImpl(context, cachingProvider, moshi)
+        return SourceConfigStoreImpl(context, cachingProvider, moshi, serviceConfig)
     }
 
     @Singleton
@@ -51,5 +55,17 @@ class DataModule {
     @Provides
     fun provideSharedPrefs(@ApplicationContext context: Context): SharedPreferences {
         return context.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+    }
+
+    @Singleton
+    @Provides
+    fun provideConfigRepo(): ServiceConfig {
+        return Retrofit.Builder().baseUrl(ServiceConfig.ENDPOINT)
+            .client(
+                OkHttpClient.Builder().build()
+            )
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(ServiceConfig::class.java)
     }
 }
