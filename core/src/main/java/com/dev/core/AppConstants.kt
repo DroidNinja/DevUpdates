@@ -7,6 +7,6 @@ class AppConstants {
         const val FORMAT_DATE="MMM dd, yyyy"
 
 
-        const val CONFIG_URL = "https://run.mocky.io/v3/7fdab6b7-958b-408e-9c21-3dac6c0cfb33"
+        const val CONFIG_URL = "https://raw.githubusercontent.com/DroidNinja/DevUpdates/master/config/sources.json"
     }
 }
