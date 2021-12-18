@@ -40,6 +40,15 @@
       "hasPagingSupport": true
     },
     {
+      "name": "Shopify Engg",
+      "type": "RSS",
+      "metadata": {
+        "url": "https://shopify.engineering/blog.atom"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
       "name": "Pinterest Eng",
       "type": "MEDIUM",
       "metadata": {
