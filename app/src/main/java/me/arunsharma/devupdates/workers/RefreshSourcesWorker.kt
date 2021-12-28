@@ -46,7 +46,6 @@ class RefreshSourcesWorker(
                     { it.run() }
                 )
             } else {
-
                 val refreshWorker = PeriodicWorkRequestBuilder<RefreshSourcesWorker>(
                     REPEAT_INTERVAL,
                     TimeUnit.HOURS

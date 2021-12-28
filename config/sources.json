@@ -24,10 +24,10 @@
       "name": "Official Android",
       "type": "BLOGSPOT",
       "metadata": {
-        "url": "https://android-developers.blogspot.com/feeds/posts/default?alt=rss"
+        "url": "https://android-developers.blogspot.com/feeds/posts/default"
       },
       "shouldUseCache": true,
-      "hasPagingSupport": false
+      "hasPagingSupport": true
     },
     {
       "name": "Swiggy Eng",
@@ -38,15 +38,6 @@
       },
       "shouldUseCache": true,
       "hasPagingSupport": true
-    },
-    {
-      "name": "Shopify Engg",
-      "type": "RSS",
-      "metadata": {
-        "url": "https://shopify.engineering/blog.atom"
-      },
-      "shouldUseCache": true,
-      "hasPagingSupport": false
     },
     {
       "name": "Pinterest Eng",

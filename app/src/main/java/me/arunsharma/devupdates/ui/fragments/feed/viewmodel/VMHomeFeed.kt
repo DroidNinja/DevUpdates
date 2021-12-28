@@ -10,7 +10,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,19 +22,28 @@ class VMHomeFeed @Inject constructor(
 
     private val currentFeedList = mutableListOf<ServiceItem>()
 
-    fun observeHomeFeed(
-        request: ServiceRequest,
+    val feedItems = repoFeed.observeHomeFeed()
+
+    fun onDataReceived(
+        data: List<ServiceItem>,
+        request: ServiceRequest
     ) {
         launchDataLoad {
-            _lvUIState.value = FeedUIState.Loading
-            repoFeed.observeHomeFeed { data ->
-                if (_lvUIState.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
-                    if (data.first().createdAt > currentFeedList.first().createdAt) {
-                        _lvUIState.postValue(FeedUIState.HasNewItems)
-                    }
+            if (_lvUIState.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
+                if (data.first().createdAt > currentFeedList.first().createdAt) {
+                    _lvUIState.postValue(FeedUIState.HasNewItems)
+                }
+            } else {
+                if (data.isNotEmpty()) {
+                    currentFeedList.addAll(data)
+                    _lvUIState.postValue(FeedUIState.ShowList(request, data))
                 } else {
-                    Timber.e("fetchHomeFeed")
-                    fetchHomeFeed(request)
+                    _lvUIState.postValue(
+                        FeedUIState.ShowError(
+                            context.getString(R.string.empty_feed),
+                            context.getString(R.string.swipe_down_to_refresh_the_feed)
+                        )
+                    )
                 }
             }
         }

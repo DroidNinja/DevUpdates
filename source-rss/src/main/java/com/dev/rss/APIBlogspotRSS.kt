@@ -12,6 +12,7 @@ import com.dev.services.models.ServiceRequest
 import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import org.jsoup.Jsoup
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.min
 
@@ -47,6 +48,7 @@ class APIBlogspotRSS @Inject constructor(val serviceRSS: ServiceRSS) : ServiceIn
                     topTitleText = author
                 )
             } ?: mutableListOf()
+            Timber.d("Blogspot:"+result.size)
             return ResponseStatus.success(ServiceResult(result, (result.size + page).toString()))
         } else {
             return ResponseStatus.failure(APIErrorException(APIError("BP", "Url not specified")))

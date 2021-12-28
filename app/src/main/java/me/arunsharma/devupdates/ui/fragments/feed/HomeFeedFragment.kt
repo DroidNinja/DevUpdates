@@ -23,7 +23,6 @@ import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMHomeFeed
 import me.arunsharma.devupdates.utils.BookmarkEvent
 import me.arunsharma.devupdates.utils.EventBus
-import me.arunsharma.devupdates.utils.SnackbarUtil
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -58,23 +57,25 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                 viewModel.getHomeFeed(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner) { resourceString ->
-                view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-            }
-
             viewModel.lvUiState.observe(viewLifecycleOwner) { state ->
                 handleUIState(state)
             }
 
             lifecycleScope.launchWhenStarted {
-                eventBus.observe().collect { data->
-                    if(data is BookmarkEvent){
+                eventBus.observe().collect { data ->
+                    if (data is BookmarkEvent) {
                         (binding.recyclerView.adapter as? FeedAdapter)?.updateItem(data.item)
                     }
                 }
             }
 
-            loadData()
+            lifecycleScope.launchWhenResumed {
+                arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
+                    viewModel.feedItems.collect { data ->
+                        viewModel.onDataReceived(data, request)
+                    }
+                }
+            }
         }
     }
 
@@ -153,16 +154,6 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
         fun newInstance(request: ServiceRequest): HomeFeedFragment = HomeFeedFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
-            }
-        }
-    }
-
-    private fun loadData() {
-        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
-            if (view != null && viewModel.lvUiState.value == null) {
-                request.next = System.currentTimeMillis().toString()
-                viewModel.observeHomeFeed(request)
-//                viewModel.getHomeFeed(request)
             }
         }
     }

@@ -10,7 +10,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import okhttp3.Interceptor
-import okhttp3.logging.HttpLoggingInterceptor
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -28,9 +27,9 @@ class DevikModule {
         return ChuckerInterceptor(context)
     }
 
-    @Provides
-    @IntoSet
-    fun provideHttpLoggingInterceptor(): Interceptor {
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    }
+//    @Provides
+//    @IntoSet
+//    fun provideHttpLoggingInterceptor(): Interceptor {
+//        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+//    }
 }

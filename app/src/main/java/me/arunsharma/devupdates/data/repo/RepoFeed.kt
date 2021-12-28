@@ -11,7 +11,6 @@ import com.dev.services.repo.ServiceIntegration
 import com.devupdates.github.ServiceGithub
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.data.AppDatabase
@@ -62,7 +61,7 @@ class RepoFeed @Inject constructor(
             return withContext(ioDispatcher) {
                 val cacheData =
                     database.feedDao()
-                        .getAllFeed(request.next?.toLong() ?: 0)
+                        .getAllFeed(request.next?.toLong() ?: System.currentTimeMillis())
 
                 return@withContext ResponseStatus.success(mapHomeFeed(cacheData))
             }
@@ -84,22 +83,12 @@ class RepoFeed @Inject constructor(
         }
     }
 
-    suspend fun observeHomeFeed(onNewData: suspend (List<ServiceItem>) -> Unit) {
-        try {
-            return withContext(ioDispatcher) {
-                database.feedDao()
-                    .observeFeed()
-                    .distinctUntilChanged { old, new ->
-                        old.size != new.size
-                    }.collect { data ->
-                        if (data.isNotEmpty()) {
-                            onNewData(data)
-                        }
-                    }
-            }
-        } catch (ex: Exception) {
-            Timber.e(ex)
-        }
+    fun observeHomeFeed(): Flow<List<ServiceItem>> {
+        return database.feedDao()
+                .observeFeed()
+                .distinctUntilChanged { old, new ->
+                    old.size != new.size
+                }
     }
 
     private fun saveCache(data: List<ServiceItem>) {
