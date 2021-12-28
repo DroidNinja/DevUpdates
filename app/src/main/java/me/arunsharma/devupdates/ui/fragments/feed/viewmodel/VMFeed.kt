@@ -28,7 +28,7 @@ class VMFeed @Inject constructor(
                 val configList = sourceConfigStore.getData()
                 _lvFetchConfig.postValue(configList.map { item ->
                     if (item.type == DataSource.MEDIUM) {
-                        item.next = System.currentTimeMillis()
+                        item.next = System.currentTimeMillis().toString()
                     }
                     FeedPagerItem(
                         item.getDrawable(),

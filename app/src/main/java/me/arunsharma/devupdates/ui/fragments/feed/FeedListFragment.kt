@@ -52,13 +52,13 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
                 viewModel.getData(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
+            viewModel.lvShowMessage.observe(viewLifecycleOwner) { resourceString ->
                 view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-            })
+            }
 
-            viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
+            viewModel.lvUiState.observe(viewLifecycleOwner) { state ->
                 handleUIState(state)
-            })
+            }
 
             lifecycleScope.launchWhenStarted {
                 eventBus.observe().collect { data->
@@ -125,7 +125,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
         } else {
             val adapter = binding.recyclerView.adapter as FeedAdapter
             if (request.hasPagingSupport) {
-                if (request.next > 0 && data.isNotEmpty()) {
+                if (request.next?.isNotEmpty() == true && data.isNotEmpty()) {
                         adapter.addData(data)
                     adapter.loadMoreComplete()
                 } else {

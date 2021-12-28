@@ -4,13 +4,14 @@ import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import timber.log.Timber
 import javax.inject.Inject
 
 class APIGithub @Inject constructor(val service: ServiceGithub) : ServiceIntegration {
 
-    override suspend fun getData(request: ServiceRequest): ResponseStatus<List<ServiceItem>> {
+    override suspend fun getData(request: ServiceRequest): ResponseStatus<ServiceResult> {
         try {
             Timber.d("Debug--getData")
             val result = service.getTrending(request.metadata?.get(ServiceGithub.SELECTED_LANGUAGE) ?: "", "daily").map { item ->
@@ -26,7 +27,7 @@ class APIGithub @Inject constructor(val service: ServiceGithub) : ServiceIntegra
                     groupId = request.name
                 )
             }
-            return ResponseStatus.success(result)
+            return ResponseStatus.success(ServiceResult(result))
         } catch (exception: Exception) {
             Timber.d("Debug--"+ exception.message)
             return ResponseStatus.failure(APIErrorException.newInstance(exception))

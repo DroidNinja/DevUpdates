@@ -27,7 +27,7 @@ object AndroidWeeklyParser {
 
         //removing sponsored post
         allList.removeAt(2)
-        allList.removeAt(4)
+        allList.removeAt(5)
 
         return allList.subList(0, allList.indexOfFirst { it.title.contains("Place a") })
     }

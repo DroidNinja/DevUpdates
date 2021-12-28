@@ -1,11 +1,12 @@
 package me.arunsharma.devupdates.data
 
 import android.content.Context
-import com.dev.core.AppConstants
+import com.dev.core.utils.StorageUtils
 import com.dev.services.models.ServiceRequest
 import com.dev.services.models.SourceConfig
 import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
+import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.di.data.ServiceConfig
 import me.arunsharma.devupdates.utils.cache.AppCache
 import me.arunsharma.devupdates.utils.cache.CacheConstants
@@ -29,12 +30,14 @@ class SourceConfigStoreImpl @Inject constructor(
 
     override suspend fun getData(): List<ServiceRequest> {
         val config = cachingProvider.cacheData<List<ServiceRequest>>(appCache) {
-            return try {
-                val result = serviceConfig.getConfig(AppConstants.CONFIG_URL)
-                result.data
-            } catch (exception: Exception){
-                mutableListOf()
-            }
+//            return try {
+//                val result = serviceConfig.getConfig(AppConstants.CONFIG_URL)
+//                result.data
+//            } catch (exception: Exception){
+                val result = StorageUtils.getRawData(context, R.raw.sources)
+                val jsonAdapter = moshi.adapter(SourceConfig::class.java)
+                jsonAdapter.fromJson(result)?.data!!
+//            }
         }
 
         return config

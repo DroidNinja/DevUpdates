@@ -51,7 +51,7 @@ class VMHomeFeed @Inject constructor(
                 _lvUIState.value = FeedUIState.Loading
             }
             if (forceUpdate) {
-                request.next = System.currentTimeMillis()
+                request.next = System.currentTimeMillis().toString()
             }
             fetchHomeFeed(request, showLoading)
         }
@@ -81,7 +81,7 @@ class VMHomeFeed @Inject constructor(
 
     fun updateHomeFeedData(currentData: MutableList<ServiceItem>, request: ServiceRequest) {
         if (request.hasPagingSupport) {
-            request.next = currentData.last().createdAt
+            request.next = currentData.last().createdAt.toString()
             getHomeFeed(request, forceUpdate = false, showLoading = false)
         }
     }

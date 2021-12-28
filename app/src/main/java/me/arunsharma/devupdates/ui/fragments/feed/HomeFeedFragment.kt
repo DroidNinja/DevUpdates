@@ -58,13 +58,13 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                 viewModel.getHomeFeed(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
+            viewModel.lvShowMessage.observe(viewLifecycleOwner) { resourceString ->
                 view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-            })
+            }
 
-            viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
+            viewModel.lvUiState.observe(viewLifecycleOwner) { state ->
                 handleUIState(state)
-            })
+            }
 
             lifecycleScope.launchWhenStarted {
                 eventBus.observe().collect { data->
@@ -160,7 +160,7 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
     private fun loadData() {
         arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
             if (view != null && viewModel.lvUiState.value == null) {
-                request.next = System.currentTimeMillis()
+                request.next = System.currentTimeMillis().toString()
                 viewModel.observeHomeFeed(request)
 //                viewModel.getHomeFeed(request)
             }

@@ -6,6 +6,7 @@ import com.dev.network.model.ResponseStatus
 import com.dev.services.models.DataSource
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import com.devupdates.medium.models.Collection
 import com.devupdates.medium.models.MediumResponse
@@ -13,12 +14,12 @@ import javax.inject.Inject
 
 class APIMedium @Inject constructor(val service: ServiceMedium) : ServiceIntegration {
 
-    override suspend fun getData(request: ServiceRequest): ResponseStatus<List<ServiceItem>> {
+    override suspend fun getData(request: ServiceRequest): ResponseStatus<ServiceResult> {
         val username = request.metadata?.get("username") ?: ""
-        val requestMap = mutableMapOf<String, String?>(
+        val requestMap = mutableMapOf(
             "sortBy" to "latest",
             "limit" to "10",
-            "to" to request.next.toString()
+            "to" to request.next
         )
 
         return if (request.metadata?.get("tag") != null) {
@@ -34,12 +35,12 @@ class APIMedium @Inject constructor(val service: ServiceMedium) : ServiceIntegra
         username: String,
         requestMap: MutableMap<String, String?>,
         groupId: String
-    ): ResponseStatus<List<ServiceItem>> {
+    ): ResponseStatus<ServiceResult> {
         val response = service.getTaggedFeed(username, requestMap)
         if (response.isSuccessful) {
-            return ResponseStatus.success(response.body()?.payload?.getTaggedPosts()?.map { item ->
+            return ResponseStatus.success(ServiceResult(response.body()?.payload?.getTaggedPosts()?.map { item ->
                 mapCollectionToServiceItem(username, response.body(), item, groupId)
-            } ?: mutableListOf())
+            } ?: mutableListOf()))
         } else {
             return ResponseStatus.failure(APIErrorException.httpError(response))
         }
@@ -49,12 +50,12 @@ class APIMedium @Inject constructor(val service: ServiceMedium) : ServiceIntegra
         username: String,
         requestMap: MutableMap<String, String?>,
         groupId: String
-    ): ResponseStatus<List<ServiceItem>> {
+    ): ResponseStatus<ServiceResult> {
         val response = service.getFeed(username, requestMap)
         if (response.isSuccessful) {
-            return ResponseStatus.success(response.body()?.payload?.values?.map { item ->
+            return ResponseStatus.success(ServiceResult(response.body()?.payload?.values?.map { item ->
                 mapCollectionToServiceItem(username, response.body(), item, groupId)
-            } ?: mutableListOf())
+            } ?: mutableListOf()))
         } else {
             return ResponseStatus.failure(APIErrorException.httpError(response))
         }

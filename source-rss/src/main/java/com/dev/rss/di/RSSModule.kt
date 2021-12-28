@@ -14,10 +14,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Retrofit
 
 @InstallIn(SingletonComponent::class)
@@ -45,7 +45,14 @@ abstract class RSSModule {
         internal fun provideRSSParser(okhttpBuilder: OkHttpClient.Builder): ServiceRSS {
             return Retrofit.Builder().baseUrl(ServiceRSS.ENDPOINT)
                 .client(okhttpBuilder
+                    .addInterceptor { chain ->
+                        val response = chain.proceed(chain.request())
+                        val responseText = response.body?.string()?.replace("(<\\?xml.*?\\?>)","")
+                        val body = responseText?.toResponseBody(response.body?.contentType())
+                        response.newBuilder().body(body).build()
+                    }
                     .build())
+
                 .addConverterFactory(TikXmlConverterFactory.create(
                     TikXml.Builder()
                         .addTypeConverter(String::class.java,  HtmlEscapeStringConverter())

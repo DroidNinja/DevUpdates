@@ -4,13 +4,14 @@ import com.dev.rss.model.blogspot.Feed
 import com.dev.rss.model.rss.ChannelFeed
 import com.dev.rss.model.rss.RSSFeed
 import retrofit2.http.GET
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 
 interface ServiceRSS {
 
     @GET
-    suspend fun getFeed(@Url url: String): Feed
+    suspend fun getFeed(@Url url: String, @Query("start-index") page: Int): Feed
 
     @GET
     suspend fun getRSSFeed(@Url url: String): RSSFeed

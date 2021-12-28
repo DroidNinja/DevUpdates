@@ -5,24 +5,22 @@ import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
+import timber.log.Timber
 import java.net.URL
 import javax.inject.Inject
 
 class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : ServiceIntegration {
 
-    private var latestIssue: Int = 0
-
-    override suspend fun getData(request: ServiceRequest): ResponseStatus<List<ServiceItem>> {
+    override suspend fun getData(request: ServiceRequest): ResponseStatus<ServiceResult> {
         try {
-            if (latestIssue == 0) {
-                latestIssue = getLatestIssue().toInt()
-            }
-            if (isPagination(request)) {
-                latestIssue--
+            var latestIssue = request.next
+            if (latestIssue == null) {
+                latestIssue = getLatestIssue()
             }
 
             val result =
@@ -39,14 +37,15 @@ class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : 
                         groupId = request.name
                     )
                 }
-            return ResponseStatus.success(result)
+            return ResponseStatus.success(
+                ServiceResult(
+                    result,
+                    (latestIssue.toInt() - 1).toString()
+                )
+            )
         } catch (exception: Exception) {
             return ResponseStatus.failure(APIErrorException.newInstance(exception))
         }
-    }
-
-    private fun isPagination(request: ServiceRequest): Boolean {
-        return request.next > 0
     }
 
     private suspend fun getLatestIssue(): String {
@@ -56,6 +55,7 @@ class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : 
 
             val issueText =
                 doc.select("body > section > div > div > ul > li:nth-child(1) > h3 > a").text()
+            Timber.d("latestIssue" + issueText)
             issueText.substring(issueText.lastIndexOf("#") + 1, issueText.length)
         }
     }

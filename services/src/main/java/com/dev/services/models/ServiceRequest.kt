@@ -1,13 +1,12 @@
 package com.dev.services.models
 
 import android.os.Parcelable
-import com.dev.services.R
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 interface Pageable {
     var hasPagingSupport: Boolean
-    var next: Long
+    var next: String?
 }
 
 @JsonClass(generateAdapter = true)
@@ -17,7 +16,7 @@ open class ServiceRequest(
     var name: String,
     var shouldUseCache: Boolean = false,
     var metadata: MutableMap<String, String?>? = null,
-    override var next: Long = 0,
+    override var next: String? = null,
     override var hasPagingSupport: Boolean = false
 ) : Parcelable, Pageable {
 

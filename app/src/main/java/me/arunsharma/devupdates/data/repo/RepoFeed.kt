@@ -6,6 +6,7 @@ import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import com.devupdates.github.ServiceGithub
 import kotlinx.coroutines.CoroutineDispatcher
@@ -26,7 +27,7 @@ class RepoFeed @Inject constructor(
     suspend fun getData(
         request: ServiceRequest,
         forceUpdate: Boolean
-    ): ResponseStatus<List<ServiceItem>> {
+    ): ResponseStatus<ServiceResult> {
         try {
             return withContext(ioDispatcher) {
                 val cacheData =
@@ -34,21 +35,21 @@ class RepoFeed @Inject constructor(
                         .getFeedBySource(
                             request.type.toString(),
                             request.getGroupId(),
-                            request.next
+                            request.next?.toLong() ?: System.currentTimeMillis()
                         )
                 if (forceUpdate || cacheData.isNullOrEmpty()) {
                     val result =
                         serviceIntegration[request.type.toString()]?.getData(request)
                     if (result is ResponseStatus.Success) {
                         if (request.shouldUseCache) {
-                            saveCache(result.data)
+                            saveCache(result.data.data)
                         }
                     }
                     return@withContext result
                         ?: ResponseStatus.failure(APIErrorException.unexpectedError())
 
                 } else {
-                    return@withContext ResponseStatus.success(cacheData)
+                    return@withContext ResponseStatus.success(ServiceResult(cacheData))
                 }
             }
         } catch (ex: Exception) {
@@ -61,7 +62,7 @@ class RepoFeed @Inject constructor(
             return withContext(ioDispatcher) {
                 val cacheData =
                     database.feedDao()
-                        .getAllFeed(request.next)
+                        .getAllFeed(request.next?.toLong() ?: 0)
 
                 return@withContext ResponseStatus.success(mapHomeFeed(cacheData))
             }
@@ -87,7 +88,10 @@ class RepoFeed @Inject constructor(
         try {
             return withContext(ioDispatcher) {
                 database.feedDao()
-                    .observeFeed().distinctUntilChanged().collect { data ->
+                    .observeFeed()
+                    .distinctUntilChanged { old, new ->
+                        old.size != new.size
+                    }.collect { data ->
                         if (data.isNotEmpty()) {
                             onNewData(data)
                         }
@@ -136,9 +140,9 @@ class RepoFeed @Inject constructor(
                     val result =
                         entry.value.getData(request)
                     if (result is ResponseStatus.Success) {
-                        checkForUpdate(request, result.data, cacheData)
+                        checkForUpdate(request, result.data.data, cacheData)
                         if (request.shouldUseCache) {
-                            saveCache(result.data)
+                            saveCache(result.data.data)
                         }
                     }
                 }
