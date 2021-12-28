@@ -7,7 +7,6 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import javax.inject.Inject
@@ -29,21 +28,13 @@ class VMHomeFeed @Inject constructor(
         request: ServiceRequest
     ) {
         launchDataLoad {
-            if (_lvUIState.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
-                if (data.first().createdAt > currentFeedList.first().createdAt) {
-                    _lvUIState.postValue(FeedUIState.HasNewItems)
-                }
-            } else {
-                if (data.isNotEmpty()) {
-                    currentFeedList.addAll(data)
-                    _lvUIState.postValue(FeedUIState.ShowList(request, data))
+            if (data.size != currentFeedList.size) {
+                if (_lvUIState.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
+                    if (data.first().createdAt > currentFeedList.first().createdAt) {
+                        _lvUIState.postValue(FeedUIState.HasNewItems)
+                    }
                 } else {
-                    _lvUIState.postValue(
-                        FeedUIState.ShowError(
-                            context.getString(R.string.empty_feed),
-                            context.getString(R.string.swipe_down_to_refresh_the_feed)
-                        )
-                    )
+                    getHomeFeed(request, true)
                 }
             }
         }
@@ -51,46 +42,32 @@ class VMHomeFeed @Inject constructor(
 
     fun getHomeFeed(
         request: ServiceRequest,
-        forceUpdate: Boolean = false,
-        showLoading: Boolean = true
+        forceUpdate: Boolean = false
     ) {
         launchDataLoad {
-            if (showLoading) {
+            if (forceUpdate) {
                 _lvUIState.value = FeedUIState.Loading
             }
-            if (forceUpdate) {
-                request.next = System.currentTimeMillis().toString()
-            }
-            fetchHomeFeed(request, showLoading)
-        }
-    }
-
-    private suspend fun fetchHomeFeed(
-        request: ServiceRequest,
-        showLoading: Boolean = true
-    ) {
-        val result = repoFeed.getHomeFeed(request)
-        if (result is ResponseStatus.Success) {
-            if (!showLoading || result.data.isNotEmpty()) {
-                currentFeedList.addAll(result.data)
-                _lvUIState.postValue(FeedUIState.ShowList(request, result.data))
-            } else {
+            val result = repoFeed.getHomeFeed(request)
+            if (result is ResponseStatus.Success) {
+                if (result.data.isNotEmpty()) {
+                    currentFeedList.addAll(result.data)
+                }
                 _lvUIState.postValue(
-                    FeedUIState.ShowError(
-                        context.getString(R.string.empty_feed),
-                        context.getString(R.string.swipe_down_to_refresh_the_feed)
-                    )
+                    FeedUIState.ShowList(
+                        request,
+                        result.data)
                 )
+            } else if (result is ResponseStatus.Failure) {
+                _lvUIState.postValue(FeedUIState.ShowError(result.exception.message))
             }
-        } else if (result is ResponseStatus.Failure) {
-            _lvUIState.postValue(FeedUIState.ShowError(result.exception.message))
         }
     }
 
     fun updateHomeFeedData(currentData: MutableList<ServiceItem>, request: ServiceRequest) {
         if (request.hasPagingSupport) {
             request.next = currentData.last().createdAt.toString()
-            getHomeFeed(request, forceUpdate = false, showLoading = false)
+            getHomeFeed(request, forceUpdate = false)
         }
     }
 }

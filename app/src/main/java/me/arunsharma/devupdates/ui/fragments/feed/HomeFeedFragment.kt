@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +19,15 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentHomeFeedListBinding
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMHomeFeed
 import me.arunsharma.devupdates.utils.BookmarkEvent
 import me.arunsharma.devupdates.utils.EventBus
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -69,13 +74,15 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                 }
             }
 
-            lifecycleScope.launchWhenResumed {
-                arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
-                    viewModel.feedItems.collect { data ->
-                        viewModel.onDataReceived(data, request)
-                    }
+            arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)
+                ?.let { request ->
+                    viewModel.feedItems.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .onEach { data ->
+                            Timber.d("onNew Data:" + data.size)
+                            viewModel.onDataReceived(data, request)
+                        }
+                        .launchIn(lifecycleScope)
                 }
-            }
         }
     }
 
@@ -136,7 +143,7 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
             }
         } else {
             val adapter = binding.recyclerView.adapter as FeedAdapter
-            if (request.hasPagingSupport) {
+                if (request.hasPagingSupport && request.next != null) {
                 if (data.isNotEmpty()) {
                     adapter.addData(data)
                     adapter.loadMoreComplete()

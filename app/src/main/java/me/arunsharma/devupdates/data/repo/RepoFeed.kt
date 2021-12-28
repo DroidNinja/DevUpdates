@@ -11,7 +11,6 @@ import com.dev.services.repo.ServiceIntegration
 import com.devupdates.github.ServiceGithub
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.data.AppDatabase
 import timber.log.Timber
@@ -86,9 +85,6 @@ class RepoFeed @Inject constructor(
     fun observeHomeFeed(): Flow<List<ServiceItem>> {
         return database.feedDao()
                 .observeFeed()
-                .distinctUntilChanged { old, new ->
-                    old.size != new.size
-                }
     }
 
     private fun saveCache(data: List<ServiceItem>) {

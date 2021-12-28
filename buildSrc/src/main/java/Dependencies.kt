@@ -24,6 +24,7 @@ object Dependencies {
         const val Browser = "androidx.browser:browser:1.3.0"
         const val Room = "androidx.room:room-runtime:${Versions.AndroidX.Room}"
         const val WorkManager = "androidx.work:work-runtime-ktx:${Versions.AndroidX.WorkManager}"
+        const val AppStartup = "androidx.startup:startup-runtime:1.1.0"
         const val SwipeRefreshLayout =
             "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.AndroidX.SwipeRefreshLayout}"
     }

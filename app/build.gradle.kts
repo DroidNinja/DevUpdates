@@ -93,6 +93,7 @@ dependencies {
     implementation(Dependencies.Firebase.CrashlyticsKtx)
 
     implementation(Dependencies.AndroidX.WorkManager)
+    implementation(Dependencies.AndroidX.AppStartup)
 
     implementation(Dependencies.AndroidX.Room)
     implementation(Dependencies.Ktx.Room)

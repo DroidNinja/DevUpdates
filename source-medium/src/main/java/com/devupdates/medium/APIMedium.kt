@@ -16,10 +16,10 @@ class APIMedium @Inject constructor(val service: ServiceMedium) : ServiceIntegra
 
     override suspend fun getData(request: ServiceRequest): ResponseStatus<ServiceResult> {
         val username = request.metadata?.get("username") ?: ""
-        val requestMap = mutableMapOf(
+        val requestMap = mutableMapOf<String, String?>(
             "sortBy" to "latest",
             "limit" to "10",
-            "to" to request.next
+            "to" to (request.next ?: "")
         )
 
         return if (request.metadata?.get("tag") != null) {

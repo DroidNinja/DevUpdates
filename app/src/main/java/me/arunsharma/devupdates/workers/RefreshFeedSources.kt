@@ -30,7 +30,6 @@ open class RefreshFeedSources @Inject constructor(
     suspend fun refresh() {
         Timber.d("refreshing feeds")
 
-
         withContext(defaultDispatcher) {
             repository.refreshSources(sourceConfigStore.getData()) { request, newResult, cacheResult ->
                 val newResultCreatedAt = newResult.first().createdAt
