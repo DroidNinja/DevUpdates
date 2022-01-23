@@ -43,10 +43,6 @@ Although If you have some suggestions regarding data sources, I will try to add 
 - Drag/Drop order of services
 
 ## TODO
-- Show notifications
-- Jetpack pagination
-- More polished architecture
-- Convert UI to Jetpack Compose
 - Devik module - Make this development only module more usable
 
 
