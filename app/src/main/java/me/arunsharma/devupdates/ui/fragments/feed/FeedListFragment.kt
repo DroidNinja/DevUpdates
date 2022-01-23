@@ -61,8 +61,8 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
             }
 
             lifecycleScope.launchWhenStarted {
-                eventBus.observe().collect { data->
-                    if(data is BookmarkEvent){
+                eventBus.observe().collect { data ->
+                    if (data is BookmarkEvent) {
                         (binding.recyclerView.adapter as? FeedAdapter)?.updateItem(data.item)
                     }
                 }
@@ -124,9 +124,9 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
             }
         } else {
             val adapter = binding.recyclerView.adapter as FeedAdapter
-            if (request.hasPagingSupport) {
-                if (request.next?.isNotEmpty() == true && data.isNotEmpty()) {
-                        adapter.addData(data)
+            if (request.hasPagingSupport && request.next?.isNotEmpty() == true) {
+                if (data.isNotEmpty()) {
+                    adapter.addData(data)
                     adapter.loadMoreComplete()
                 } else {
                     adapter.loadMoreEnd()

@@ -42,7 +42,7 @@ open class VMFeedList @Inject constructor(
             }
             val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {
-                if (!showLoading || result.data.data.isNotEmpty()) {
+                if (result.data.data.isNotEmpty()) {
                     pageId = result.data.page
                     _lvUIState.value = FeedUIState.ShowList(request, result.data.data)
                 } else {

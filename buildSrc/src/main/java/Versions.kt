@@ -1,6 +1,6 @@
 object Versions {
     object Gradle {
-        const val Gradle = "7.1.0-beta05"
+        const val Gradle = "7.1.0-rc01"
         const val Kotlin = "1.6.0"
     }
 

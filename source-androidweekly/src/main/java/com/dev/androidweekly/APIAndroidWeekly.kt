@@ -55,8 +55,9 @@ class APIAndroidWeekly @Inject constructor(val service: ServiceAndroidWeekly) : 
 
             val issueText =
                 doc.select("body > section > div > div > ul > li:nth-child(1) > h3 > a").text()
-            Timber.d("latestIssue" + issueText)
-            issueText.substring(issueText.lastIndexOf("#") + 1, issueText.length)
+            val issueNum = issueText.substring(issueText.lastIndexOf("#") + 1, issueText.length)
+            Timber.d("latestIssue" + issueNum)
+            issueNum
         }
     }
 }
