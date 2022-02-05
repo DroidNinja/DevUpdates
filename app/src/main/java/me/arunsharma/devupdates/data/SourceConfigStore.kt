@@ -15,8 +15,9 @@ import me.arunsharma.devupdates.utils.cache.CachingProvider
 import javax.inject.Inject
 
 interface SourceConfigStore {
-    suspend fun getData(): List<ServiceRequest>
+    suspend fun fetchFromRemote(): List<ServiceRequest>
     suspend fun save(data: List<ServiceRequest>)
+    suspend fun get(): MutableList<ServiceRequest>
     suspend fun addSource(serviceRequest: ServiceRequest)
 }
 
@@ -29,23 +30,27 @@ class SourceConfigStoreImpl @Inject constructor(
 
     val appCache = AppCache(CacheConstants.CACHE_DATASOURCES)
 
-    override suspend fun getData(): List<ServiceRequest> {
-        val config = cachingProvider.cacheData<List<ServiceRequest>>(appCache) {
-            return try {
+    override suspend fun fetchFromRemote(): List<ServiceRequest> {
+        val config = cachingProvider.cacheData(appCache) {
+            try {
                 val result = serviceConfig.getConfig(AppConstants.CONFIG_URL)
-                result.data
+                result
             } catch (exception: Exception){
                 val result = StorageUtils.getRawData(context, R.raw.sources)
                 val jsonAdapter = moshi.adapter(SourceConfig::class.java)
-                jsonAdapter.fromJson(result)?.data!!
+                jsonAdapter.fromJson(result)
             }
         }
 
-        return config
+        return config?.data ?: mutableListOf()
     }
 
     override suspend fun save(data: List<ServiceRequest>) {
         cachingProvider.writeCacheData(appCache, SourceConfig(data = data))
+    }
+
+    override suspend fun get(): MutableList<ServiceRequest> {
+        return cachingProvider.readCacheData<SourceConfig>(appCache)?.data?.toMutableList() ?: mutableListOf()
     }
 
     override suspend fun addSource(serviceRequest: ServiceRequest) {

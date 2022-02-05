@@ -1,6 +1,6 @@
 object Versions {
     object Gradle {
-        const val Gradle = "7.1.0-rc01"
+        const val Gradle = "7.1.1"
         const val Kotlin = "1.6.0"
     }
 
@@ -30,7 +30,7 @@ object Versions {
         const val Fragment = "1.4.0"
         const val Room = "2.4.0"
         const val SwipeRefreshLayout = "1.1.0"
-        const val WorkManager = "2.6.0"
+        const val WorkManager = "2.7.1"
     }
 
     object Ktx {

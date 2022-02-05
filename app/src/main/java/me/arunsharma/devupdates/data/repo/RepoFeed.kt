@@ -35,7 +35,7 @@ class RepoFeed @Inject constructor(
                             request.getGroupId(),
                             request.next?.toLong() ?: System.currentTimeMillis()
                         )
-                if (forceUpdate || cacheData.isNullOrEmpty()) {
+                if (forceUpdate || cacheData.isEmpty()) {
                     val result =
                         serviceIntegration[request.type.toString()]?.getData(request)
                     if (result is ResponseStatus.Success) {

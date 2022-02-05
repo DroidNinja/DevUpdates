@@ -37,6 +37,9 @@ open class VMFeedList @Inject constructor(
         showLoading: Boolean = true
     ) {
         launchDataLoad {
+            if (forceUpdate) {
+                request.next = null
+            }
             if (showLoading) {
                 _lvUIState.value = FeedUIState.Loading
             }

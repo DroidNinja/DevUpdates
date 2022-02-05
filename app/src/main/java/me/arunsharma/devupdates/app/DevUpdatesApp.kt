@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.StrictMode
 import androidx.work.Configuration
 import com.dev.core.extensions.d
-import com.dev.devik.DevikContext
+//import com.dev.devik.DevikContext
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class DevUpdatesApp : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
         enableStrictMode()
-        DevikContext(this)
+//        DevikContext(this)
     }
 
     private fun enableStrictMode() {
