@@ -41,9 +41,10 @@ class VMFeed @Inject constructor(
     fun getConfig() {
         launchDataLoad {
             withContext(Dispatchers.IO) {
-                val configList = sourceConfigStore.getData().map { item ->
+                val configList = sourceConfigStore.fetchFromRemote()
+                _lvFetchConfig.postValue(configList.map { item ->
                     if (item.type == DataSource.MEDIUM) {
-                        item.next = System.currentTimeMillis()
+                        item.next = System.currentTimeMillis().toString()
                     }
                     FeedPagerItem(
                         item.getDrawable(),

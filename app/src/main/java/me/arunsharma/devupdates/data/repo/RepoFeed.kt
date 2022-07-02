@@ -6,12 +6,11 @@ import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import com.devupdates.github.ServiceGithub
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.data.AppDatabase
 import timber.log.Timber
@@ -26,7 +25,7 @@ class RepoFeed @Inject constructor(
     suspend fun getData(
         request: ServiceRequest,
         forceUpdate: Boolean
-    ): ResponseStatus<List<ServiceItem>> {
+    ): ResponseStatus<ServiceResult> {
         try {
             return withContext(ioDispatcher) {
                 val cacheData =
@@ -34,21 +33,21 @@ class RepoFeed @Inject constructor(
                         .getFeedBySource(
                             request.type.toString(),
                             request.getGroupId(),
-                            request.next
+                            request.next?.toLong() ?: System.currentTimeMillis()
                         )
-                if (forceUpdate || cacheData.isNullOrEmpty()) {
+                if (forceUpdate || cacheData.isEmpty()) {
                     val result =
                         serviceIntegration[request.type.toString()]?.getData(request)
                     if (result is ResponseStatus.Success) {
                         if (request.shouldUseCache) {
-                            saveCache(result.data)
+                            saveCache(result.data.data)
                         }
                     }
                     return@withContext result
                         ?: ResponseStatus.failure(APIErrorException.unexpectedError())
 
                 } else {
-                    return@withContext ResponseStatus.success(cacheData)
+                    return@withContext ResponseStatus.success(ServiceResult(cacheData))
                 }
             }
         } catch (ex: Exception) {
@@ -61,7 +60,7 @@ class RepoFeed @Inject constructor(
             return withContext(ioDispatcher) {
                 val cacheData =
                     database.feedDao()
-                        .getAllFeed(request.next)
+                        .getAllFeed(request.next?.toLong() ?: System.currentTimeMillis())
 
                 return@withContext ResponseStatus.success(mapHomeFeed(cacheData))
             }
@@ -83,22 +82,9 @@ class RepoFeed @Inject constructor(
         }
     }
 
-    suspend fun observeHomeFeed(onNewData: suspend (List<ServiceItem>) -> Unit) {
-        try {
-            return withContext(ioDispatcher) {
-                database.feedDao()
-                    .observeFeed()
-                    .distinctUntilChanged { old, new ->
-                        old.size != new.size
-                    }.collect { data ->
-                        if (data.isNotEmpty()) {
-                            onNewData(data)
-                        }
-                    }
-            }
-        } catch (ex: Exception) {
-            Timber.e(ex)
-        }
+    fun observeHomeFeed(): Flow<List<ServiceItem>> {
+        return database.feedDao()
+                .observeFeed()
     }
 
     private fun saveCache(data: List<ServiceItem>) {
@@ -139,9 +125,9 @@ class RepoFeed @Inject constructor(
                     val result =
                         entry.value.getData(request)
                     if (result is ResponseStatus.Success) {
-                        checkForUpdate(request, result.data, cacheData)
+                        checkForUpdate(request, result.data.data, cacheData)
                         if (request.shouldUseCache) {
-                            saveCache(result.data)
+                            saveCache(result.data.data)
                         }
                     }
                 }

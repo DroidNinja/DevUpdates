@@ -64,10 +64,10 @@ object GitHubTrendingParser {
         val forks = counts.getOrNull(1)
 
         // "691 stars today"
-        val starsToday = element.select(".f6.color-text-secondary.mt-2 > span:last-child")[0]
-            .text()
-            .removeCommas()
-            .let {
+        val starsToday = element.select(".d-inline-block.float-sm-right").firstOrNull()
+            ?.text()
+            ?.removeCommas()
+            ?.let {
                 NUMBER_PATTERN.find(it)?.groups?.firstOrNull()?.value?.toInt() ?: run {
                     d {  "$authorAndName didn't have today" }
                     null

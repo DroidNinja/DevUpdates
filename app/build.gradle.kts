@@ -8,8 +8,6 @@ plugins {
     id(Plugins.CRASHLYTICS)
 }
 
-val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
-
 android {
     compileSdk = AndroidVersion.COMPILE_SDK_VERSION
 
@@ -56,15 +54,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-    }
-
     buildFeatures{
         viewBinding = true
         compose = true
@@ -83,8 +72,8 @@ dependencies {
     implementation(project(":source-androidweekly"))
     implementation(project(":source-rss"))
     implementation(project(":services"))
-    debugImplementation(project(":devik"))
-    releaseImplementation(project(":devik-noop"))
+//    debugImplementation(project(":devik"))
+//    releaseImplementation(project(":devik-noop"))
     implementation(Dependencies.AndroidX.Material)
     implementation(Dependencies.Di.Hilt)
     implementation(Dependencies.AndroidX.AppCompat)
@@ -119,6 +108,7 @@ dependencies {
     implementation(Dependencies.Firebase.CrashlyticsKtx)
 
     implementation(Dependencies.AndroidX.WorkManager)
+    implementation(Dependencies.AndroidX.AppStartup)
 
     implementation(Dependencies.AndroidX.Room)
     implementation(Dependencies.Ktx.Room)

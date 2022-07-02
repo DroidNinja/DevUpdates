@@ -3,7 +3,6 @@ package me.arunsharma.devupdates.ui.fragments.addsource
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
-import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,16 +23,30 @@ class VMDataSource @Inject constructor(
     fun getServices() {
         launchDataLoad {
             withContext(Dispatchers.IO) {
-                val configList = sourceConfigStore.getData()
+                val configList = sourceConfigStore.fetchFromRemote()
                 _lvFetchConfig.postValue(configList)
             }
         }
     }
 
-    fun saveConfig(data: List<ServiceRequest>){
+    fun saveConfig(data: List<ServiceRequest>) {
         launchDataLoad {
             withContext(Dispatchers.IO) {
                 sourceConfigStore.save(data = data)
+            }
+        }
+    }
+
+    fun deleteSource(item: ServiceRequest) {
+        launchDataLoad {
+            withContext(Dispatchers.IO) {
+                val data = sourceConfigStore.get()
+                data.removeAll { req ->
+                    req.type == item.type && req.name == item.name
+                }
+                if(data.isNotEmpty()) {
+                    sourceConfigStore.save(data = data)
+                }
             }
         }
     }

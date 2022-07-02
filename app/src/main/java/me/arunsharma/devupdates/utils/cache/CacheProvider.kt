@@ -69,12 +69,18 @@ class CachingProvider @Inject constructor(@ApplicationContext val context: Conte
         return result
     }
 
+    inline fun <reified T> readCacheData(
+        appCache: AppCache
+    ): T? {
+        return readCache(context, appCache.getCacheName())
+    }
+
     inline fun <reified T> doNetworkCall(
         appCache: AppCache,
         networkCall: () -> T
     ): T {
-        val result = networkCall.invoke()
-        if (result != null) {
+        val result = networkCall()
+        if(result != null) {
             writeCache(context, appCache.getCacheName(), result)
         }
         return result

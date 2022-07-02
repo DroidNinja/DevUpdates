@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +19,15 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentHomeFeedListBinding
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMHomeFeed
 import me.arunsharma.devupdates.utils.BookmarkEvent
 import me.arunsharma.devupdates.utils.EventBus
-import me.arunsharma.devupdates.utils.SnackbarUtil
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -58,23 +62,27 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                 viewModel.getHomeFeed(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
-                view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-            })
-
-            viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
+            viewModel.lvUiState.observe(viewLifecycleOwner) { state ->
                 handleUIState(state)
-            })
+            }
 
             lifecycleScope.launchWhenStarted {
-                eventBus.observe().collect { data->
-                    if(data is BookmarkEvent){
+                eventBus.observe().collect { data ->
+                    if (data is BookmarkEvent) {
                         (binding.recyclerView.adapter as? FeedAdapter)?.updateItem(data.item)
                     }
                 }
             }
 
-            loadData()
+            arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)
+                ?.let { request ->
+                    viewModel.feedItems.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .onEach { data ->
+                            Timber.d("onNew Data:" + data.size)
+                            viewModel.onDataReceived(data, request)
+                        }
+                        .launchIn(lifecycleScope)
+                }
         }
     }
 
@@ -102,6 +110,7 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                 binding.btnCheckUpdate.animate()
                     .translationY(binding.btnCheckUpdate.height.toFloat())
             }
+            else -> {}
         }
     }
 
@@ -135,7 +144,7 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
             }
         } else {
             val adapter = binding.recyclerView.adapter as FeedAdapter
-            if (request.hasPagingSupport) {
+                if (request.hasPagingSupport && request.next != null) {
                 if (data.isNotEmpty()) {
                     adapter.addData(data)
                     adapter.loadMoreComplete()
@@ -153,16 +162,6 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
         fun newInstance(request: ServiceRequest): HomeFeedFragment = HomeFeedFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(EXTRA_SERVICE_REQUEST, request)
-            }
-        }
-    }
-
-    private fun loadData() {
-        arguments?.getParcelable<ServiceRequest>(EXTRA_SERVICE_REQUEST)?.let { request ->
-            if (view != null && viewModel.lvUiState.value == null) {
-                request.next = System.currentTimeMillis()
-                viewModel.observeHomeFeed(request)
-//                viewModel.getHomeFeed(request)
             }
         }
     }

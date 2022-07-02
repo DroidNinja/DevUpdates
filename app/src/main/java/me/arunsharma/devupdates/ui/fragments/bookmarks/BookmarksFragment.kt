@@ -71,6 +71,7 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
                     binding.progressLayout.showError(root)
                 }
             }
+            else -> {}
         }
     }
 

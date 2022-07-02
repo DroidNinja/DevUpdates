@@ -25,6 +25,7 @@ open class VMFeedList @Inject constructor(
 ) :
     BaseViewModel() {
 
+    private var pageId: String? = null
     protected open val _lvUIState = MutableLiveData<FeedUIState>()
     val lvUiState: LiveData<FeedUIState> = _lvUIState
 
@@ -38,16 +39,17 @@ open class VMFeedList @Inject constructor(
         showLoading: Boolean = true
     ) {
         launchDataLoad {
-
+            if (forceUpdate) {
+                request.next = null
+            }
             if (showLoading) {
                 _lvUIState.value = FeedUIState.Loading
-                request.next = System.currentTimeMillis()
             }
             val result = repoFeed.getData(request, forceUpdate)
             if (result is ResponseStatus.Success) {
-                if (!showLoading || result.data.isNotEmpty()) {
-                    map[request.name] = result.data
-                    _lvUIState.value = FeedUIState.ShowList(request, result.data)
+                if (result.data.data.isNotEmpty()) {
+                    pageId = result.data.page
+                    _lvUIState.value = FeedUIState.ShowList(request, result.data.data)
                 } else {
                     _lvUIState.value = FeedUIState.ShowError(
                         context.getString(R.string.empty_feed),
@@ -63,7 +65,7 @@ open class VMFeedList @Inject constructor(
 
     fun updateData(currentData: MutableList<ServiceItem>, request: ServiceRequest) {
         if (request.hasPagingSupport) {
-            request.next = currentData.last().createdAt
+            request.next = pageId ?: currentData.last().createdAt.toString()
             getData(request, forceUpdate = false, showLoading = false)
         }
     }

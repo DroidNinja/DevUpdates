@@ -9,6 +9,7 @@ import com.dev.network.model.ResponseStatus
 import com.dev.services.models.DataSource
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.dev.services.models.ServiceResult
 import com.dev.services.repo.ServiceIntegration
 import org.jsoup.Jsoup
 import javax.inject.Inject
@@ -16,10 +17,10 @@ import kotlin.math.min
 
 class APIRSSChannel @Inject constructor(val serviceRSS: ServiceRSS) : ServiceIntegration {
 
-    override suspend fun getData(request: ServiceRequest): ResponseStatus<List<ServiceItem>> {
+    override suspend fun getData(request: ServiceRequest): ResponseStatus<ServiceResult> {
         if (request.metadata != null) {
             val data = serviceRSS.getRSSChannelFeed(request.metadata!!["url"] ?: "")
-            return ResponseStatus.success(data.channel.item.map { item ->
+            val result = data.channel.item.map { item ->
                 val htmlText = Jsoup.parse(item.summary).text()
                 val createdAt = DateTimeHelper.formatDate(
                     AppConstants.FORMAT_ISO_RFC_822,
@@ -36,7 +37,8 @@ class APIRSSChannel @Inject constructor(val serviceRSS: ServiceRSS) : ServiceInt
                     createdAt = createdAt,
                     topTitleText = item.author
                 )
-            })
+            }
+            return ResponseStatus.success(ServiceResult(result))
         } else {
             return ResponseStatus.failure(APIErrorException(APIError("BP", "Url not specified")))
         }

@@ -5,8 +5,6 @@ plugins {
     id(Plugins.KOTLIN_PARCELIZE)
 }
 
-val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
-
 android {
     compileSdk = AndroidVersion.COMPILE_SDK_VERSION
 
@@ -14,15 +12,6 @@ android {
         minSdk = AndroidVersion.MIN_SDK_VERSION
         targetSdk = AndroidVersion.TARGET_SDK_VERSION
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
     }
 
     buildFeatures{
