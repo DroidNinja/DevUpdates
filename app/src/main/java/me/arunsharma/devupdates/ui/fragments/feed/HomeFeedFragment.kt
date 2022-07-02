@@ -110,6 +110,7 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                 binding.btnCheckUpdate.animate()
                     .translationY(binding.btnCheckUpdate.height.toFloat())
             }
+            else -> {}
         }
     }
 

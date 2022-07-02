@@ -8,8 +8,6 @@ plugins {
     id(Plugins.CRASHLYTICS)
 }
 
-val javaVersion: JavaVersion by extra { JavaVersion.VERSION_1_8 }
-
 android {
     compileSdk = AndroidVersion.COMPILE_SDK_VERSION
 
@@ -54,15 +52,6 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-dev"
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-    }
-
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
     }
 
     buildFeatures{

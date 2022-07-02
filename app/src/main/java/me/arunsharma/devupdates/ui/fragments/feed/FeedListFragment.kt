@@ -91,6 +91,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
                     binding.progressLayout.showError(root)
                 }
             }
+            else -> {}
         }
     }
 

@@ -1,7 +1,7 @@
 object Versions {
     object Gradle {
-        const val Gradle = "7.1.1"
-        const val Kotlin = "1.6.0"
+        const val Gradle = "7.2.1"
+        const val Kotlin = "1.7.0"
     }
 
     object Network {
@@ -41,7 +41,7 @@ object Versions {
 
     object Di {
         const val Dagger = "2.35.1"
-        const val Hilt = "2.38.1"
+        const val Hilt = "2.42"
     }
 
     object Compose {

@@ -102,6 +102,7 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                     binding.progressLayout.showError(root)
                 }
             }
+            else -> {}
         }
     }
 
