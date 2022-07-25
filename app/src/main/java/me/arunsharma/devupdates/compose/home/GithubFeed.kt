@@ -5,37 +5,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
-import kotlinx.coroutines.flow.collect
+import com.dev.services.models.ServiceRequest
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeedList
 import timber.log.Timber
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun GithubFeed(pagerState: PagerState, feedPagerItems: List<FeedPagerItem>) {
+fun GithubFeed(request: ServiceRequest) {
     Timber.d("Recomposition:GithubFeed")
     val feedListViewModel = hiltViewModel<VMFeedList>()
+//    CustomText(text = request.name)
+    val state: FeedUIState? by feedListViewModel.lvUiState.observeAsState()
 
-    GithubFeed(viewModel = feedListViewModel)
+    GithubFeed(state)
 
-    LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }.collect { page ->
-            Timber.d("changedPage:$page")
-            feedListViewModel.getFeed(feedPagerItems[page].request)
-        }
+    LaunchedEffect(request.name) {
+        feedListViewModel.getFeed(request)
     }
 }
 
 @Composable
-fun GithubFeed(viewModel: VMFeedList) {
-    Timber.d("Recomposition:GithubFeed")
-    val state: FeedUIState? by viewModel.lvUiState.observeAsState()
+fun GithubFeed(state: FeedUIState?) {
 
     FeedPagerViewItem(
         feedUIState = state,

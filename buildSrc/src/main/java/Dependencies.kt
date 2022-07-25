@@ -119,7 +119,7 @@ object Dependencies {
 
     object Compose {
         const val UI = "androidx.compose.ui:ui:${Versions.Compose.ComposeVersion}"
-        const val ActivityCompose = "androidx.activity:activity-compose:1.4.0-alpha01"
+        const val ActivityCompose = "androidx.activity:activity-compose:1.6.0-alpha05"
         const val MaterialCompose =
             "androidx.compose.material:material:${Versions.Compose.ComposeVersion}"
         const val MaterialIconsCompose =
@@ -136,8 +136,8 @@ object Dependencies {
         const val Navigation = "androidx.navigation:navigation-compose:2.4.0-alpha08"
         const val Tooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.ComposeVersion}"
         const val ConstraintLayout =
-            "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
-        const val Hilt = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+            "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha03"
+        const val Hilt = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val Shimmer = "me.vponomarenko:compose-shimmer:1.0.0"
     }
 

@@ -45,8 +45,9 @@ object Versions {
     }
 
     object Compose {
-        const val ComposeVersion = "1.0.1"
-        const val Accompanist = "0.19.0"
+        const val ComposeVersion = "1.2.0-rc03"
+        const val Accompanist = "0.24.13-rc"
+        const val ComposeCompiler = "1.2.0"
     }
 
     object Helpers {

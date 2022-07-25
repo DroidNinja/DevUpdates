@@ -7,10 +7,7 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeedList
@@ -38,9 +35,10 @@ class HomeScreenViewModel @Inject constructor(
     fun observeHomeFeed(
         request: ServiceRequest,
     ) {
+        Timber.d("observeHomeFeed")
         launchDataLoad {
             _state.value = FeedUIState.Loading
-            repoFeed.observeHomeFeed { data ->
+            repoFeed.observeHomeFeed().distinctUntilChanged().collect { data ->
 //                if (currentFeedList.size != data.size) {
                     if (_state.value is FeedUIState.ShowList && currentFeedList.isNotEmpty()) {
                         if (data.first().createdAt > currentFeedList.first().createdAt) {
@@ -49,7 +47,7 @@ class HomeScreenViewModel @Inject constructor(
                     } else {
                         Timber.e("fetchHomeFeed")
 
-                        request.next = System.currentTimeMillis()
+                        request.next = System.currentTimeMillis().toString()
                         currentFeedList.addAll(data)
                         _state.emit(FeedUIState.ShowList(request, data))
                     }

@@ -39,7 +39,6 @@ class VMHomeFeed @Inject constructor(
                 }
             }
         }
-        return lvUiState
     }
 
     fun getHomeFeed(

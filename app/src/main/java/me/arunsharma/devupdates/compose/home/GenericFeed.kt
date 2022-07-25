@@ -9,6 +9,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dev.services.models.ServiceItem
+import com.dev.services.models.ServiceRequest
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import kotlinx.coroutines.flow.collect
@@ -18,28 +19,23 @@ import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeedList
 import timber.log.Timber
 
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun GenericFeed(pagerState: PagerState, feedPagerItems: List<FeedPagerItem>) {
-    Timber.d("Recomposition:GithubFeed")
+fun GenericFeed(request: ServiceRequest) {
+    Timber.d("Recomposition:GenericFeed")
     val feedListViewModel = hiltViewModel<VMFeedList>()
-
-    GenericFeed(viewModel = feedListViewModel) { item->
+//    CustomText(text = request.name)
+    val state: FeedUIState? by feedListViewModel.lvUiState.observeAsState()
+    GenericFeed(state = state) { item->
         feedListViewModel.addBookmark(item)
     }
 
-    LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }.collect { page ->
-            Timber.d("changedPage:$page")
-            feedListViewModel.getFeed(feedPagerItems[page].request)
-        }
+    LaunchedEffect(request.name) {
+        feedListViewModel.getFeed(request)
     }
 }
 
 @Composable
-fun GenericFeed(viewModel: VMFeedList, onBookmarkClick: (ServiceItem) -> Unit) {
-    Timber.d("Recomposition:GenericFeed")
-    val state: FeedUIState? by viewModel.lvUiState.observeAsState()
+fun GenericFeed(state: FeedUIState?, onBookmarkClick: (ServiceItem) -> Unit) {
 
     FeedPagerViewItem(
         feedUIState = state,

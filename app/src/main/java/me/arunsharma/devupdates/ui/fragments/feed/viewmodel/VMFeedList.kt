@@ -15,6 +15,7 @@ import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.utils.SingleLiveEvent
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,6 +33,10 @@ open class VMFeedList @Inject constructor(
     val lvShowMessage = SingleLiveEvent<Int>()
 
     val map = mutableMapOf<String, List<ServiceItem>>()
+
+    init {
+        Timber.d("VMFeedList init")
+    }
 
     fun getData(
         request: ServiceRequest,

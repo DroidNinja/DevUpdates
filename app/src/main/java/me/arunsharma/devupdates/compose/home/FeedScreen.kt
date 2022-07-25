@@ -1,24 +1,21 @@
 package me.arunsharma.devupdates.compose.home
 
 
+import android.util.Log
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dev.core.utils.CustomTabHelper
+import com.dev.services.models.DataSource
 import com.dev.services.models.ServiceItem
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
@@ -29,6 +26,7 @@ import me.arunsharma.devupdates.compose.utils.rememberFlowWithLifecycle
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeed
+import me.arunsharma.devupdates.utils.LogCompositions
 import me.vponomarenko.compose.shimmer.shimmer
 import timber.log.Timber
 
@@ -37,32 +35,73 @@ import timber.log.Timber
 fun FeedScreen(
     viewModel: VMFeed = hiltViewModel()
 ) {
+    Timber.d("Recomposition:FeedScreen")
+    LogCompositions("TAG", "FeedScreen")
     val config: List<FeedPagerItem> by rememberFlowWithLifecycle(viewModel.flowFetchConfig)
         .collectAsState(initial = mutableListOf())
-    val pagerState = rememberPagerState(0)
-    FeedScreen(pagerState, config)
-    Timber.d("Recomposition:FeedScreen")
+
+    if (config.isEmpty()) return
+
+    val pages = mutableListOf<Page>()
+    config.forEach { item ->
+        when (item.request.type) {
+            DataSource.ALL -> pages.add(Page(
+                item
+            ) {
+                HomeFeed(item.request)
+            })
+            DataSource.GITHUB -> pages.add(Page(
+                item
+            ) {
+                GithubFeed(item.request)
+            })
+            else -> pages.add(Page(
+                item
+            ) {
+                GenericFeed(item.request)
+            })
+        }
+    }
+
+    PagesScreen(pages = listOf(
+        Page(
+            config[0]
+        ) {
+            HomeFeed(config[0].request)
+        },
+        Page(
+            config[1]
+        ) {
+            GithubFeed(config[1].request)
+        },
+        Page(
+            config[2]
+        ) {
+            GenericFeed(config[2].request)
+        }
+    ))
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FeedScreen(
-    pagerState: PagerState,
-    config: List<FeedPagerItem>
+fun PagesScreen(
+    modifier: Modifier = Modifier,
+    pages: List<Page>
 ) {
-    if (config.isNotEmpty()) {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            FeedTab(
-                pagerState, config
-            )
-
-            FeedPager(
-                pagerState,
-                config,
-                modifier = Modifier.weight(1f)
-            )
+    Timber.d("Recomposition:PagesScreen")
+    val pagerState = rememberPagerState()
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            FeedTab(pagerState = pagerState, feedPagerItems = pages)
+        }
+    ) {
+        HorizontalPager(
+            modifier = Modifier.padding(it),
+            count = pages.size,
+            state = pagerState
+        ) { page ->
+            pages[page].content()
         }
     }
 }
@@ -71,9 +110,10 @@ fun FeedScreen(
 @Composable
 fun FeedTab(
     pagerState: PagerState,
-    feedPagerItems: List<FeedPagerItem>
+    feedPagerItems: List<Page>
 ) {
     Timber.d("Recomposition:FeedTab")
+    LogCompositions("TAG", "FeedTab" + pagerState.currentPage)
     if (pagerState.pageCount == 0) return
 
     val coroutineScope = rememberCoroutineScope()
@@ -103,8 +143,8 @@ fun FeedTab(
             ) {
                 CustomTab(
                     text =
-                    feedPagerItems[index].request.name,
-                    imageId = feedPagerItems[index].icon,
+                    feedPagerItems[index].item.request.name,
+                    imageId = feedPagerItems[index].item.icon,
                     selected = pagerState.currentPage == index
                 )
             }
@@ -148,28 +188,18 @@ private fun CustomTab(
 @Composable
 fun FeedPager(
     pagerState: PagerState,
-    feedPagerItems: List<FeedPagerItem>,
-    modifier: Modifier
+    pages: List<Page>,
+    modifier: Modifier,
+//    content: @Composable PagerScope.(request: ServiceRequest) -> Unit,
 ) {
-    Timber.d("Recomposition:HomeFeedPagerViewItem")
-    HorizontalPager(
-        state = pagerState,
-        modifier = modifier,
-        count = feedPagerItems.size
-    ) { page ->
-        Timber.d("page:$page")
-        when (page) {
-            0 -> {
-                HomeFeed(pagerState, feedPagerItems)
-            }
-            1 -> {
-                GithubFeed(pagerState, feedPagerItems)
-            }
-            else -> {
-                GenericFeed(pagerState, feedPagerItems)
-            }
-        }
-    }
+//    LogCompositions("TAG", "FeedPager")
+
+}
+
+@Composable
+fun CustomText(text: String) {
+    LogCompositions("TAG", "CustomText" + text)
+    Text(text = text)
 }
 
 
@@ -198,5 +228,6 @@ fun FeedPagerViewItem(
         is FeedUIState.HasNewItems -> {
 
         }
+        else -> {}
     }
 }

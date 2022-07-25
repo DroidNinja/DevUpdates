@@ -30,7 +30,7 @@ class APIBlogspotRSS @Inject constructor(val serviceRSS: ServiceRSS) : ServiceIn
             val data = serviceRSS.getFeed(url, page)
             val result = data.itemList?.map { item ->
                 val htmlText = Jsoup.parse(item.content)
-                val author = htmlText.select("p").first().text()
+                val author = htmlText.select("p").firstOrNull()?.text()
                 val summary = htmlText.select("p").getOrNull(2)?.text()
                 val createdAt = DateTimeHelper.formatDate(
                     AppConstants.FORMAT_ISO_OFFSET_DATE_TIME,

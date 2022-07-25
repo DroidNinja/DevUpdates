@@ -2,6 +2,7 @@ package me.arunsharma.devupdates.ui.fragments.feed.adapter
 
 import android.view.LayoutInflater
 import android.view.View
+import androidx.compose.runtime.Immutable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -12,6 +13,7 @@ import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
 import me.arunsharma.devupdates.ui.fragments.feed.GithubFragment
 import me.arunsharma.devupdates.ui.fragments.feed.HomeFeedFragment
 
+@Immutable
 data class FeedPagerItem(
     val icon: Int,
     val request: ServiceRequest
