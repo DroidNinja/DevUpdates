@@ -170,4 +170,10 @@ object Dependencies {
         const val FlipperNoOp = "com.facebook.flipper:flipper-noop:0.114.0"
         const val FlipperNetwork = "com.facebook.flipper:flipper-network-plugin:0.114.0"
     }
+
+    object Resaca {
+        const val scoped = "com.github.sebaslogen.resaca:resaca:${Versions.Resaca.ResacaVersion}"
+        const val scopedHilt =
+            "com.github.sebaslogen.resaca:resacahilt:${Versions.Resaca.ResacaVersion}"
+    }
 }

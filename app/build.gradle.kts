@@ -116,6 +116,9 @@ dependencies {
 
     kapt(Dependencies.Compilers.Hilt)
 
+    implementation(Dependencies.Resaca.scoped)
+    implementation(Dependencies.Resaca.scopedHilt)
+
     testImplementation(Dependencies.AndroidTest.Junit)
     androidTestImplementation(Dependencies.AndroidTest.TestExt)
     androidTestImplementation(Dependencies.AndroidTest.TestRunner)
