@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
+import com.sebaslogen.resaca.hilt.hiltViewModelScoped
 import me.arunsharma.devupdates.compose.HomeScreenViewModel
 import me.arunsharma.devupdates.compose.utils.rememberFlowWithLifecycle
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
@@ -16,7 +17,7 @@ import timber.log.Timber
 @Composable
 fun HomeFeed(request: ServiceRequest) {
     Timber.d("Recomposition:HomeFeed")
-    val homeViewModel = hiltViewModel<HomeScreenViewModel>()
+    val homeViewModel = hiltViewModelScoped<HomeScreenViewModel>()
 //    CustomText(text = request.name)
 
     val feedUIState: FeedUIState by rememberFlowWithLifecycle(homeViewModel.state)

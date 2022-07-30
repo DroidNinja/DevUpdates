@@ -41,7 +41,7 @@ object Versions {
 
     object Di {
         const val Dagger = "2.35.1"
-        const val Hilt = "2.42"
+        const val Hilt = "2.43"
     }
 
     object Compose {
@@ -61,5 +61,9 @@ object Versions {
 
     object Test {
         const val Mockito = "2.25.0"
+    }
+
+    object Resaca {
+        const val ResacaVersion = "2.2.0"
     }
 }

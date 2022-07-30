@@ -12,6 +12,7 @@ import com.dev.services.models.ServiceItem
 import com.dev.services.models.ServiceRequest
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
+import com.sebaslogen.resaca.hilt.hiltViewModelScoped
 import kotlinx.coroutines.flow.collect
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
@@ -22,7 +23,7 @@ import timber.log.Timber
 @Composable
 fun GenericFeed(request: ServiceRequest) {
     Timber.d("Recomposition:GenericFeed")
-    val feedListViewModel = hiltViewModel<VMFeedList>()
+    val feedListViewModel = hiltViewModelScoped<VMFeedList>()
 //    CustomText(text = request.name)
     val state: FeedUIState? by feedListViewModel.lvUiState.observeAsState()
     GenericFeed(state = state) { item->
