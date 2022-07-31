@@ -48,6 +48,15 @@
       "hasPagingSupport": true
     },
     {
+      "name": "Mohit Blog",
+      "type": "RSS",
+      "metadata": {
+        "url": "https://codingwithmohit.com/feed.xml"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
+    },
+    {
       "name": "CommonsWare",
       "type": "RSS",
       "metadata": {
