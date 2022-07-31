@@ -63,23 +63,7 @@ fun FeedScreen(
         }
     }
 
-    PagesScreen(pages = listOf(
-        Page(
-            config[0]
-        ) {
-            HomeFeed(config[0].request)
-        },
-        Page(
-            config[1]
-        ) {
-            GithubFeed(config[1].request)
-        },
-        Page(
-            config[2]
-        ) {
-            GenericFeed(config[2].request)
-        }
-    ))
+    PagesScreen(pages = pages)
 }
 
 @OptIn(ExperimentalPagerApi::class)
