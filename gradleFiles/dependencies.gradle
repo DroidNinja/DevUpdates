@@ -37,7 +37,7 @@ deps.support = support
 
 def playservices = [:]
 playservices.location="com.google.android.gms:play-services-location:17.0.0"
-playservices.maps="com.google.android.gms:play-services-maps:17.0.0"
+playservices.maps="com.google.android.gms:play-services-maps:17.0.1"
 playservices.auth="com.google.android.gms:play-services-auth:18.0.0"
 playservices.authPhone="com.google.android.gms:play-services-auth-api-phone:17.4.0"
 playservices.core="com.google.android.play:core:1.7.2"
