@@ -1,6 +1,7 @@
 package me.arunsharma.devupdates.di.data
 
 import com.dev.androidweekly.di.AndroidWeeklyModule
+import com.dev.kotlinweekly.di.KotlinWeeklyModule
 import com.dev.rss.di.RSSModule
 import com.dev.services.repo.ServiceIntegration
 import com.devupdates.github.di.GithubModule
@@ -11,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.Multibinds
 
 @InstallIn(SingletonComponent::class)
-@Module(includes = [AndroidWeeklyModule::class, MediumModule::class, RSSModule::class, GithubModule::class])
+@Module(includes = [AndroidWeeklyModule::class, MediumModule::class, RSSModule::class, GithubModule::class, KotlinWeeklyModule::class])
 abstract class ServiceModule {
     @Multibinds
     abstract fun services(): Map<String, ServiceIntegration>

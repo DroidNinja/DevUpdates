@@ -21,6 +21,12 @@
       "hasPagingSupport": true
     },
     {
+      "name": "Kotlin Weekly",
+      "type": "KOTLIN_WEEKLY",
+      "shouldUseCache": true,
+      "hasPagingSupport": true
+    },
+    {
       "name": "Official Android",
       "type": "BLOGSPOT",
       "metadata": {
