@@ -28,4 +28,4 @@ tasks.register("clean", Delete::class){
     delete(rootProject.buildDir)
 }
 
-apply(from = file("gradleFiles/dependency-graph.gradle"))
+apply(from = file("gradle/dependency-graph.gradle"))
