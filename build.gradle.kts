@@ -27,3 +27,5 @@ allprojects {
 tasks.register("clean", Delete::class){
     delete(rootProject.buildDir)
 }
+
+apply(from = file("gradleFiles/dependency-graph.gradle"))
