@@ -23,16 +23,13 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
     implementation(project(":services"))
-    implementation(Dependencies.Utils.Jsoup)
+    implementation(libs.jsoup)
 
-    implementation(Dependencies.Network.Moshi)
-    kapt(Dependencies.Compilers.Moshi)
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
 
-    implementation(Dependencies.Di.Hilt)
-    kapt(Dependencies.Compilers.Hilt)
-
-    testImplementation(Dependencies.AndroidTest.Junit)
-    androidTestImplementation(Dependencies.AndroidTest.TestExt)
-    androidTestImplementation(Dependencies.AndroidTest.TestRunner)
-    androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }

@@ -22,19 +22,20 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
-    implementation(Dependencies.Utils.Jsoup)
+    implementation(libs.jsoup)
 
-    implementation(Dependencies.AndroidX.Room)
-    kapt(Dependencies.Compilers.Room)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 
-    implementation(Dependencies.Di.Hilt)
-    kapt(Dependencies.Compilers.Hilt)
+    implementation(libs.com.squareup.moshi)
+    kapt(libs.com.squareup.moshi.kotlin.codegen)
 
-    implementation(Dependencies.Network.Moshi)
-    kapt(Dependencies.Compilers.Moshi)
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
 
-    testImplementation(Dependencies.AndroidTest.Junit)
-    androidTestImplementation(Dependencies.AndroidTest.TestExt)
-    androidTestImplementation(Dependencies.AndroidTest.TestRunner)
-    androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }
