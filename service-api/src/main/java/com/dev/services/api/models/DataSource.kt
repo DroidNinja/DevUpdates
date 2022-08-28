@@ -1,4 +1,4 @@
-package com.dev.services.models
+package com.dev.services.api.models
 
 enum class DataSource {
     GITHUB,

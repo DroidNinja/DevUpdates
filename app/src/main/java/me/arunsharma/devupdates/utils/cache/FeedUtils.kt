@@ -1,6 +1,6 @@
 package me.arunsharma.devupdates.utils.cache
 
-import com.dev.services.models.DataSource
+import com.dev.services.api.models.DataSource
 import me.arunsharma.devupdates.R
 
 object FeedUtils {

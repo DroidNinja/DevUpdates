@@ -3,7 +3,7 @@ package me.arunsharma.devupdates.ui.fragments.addsource
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

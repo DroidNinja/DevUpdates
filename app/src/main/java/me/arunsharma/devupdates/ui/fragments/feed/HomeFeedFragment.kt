@@ -15,8 +15,8 @@ import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn

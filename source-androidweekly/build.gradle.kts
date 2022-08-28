@@ -22,7 +22,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
-    implementation(project(":services"))
+    implementation(project(":service-api"))
     implementation(libs.jsoup)
 
     implementation(libs.hilt.library)

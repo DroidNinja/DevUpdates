@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dev.services.models.DataSource
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.DataSource
+import com.dev.services.api.models.ServiceRequest
 import me.arunsharma.devupdates.databinding.LayoutTabViewBinding
 import me.arunsharma.devupdates.ui.fragments.feed.FeedListFragment
 import me.arunsharma.devupdates.ui.fragments.feed.GithubFragment

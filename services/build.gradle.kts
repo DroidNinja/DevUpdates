@@ -22,6 +22,12 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
+    api(project(":service-api"))
+    implementation(project(":source-github"))
+    implementation(project(":source-medium"))
+    implementation(project(":source-androidweekly"))
+    implementation(project(":source-kotlinweekly"))
+    implementation(project(":source-rss"))
     implementation(libs.jsoup)
 
     implementation(libs.androidx.room.runtime)

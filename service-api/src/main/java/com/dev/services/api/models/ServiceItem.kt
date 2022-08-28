@@ -1,4 +1,4 @@
-package com.dev.services.models
+package com.dev.services.api.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

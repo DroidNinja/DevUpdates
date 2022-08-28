@@ -1,4 +1,4 @@
-package com.dev.services.models
+package com.dev.services.api.models
 
 import android.os.Parcelable
 import com.squareup.moshi.JsonClass

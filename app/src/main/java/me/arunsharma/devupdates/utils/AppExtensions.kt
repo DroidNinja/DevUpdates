@@ -1,7 +1,7 @@
 package me.arunsharma.devupdates.utils
 
-import com.dev.services.models.DataSource
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.DataSource
+import com.dev.services.api.models.ServiceRequest
 import me.arunsharma.devupdates.R
 
 fun ServiceRequest.getDrawable(): Int {

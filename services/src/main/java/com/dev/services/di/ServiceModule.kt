@@ -1,9 +1,9 @@
-package me.arunsharma.devupdates.di.data
+package com.dev.services.di
 
 import com.dev.androidweekly.di.AndroidWeeklyModule
 import com.dev.kotlinweekly.di.KotlinWeeklyModule
 import com.dev.rss.di.RSSModule
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.repo.ServiceIntegration
 import com.devupdates.github.di.GithubModule
 import com.devupdates.medium.di.MediumModule
 import dagger.Module

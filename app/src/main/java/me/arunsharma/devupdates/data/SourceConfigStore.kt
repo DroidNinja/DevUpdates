@@ -3,8 +3,8 @@ package me.arunsharma.devupdates.data
 import android.content.Context
 import com.dev.core.AppConstants
 import com.dev.core.utils.StorageUtils
-import com.dev.services.models.ServiceRequest
-import com.dev.services.models.SourceConfig
+import com.dev.services.api.models.ServiceRequest
+import com.dev.services.api.models.SourceConfig
 import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import me.arunsharma.devupdates.R

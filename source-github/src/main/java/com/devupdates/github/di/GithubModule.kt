@@ -3,11 +3,12 @@ package com.devupdates.github.di
 import com.dev.core.di.annotations.ServiceKey
 import com.dev.network.di.NetworkModule
 import com.dev.network.utils.DecodingConverter
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.ServiceConstants
+import com.dev.services.api.models.ServiceRequest
 import com.devupdates.github.APIGithub
 import com.devupdates.github.GitHubTrendingParser
 import com.devupdates.github.ServiceGithub
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.repo.ServiceIntegration
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,7 @@ import retrofit2.Retrofit
 abstract class GithubModule {
 
     @IntoMap
-    @ServiceKey(ServiceGithub.SERVICE_KEY)
+    @ServiceKey(ServiceConstants.SERVICE_KEY_GITHUB)
     @Binds
     internal abstract fun githubAPI(githubService: APIGithub): ServiceIntegration
 

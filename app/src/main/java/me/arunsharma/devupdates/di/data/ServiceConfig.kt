@@ -1,6 +1,6 @@
 package me.arunsharma.devupdates.di.data
 
-import com.dev.services.models.SourceConfig
+import com.dev.services.api.models.SourceConfig
 import retrofit2.http.GET
 import retrofit2.http.Url
 

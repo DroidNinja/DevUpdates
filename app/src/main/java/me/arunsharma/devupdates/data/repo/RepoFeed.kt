@@ -4,11 +4,11 @@ import android.text.format.DateUtils
 import com.dev.core.di.annotations.IoDispatcher
 import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
-import com.dev.services.models.ServiceResult
-import com.dev.services.repo.ServiceIntegration
-import com.devupdates.github.ServiceGithub
+import com.dev.services.api.ServiceConstants
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
+import com.dev.services.api.models.ServiceResult
+import com.dev.services.api.repo.ServiceIntegration
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -106,7 +106,7 @@ class RepoFeed @Inject constructor(
         checkForUpdate: (ServiceRequest, List<ServiceItem>, List<ServiceItem>) -> Unit
     ) {
         serviceIntegration.forEach { entry ->
-            if (entry.key != ServiceGithub.SERVICE_KEY) {
+            if (entry.key != ServiceConstants.SERVICE_KEY_GITHUB) {
                 sources.find {
                     it.type.toString() == entry.key
                 }?.let { request ->

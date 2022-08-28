@@ -6,7 +6,7 @@ import com.dev.kotlinweekly.KotlinWeeklyParser
 import com.dev.kotlinweekly.ServiceKotlinWeekly
 import com.dev.network.di.NetworkModule
 import com.dev.network.utils.DecodingConverter
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.repo.ServiceIntegration
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

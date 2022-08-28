@@ -3,8 +3,8 @@ package me.arunsharma.devupdates.ui.fragments.feed.viewmodel
 import android.app.Application
 import com.dev.core.di.annotations.IoDispatcher
 import com.dev.network.model.ResponseStatus
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import me.arunsharma.devupdates.data.repo.RepoFeed

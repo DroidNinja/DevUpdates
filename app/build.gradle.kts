@@ -62,11 +62,6 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
-    implementation(project(":source-github"))
-    implementation(project(":source-medium"))
-    implementation(project(":source-androidweekly"))
-    implementation(project(":source-kotlinweekly"))
-    implementation(project(":source-rss"))
     implementation(project(":services"))
 //    debugImplementation(project(":devik"))
 //    releaseImplementation(project(":devik-noop"))
