@@ -9,13 +9,13 @@ import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
-import me.arunsharma.devupdates.databinding.FragmentAddDataSourceBinding
+import me.arunsharma.devupdates.databinding.FragmentDataSourceBinding
 import me.arunsharma.devupdates.utils.SnackbarUtil
 
 @AndroidEntryPoint
-class DataSourceListFragment : BaseFragment(R.layout.fragment_add_data_source) {
+class DataSourceListFragment : BaseFragment(R.layout.fragment_data_source) {
 
-    private val binding by viewBinding(FragmentAddDataSourceBinding::bind)
+    private val binding by viewBinding(FragmentDataSourceBinding::bind)
 
     val viewModel: VMDataSource by viewModels()
 
@@ -63,7 +63,15 @@ class DataSourceListFragment : BaseFragment(R.layout.fragment_add_data_source) {
 
         }
 
+        binding.btnAddSource.setOnClickListener {
+            showAddSource()
+        }
+
         viewModel.getServices()
+    }
+
+    private fun showAddSource() {
+        AddSourceFragment.newInstance().show(requireActivity().supportFragmentManager, AddSourceFragment.TAG)
     }
 
     private fun onDeleteItem(

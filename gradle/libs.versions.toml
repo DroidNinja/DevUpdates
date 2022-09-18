@@ -23,7 +23,7 @@ spotless = "6.8.0"
 androidx-fragment = "1.4.0"
 gradleDependencyUpdate = "0.42.0"
 com-tickaroo-tikxml = "0.8.13"
-agp = "7.3.0-rc01"
+agp = "7.3.0"
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

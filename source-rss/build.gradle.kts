@@ -34,6 +34,9 @@ dependencies {
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)
 
+    implementation(libs.com.squareup.moshi)
+    kapt(libs.com.squareup.moshi.kotlin.codegen)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.runner)

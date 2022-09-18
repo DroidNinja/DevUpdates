@@ -31,7 +31,9 @@
     </style>
 
     <style name="AppTheme.AlertDialogStyle" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.MaterialComponents.Title.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">
+            @style/MaterialAlertDialog.MaterialComponents.Title.Text
+        </item>
     </style>
 
     <style name="AppTheme.RadioButtonStyle" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
@@ -102,14 +104,17 @@
         <item name="materialAlertDialogTheme">@style/AppTheme.AlertDialogStyle</item>
         <item name="radioButtonStyle">@style/AppTheme.RadioButtonStyle</item>
         <item name="checkboxStyle">@style/AppTheme.CheckboxStyle</item>
-        <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.MaterialComponents.PopupMenu.Overflow
+        </item>
         <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
         <item name="switchStyle">@style/AppTheme.SwitchStyle</item>
+        <item name="bottomSheetDialogTheme">@style/EditTextBottomSheetDialog</item>
     </style>
 
 
-<!--    setting styles-->
+    <!--    setting styles-->
     <style name="Settings" />
+
     <style name="Settings.Button">
         <item name="fontFamily">@font/arimo</item>
         <item name="android:background">?selectableItemBackground</item>
@@ -122,5 +127,21 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">?textAppearanceBody2</item>
     </style>
+
+
+    <style name="EditTextBottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerSize">@dimen/_20sdp</item>
+    </style>
+
 
 </resources>

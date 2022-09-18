@@ -18,5 +18,12 @@
     <string name="system">System</string>
     <string name="battery_saver">Battery Saver</string>
     <string name="check_new_updates">Check new updates</string>
+    <string name="medium">Medium</string>
+    <string name="select_source">Select Source</string>
+    <string name="rss">RSS</string>
+    <string name="url">URL</string>
+    <string name="name">Source name</string>
+    <string name="error_invalid_input">Invalid input</string>
+    <string name="error_permission_notification">Permission required for sending notifications</string>
 
 </resources>

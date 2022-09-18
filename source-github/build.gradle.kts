@@ -25,6 +25,9 @@ dependencies {
     implementation(project(":service-api"))
     implementation(libs.jsoup)
 
+    implementation(libs.com.squareup.moshi)
+    kapt(libs.com.squareup.moshi.kotlin.codegen)
+
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)
 
