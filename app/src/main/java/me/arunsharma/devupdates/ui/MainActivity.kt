@@ -46,30 +46,30 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         }
 
         RefreshSourcesWorker.scheduleFetchEventData(this)
-        checkForNotificationPermission()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkForNotificationPermission()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun checkForNotificationPermission(){
-        if(BuildCompat.isAtLeastT()) {
-            val requestPermissionLauncher =
-                registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted->
-                    if (!granted) {
-                        SnackbarUtil.showBarLongTime(
-                            binding.root,
-                            getString(R.string.error_permission_notification),
-                            SnackbarUtil.INFO
-                        )
-                    }
+    private fun checkForNotificationPermission() {
+        val requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+                if (!granted) {
+                    SnackbarUtil.showBarLongTime(
+                        binding.root,
+                        getString(R.string.error_permission_notification),
+                        SnackbarUtil.INFO
+                    )
                 }
-
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS,
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS,
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 

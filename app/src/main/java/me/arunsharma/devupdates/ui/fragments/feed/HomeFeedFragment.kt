@@ -91,12 +91,14 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
             is FeedUIState.Loading -> {
                 binding.progressLayout.showLoading(true, arrayOf(R.layout.skeleton_item_feed_item))
             }
+
             is FeedUIState.ShowList -> {
                 binding.srlView.isRefreshing = false
                 binding.progressLayout.showContent()
                 val data = state.list
                 setDataOnList(state.request, data)
             }
+
             is FeedUIState.ShowError -> {
                 LayoutProgressErrorBinding.inflate(LayoutInflater.from(requireContext())).apply {
                     tvTitle.text = state.errorTitle
@@ -105,11 +107,13 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
                     binding.progressLayout.showError(root)
                 }
             }
+
             is FeedUIState.HasNewItems -> {
                 binding.btnCheckUpdate.visibility = View.VISIBLE
                 binding.btnCheckUpdate.animate()
                     .translationY(binding.btnCheckUpdate.height.toFloat())
             }
+
             else -> {}
         }
     }
@@ -144,7 +148,7 @@ class HomeFeedFragment : BaseFragment(R.layout.fragment_home_feed_list) {
             }
         } else {
             val adapter = binding.recyclerView.adapter as FeedAdapter
-                if (request.hasPagingSupport && request.next != null) {
+            if (request.hasPagingSupport && request.next != null) {
                 if (data.isNotEmpty()) {
                     adapter.addData(data)
                     adapter.loadMoreComplete()
