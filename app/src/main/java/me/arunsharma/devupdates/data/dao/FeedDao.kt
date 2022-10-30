@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.ServiceItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,6 +1,6 @@
 package me.arunsharma.devupdates.utils
 
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.ServiceItem
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

@@ -13,9 +13,9 @@ import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
-import com.devupdates.github.ServiceGithub
+import com.dev.services.api.ServiceConstants
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedGithubBinding
@@ -57,7 +57,7 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                                 if (isChecked) {
                                     val lang = buttonView.text.toString()
                                     if (lang != DEFAULT_LANG) {
-                                        request.metadata?.put(ServiceGithub.SELECTED_LANGUAGE, lang)
+                                        request.metadata?.put(ServiceConstants.GITHUB_SELECTED_LANGUAGE, lang)
                                     }
                                     viewModel.getData(request, forceUpdate = true)
                                 }
@@ -71,13 +71,13 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                 viewModel.getData(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
+            viewModel.lvShowMessage.observe(viewLifecycleOwner) { resourceString ->
                 view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-            })
+            }
 
-            viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
+            viewModel.lvUiState.observe(viewLifecycleOwner) { state ->
                 handleUIState(state)
-            })
+            }
 
             loadData()
         }

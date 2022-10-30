@@ -11,11 +11,6 @@ interface ServiceAndroidWeekly {
         @Url url: String
     ): List<AndroidWeeklyFeedItem>
 
-    @GET
-    suspend fun getLatestIssue(
-        @Url url: String
-    ): String
-
     companion object {
         const val ENDPOINT = "https://androidweekly.net/"
         const val SERVICE_KEY = "ANDROID_WEEKLY"

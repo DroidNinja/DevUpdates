@@ -20,19 +20,19 @@ android {
 }
 
 dependencies {
-    api(Dependencies.JetBrains.Coroutines)
-    api(Dependencies.JetBrains.CoroutinesAndroid)
-    api(Dependencies.Network.Retrofit)
+    api(libs.kotlin.coroutines.core)
+    api(libs.kotlin.coroutines.android)
+    api(libs.retrofit.retrofit)
     api(Dependencies.Network.MoshiConverter)
-    api(Dependencies.Network.LoggingInterceptor)
-    debugApi(Dependencies.DevOnly.Chuck)
-    releaseApi(Dependencies.DevOnly.ChuckNoOp)
+    api(libs.okhttp.loggingInterceptor)
+    debugApi(libs.chucker.library)
+    releaseApi(libs.chucker.library.no.op)
 
-    implementation(Dependencies.Di.Hilt)
-    kapt(Dependencies.Compilers.Hilt)
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
 
-    testImplementation(Dependencies.AndroidTest.Junit)
-    androidTestImplementation(Dependencies.AndroidTest.TestExt)
-    androidTestImplementation(Dependencies.AndroidTest.TestRunner)
-    androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }

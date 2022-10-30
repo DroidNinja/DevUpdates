@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.BaseViewHolder
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.ServiceRequest
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.ItemDataSourceBinding
 import me.arunsharma.devupdates.utils.cache.FeedUtils

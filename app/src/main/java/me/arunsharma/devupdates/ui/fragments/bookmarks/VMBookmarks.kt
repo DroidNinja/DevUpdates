@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dev.core.base.BaseViewModel
 import com.dev.core.di.annotations.IoDispatcher
-import com.dev.services.models.DataSource
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.DataSource
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -6,11 +6,11 @@ import com.dev.core.utils.DateTimeHelper
 import com.dev.network.model.APIError
 import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
-import com.dev.services.models.DataSource
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
-import com.dev.services.models.ServiceResult
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.models.DataSource
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
+import com.dev.services.api.models.ServiceResult
+import com.dev.services.api.repo.ServiceIntegration
 import javax.inject.Inject
 import kotlin.math.min
 

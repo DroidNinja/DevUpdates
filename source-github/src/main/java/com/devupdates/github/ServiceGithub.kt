@@ -15,8 +15,6 @@ interface ServiceGithub {
 
     companion object {
         private const val LANGUAGE = "language"
-        const val SELECTED_LANGUAGE = "selectedLang"
         const val ENDPOINT = "https://github.com/"
-        const val SERVICE_KEY = "GITHUB"
     }
 }

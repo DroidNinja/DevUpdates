@@ -1,8 +1,16 @@
 package me.arunsharma.devupdates.ui
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.os.BuildCompat
 import com.dev.core.extensions.addFragment
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
@@ -10,6 +18,7 @@ import me.arunsharma.devupdates.databinding.ActivityMainBinding
 import me.arunsharma.devupdates.helpers.deeplink.DeepLinkHandler
 import me.arunsharma.devupdates.navigator.MainNavigator
 import me.arunsharma.devupdates.ui.fragments.home.HomeFragment
+import me.arunsharma.devupdates.utils.SnackbarUtil
 import me.arunsharma.devupdates.workers.RefreshSourcesWorker
 import javax.inject.Inject
 
@@ -37,6 +46,31 @@ class MainActivity : AppCompatActivity(), MainActivityListener {
         }
 
         RefreshSourcesWorker.scheduleFetchEventData(this)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkForNotificationPermission()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun checkForNotificationPermission() {
+        val requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+                if (!granted) {
+                    SnackbarUtil.showBarLongTime(
+                        binding.root,
+                        getString(R.string.error_permission_notification),
+                        SnackbarUtil.INFO
+                    )
+                }
+            }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS,
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 
     override fun onResume() {

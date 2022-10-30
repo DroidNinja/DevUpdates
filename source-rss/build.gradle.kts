@@ -22,19 +22,23 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
-    implementation(project(":services"))
-    implementation(Dependencies.Utils.Jsoup)
-    implementation(Dependencies.TikXML.annotation)
-    implementation(Dependencies.TikXML.core)
-    implementation(Dependencies.TikXML.retrofit)
-    api(Dependencies.TikXML.htmlEscape)
-    kapt(Dependencies.TikXML.apt)
+    implementation(project(":service-api"))
+    implementation(libs.tikxml.annotation)
+    implementation(libs.tikxml.core)
+    implementation(libs.tikxml.retrofit.converter)
+    api(libs.tikxml.converter.htmlescape)
+    kapt(libs.tikxml.processor)
 
-    implementation(Dependencies.Di.Hilt)
-    kapt(Dependencies.Compilers.Hilt)
+    implementation(libs.jsoup)
 
-    testImplementation(Dependencies.AndroidTest.Junit)
-    androidTestImplementation(Dependencies.AndroidTest.TestExt)
-    androidTestImplementation(Dependencies.AndroidTest.TestRunner)
-    androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.com.squareup.moshi)
+    kapt(libs.com.squareup.moshi.kotlin.codegen)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }

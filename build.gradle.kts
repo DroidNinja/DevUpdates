@@ -1,29 +1,15 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
-    }
-    dependencies {
-        classpath(Dependencies.ClassPath.Gradle)
-        classpath(Dependencies.ClassPath.Kotlin)
-        classpath(Dependencies.ClassPath.Hilt)
-        classpath(Dependencies.ClassPath.Firebase)
-        classpath(Dependencies.ClassPath.Crashlytics)
-    }
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.android.lint) apply false
+    alias(libs.plugins.android.test) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.gms.googleServices) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.spotless)
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://jitpack.io") }
-        maven { url = uri("https://maven.google.com") }
-        maven { url = uri("https://oss.jfrog.org/libs-snapshot") }
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
-    }
-}
-
-tasks.register("clean", Delete::class){
-    delete(rootProject.buildDir)
-}
+apply(from = file("gradle/dependency-graph.gradle"))

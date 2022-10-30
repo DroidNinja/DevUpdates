@@ -2,10 +2,11 @@ package com.devupdates.github
 
 import com.dev.network.model.APIErrorException
 import com.dev.network.model.ResponseStatus
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
-import com.dev.services.models.ServiceResult
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.ServiceConstants
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
+import com.dev.services.api.models.ServiceResult
+import com.dev.services.api.repo.ServiceIntegration
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -14,7 +15,7 @@ class APIGithub @Inject constructor(val service: ServiceGithub) : ServiceIntegra
     override suspend fun getData(request: ServiceRequest): ResponseStatus<ServiceResult> {
         try {
             Timber.d("Debug--getData")
-            val result = service.getTrending(request.metadata?.get(ServiceGithub.SELECTED_LANGUAGE) ?: "", "daily").map { item ->
+            val result = service.getTrending(request.metadata?.get(ServiceConstants.GITHUB_SELECTED_LANGUAGE) ?: "", "daily").map { item ->
                 ServiceItem(
                     title = item.author + " / " + item.name,
                     description = item.description,

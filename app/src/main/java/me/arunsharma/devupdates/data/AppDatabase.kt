@@ -2,7 +2,7 @@ package me.arunsharma.devupdates.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.ServiceItem
 import me.arunsharma.devupdates.data.dao.FeedDao
 
 @Database(entities = [ServiceItem::class], version = 1)

@@ -6,7 +6,7 @@ import com.dev.rss.APIBlogspotRSS
 import com.dev.rss.APIRSS
 import com.dev.rss.APIRSSChannel
 import com.dev.rss.ServiceRSS
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.repo.ServiceIntegration
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.converter.htmlescape.HtmlEscapeStringConverter
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory

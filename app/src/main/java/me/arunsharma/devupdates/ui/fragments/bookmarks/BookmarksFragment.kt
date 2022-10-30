@@ -10,7 +10,7 @@ import com.dev.core.databinding.LayoutProgressErrorBinding
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.ServiceItem
 import dagger.hilt.android.AndroidEntryPoint
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentBookmarksBinding

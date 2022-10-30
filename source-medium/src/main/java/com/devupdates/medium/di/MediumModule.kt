@@ -2,7 +2,7 @@ package com.devupdates.medium.di
 
 import com.dev.core.di.annotations.ServiceKey
 import com.dev.network.di.NetworkModule
-import com.dev.services.repo.ServiceIntegration
+import com.dev.services.api.repo.ServiceIntegration
 import com.devupdates.medium.APIMedium
 import com.devupdates.medium.ServiceMedium
 import com.squareup.moshi.Moshi

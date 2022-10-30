@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.BaseViewHolder
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.ServiceItem
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.ItemFeedItemBinding
 

@@ -22,14 +22,17 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
-    implementation(project(":services"))
-    implementation(Dependencies.Utils.Jsoup)
+    implementation(project(":service-api"))
+    implementation(libs.jsoup)
 
-    implementation(Dependencies.Di.Hilt)
-    kapt(Dependencies.Compilers.Hilt)
+    implementation(libs.com.squareup.moshi)
+    kapt(libs.com.squareup.moshi.kotlin.codegen)
 
-    testImplementation(Dependencies.AndroidTest.Junit)
-    androidTestImplementation(Dependencies.AndroidTest.TestExt)
-    androidTestImplementation(Dependencies.AndroidTest.TestRunner)
-    androidTestImplementation(Dependencies.AndroidTest.EspressoCore)
+    implementation(libs.hilt.library)
+    kapt(libs.hilt.compiler)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }

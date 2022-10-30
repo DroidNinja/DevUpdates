@@ -30,26 +30,6 @@
       "hasPagingSupport": true
     },
     {
-      "name": "Swiggy Eng",
-      "type": "MEDIUM",
-      "metadata": {
-        "username": "swiggy-bytes",
-        "tag":"swiggy-mobile"
-      },
-      "shouldUseCache": true,
-      "hasPagingSupport": true
-    },
-    {
-      "name": "Pinterest Eng",
-      "type": "MEDIUM",
-      "metadata": {
-        "username": "pinterest-engineering",
-        "tag": "mobile"
-      },
-      "shouldUseCache": true,
-      "hasPagingSupport": true
-    },
-    {
       "name": "Android Developers",
       "type": "MEDIUM",
       "metadata": {
@@ -57,6 +37,15 @@
       },
       "shouldUseCache": true,
       "hasPagingSupport": true
+    },
+    {
+      "name": "Mohit Blog",
+      "type": "RSS",
+      "metadata": {
+        "url": "https://codingwithmohit.com/feed.xml"
+      },
+      "shouldUseCache": true,
+      "hasPagingSupport": false
     },
     {
       "name": "ProAndroidDev",
@@ -85,15 +74,6 @@
       },
       "shouldUseCache": false,
       "hasPagingSupport": true
-    },
-    {
-      "name": "Antonio Leiva",
-      "type": "RSS_CHANNEL",
-      "metadata": {
-        "url": "https://antonioleiva.com/category/blog/feed/"
-      },
-      "shouldUseCache": true,
-      "hasPagingSupport": false
     },
     {
       "name": "Chris Banes",
