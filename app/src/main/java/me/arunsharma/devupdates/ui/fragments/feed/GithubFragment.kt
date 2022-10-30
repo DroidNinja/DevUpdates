@@ -71,13 +71,13 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                 viewModel.getData(request, forceUpdate = true)
             }
 
-            viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
+            viewModel.lvShowMessage.observe(viewLifecycleOwner) { resourceString ->
                 view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-            })
+            }
 
-            viewModel.lvUiState.observe(viewLifecycleOwner, { state ->
+            viewModel.lvUiState.observe(viewLifecycleOwner) { state ->
                 handleUIState(state)
-            })
+            }
 
             loadData()
         }

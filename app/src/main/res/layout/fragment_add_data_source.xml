@@ -76,14 +76,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <Button
         android:id="@+id/btnAddSource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/btn_selected"
         android:gravity="center"
-        android:padding="@dimen/_15sdp"
         android:text="@string/add_source"
         android:textAllCaps="true"
         android:textStyle="bold"
