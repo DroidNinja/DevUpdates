@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.ServiceItem
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.compose.theme.AppTypography
 

@@ -60,7 +60,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.Compose.ComposeCompiler
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 }
 
@@ -80,20 +80,19 @@ dependencies {
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.google.analytics)
     implementation(libs.google.crashlytics)
-    implementation(Dependencies.Compose.UI)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.androidx.compose.material3)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.runtime)
+    api(libs.androidx.compose.runtime.livedata)
     implementation(Dependencies.Compose.ActivityCompose)
-    implementation(Dependencies.Compose.MaterialCompose)
-    implementation(Dependencies.Compose.MaterialIconsCompose)
-    implementation(Dependencies.Compose.Foundation)
-    implementation(Dependencies.Compose.FoundationLayout)
-    implementation(Dependencies.Compose.Animation)
-    implementation(Dependencies.Compose.Runtime)
-    implementation(Dependencies.Compose.RuntimeLivedata)
-    implementation(Dependencies.Compose.Navigation)
-    implementation(Dependencies.Compose.Tooling)
     implementation(Dependencies.Compose.ConstraintLayout)
     implementation(Dependencies.Compose.Hilt)
-    implementation(Dependencies.Compose.Shimmer)
 
     implementation(Dependencies.Accompanist.SystemUIController)
     implementation(Dependencies.Accompanist.Insets)

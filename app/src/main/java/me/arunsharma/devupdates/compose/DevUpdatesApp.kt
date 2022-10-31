@@ -54,7 +54,6 @@ fun HomeScreenContent(
     homeScreen: String,
     modifier: Modifier
 ) {
-    Timber.d("Recomposition:HomeScreenContent")
     Column(modifier = modifier) {
         Crossfade(homeScreen) { screen ->
             Surface(color = MaterialTheme.colors.background) {

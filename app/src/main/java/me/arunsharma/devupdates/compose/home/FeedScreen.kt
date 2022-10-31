@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dev.core.utils.CustomTabHelper
-import com.dev.services.models.DataSource
-import com.dev.services.models.ServiceItem
+import com.dev.services.api.models.DataSource
+import com.dev.services.api.models.ServiceItem
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 import me.arunsharma.devupdates.compose.theme.ArimoFamily
@@ -27,7 +27,6 @@ import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeed
 import me.arunsharma.devupdates.utils.LogCompositions
-import me.vponomarenko.compose.shimmer.shimmer
 import timber.log.Timber
 
 @OptIn(ExperimentalPagerApi::class)
@@ -196,7 +195,7 @@ fun FeedPagerViewItem(
     val context = LocalContext.current
     when (feedUIState) {
         is FeedUIState.Loading -> {
-            PlaceHolder(modifier.shimmer())
+            PlaceHolder(modifier)
         }
         is FeedUIState.ShowList -> {
             Timber.d("size:" + feedUIState.list.size)

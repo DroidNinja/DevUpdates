@@ -6,11 +6,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.ServiceRequest
 import com.sebaslogen.resaca.hilt.hiltViewModelScoped
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
-import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import me.arunsharma.devupdates.ui.fragments.feed.viewmodel.VMFeedList
 import timber.log.Timber
 

@@ -3,14 +3,12 @@ package me.arunsharma.devupdates.compose.home
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.dev.services.models.ServiceItem
-import com.dev.services.models.ServiceRequest
+import com.dev.services.api.models.ServiceItem
+import com.dev.services.api.models.ServiceRequest
 import com.sebaslogen.resaca.hilt.hiltViewModelScoped
 import me.arunsharma.devupdates.compose.HomeScreenViewModel
 import me.arunsharma.devupdates.compose.utils.rememberFlowWithLifecycle
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
-import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedPagerItem
 import timber.log.Timber
 
 

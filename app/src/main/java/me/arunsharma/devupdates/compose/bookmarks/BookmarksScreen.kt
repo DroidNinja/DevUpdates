@@ -12,13 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.pager.ExperimentalPagerApi
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.compose.home.FeedPagerViewItem
 import me.arunsharma.devupdates.ui.fragments.bookmarks.VMBookmarks
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BookmarksScreen(viewModel: VMBookmarks = hiltViewModel()) {
     Column(
