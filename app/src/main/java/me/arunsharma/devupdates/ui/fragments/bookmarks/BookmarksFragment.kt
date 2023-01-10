@@ -6,12 +6,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
-import com.dev.core.databinding.LayoutProgressErrorBinding
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.utils.CustomTabHelper
 import com.dev.core.utils.viewBinding
 import com.dev.services.api.models.ServiceItem
 import dagger.hilt.android.AndroidEntryPoint
+import me.arunsharma.devupdates.databinding.LayoutProgressErrorBinding
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentBookmarksBinding
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
@@ -36,13 +36,13 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
             setHasFixedSize(true)
         }
 
-        viewModel.lvUiState.observe(viewLifecycleOwner, {
+        viewModel.lvUiState.observe(viewLifecycleOwner) {
             handleUIState(it)
-        })
+        }
 
-        viewModel.lvShowMessage.observe(viewLifecycleOwner, { resourceString ->
+        viewModel.lvShowMessage.observe(viewLifecycleOwner) { resourceString ->
             view?.let { SnackbarUtil.showBarShortTime(it, getString(resourceString)) }
-        })
+        }
 
         viewModel.getBookmarks()
 

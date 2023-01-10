@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
-import com.dev.core.databinding.LayoutProgressErrorBinding
+import me.arunsharma.devupdates.databinding.LayoutProgressErrorBinding
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
@@ -95,6 +95,7 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                 setDataOnList(state.request, data)
             }
             is FeedUIState.ShowError -> {
+                binding.srlView.isRefreshing = false
                 LayoutProgressErrorBinding.inflate(LayoutInflater.from(requireContext())).apply {
                     tvTitle.text = state.errorTitle
                     tvSubtitle.text = state.errorSubtitle

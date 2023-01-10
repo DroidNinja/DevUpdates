@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.core.base.BaseFragment
-import com.dev.core.databinding.LayoutProgressErrorBinding
+import me.arunsharma.devupdates.databinding.LayoutProgressErrorBinding
 import com.dev.core.recyclerview.BaseRecyclerViewAdapter
 import com.dev.core.recyclerview.RequestLoadMoreListener
 import com.dev.core.utils.CustomTabHelper
@@ -16,7 +16,6 @@ import com.dev.core.utils.viewBinding
 import com.dev.services.api.models.ServiceItem
 import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.databinding.FragmentFeedListBinding
 import me.arunsharma.devupdates.ui.fragments.feed.adapter.FeedAdapter
@@ -84,6 +83,7 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
                 setDataOnList(state.request, data)
             }
             is FeedUIState.ShowError -> {
+                binding.srlView.isRefreshing = false
                 LayoutProgressErrorBinding.inflate(LayoutInflater.from(requireContext())).apply {
                     tvTitle.text = state.errorTitle
                     tvSubtitle.text = state.errorSubtitle

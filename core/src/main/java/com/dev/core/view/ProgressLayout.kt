@@ -135,55 +135,17 @@ class ProgressLayout : RelativeLayout {
             removeView(errorView)
         }
         hideLoadingView()
+        this.errorGroup = errorLayout
         errorLayout.tag = ERROR_TAG
         layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT)
-        this.errorGroup = errorLayout
-        addView(errorGroup, layoutParams)
-        setContentVisibility(false)
-    }
-
-    fun showError(@StringRes stringId: Int, onClickListener: View.OnClickListener?) {
-        showError(resources.getString(stringId), onClickListener)
-    }
-
-    fun showError(errorMessage: String, onClickListener: View.OnClickListener?) {
-        currentState = State.ERROR
-        hideLoadingView()
-        showErrorView()
-
-        errorTextView?.text = errorMessage
-
-        if (onClickListener != null) {
-            errorButton?.visibility = View.VISIBLE
-            errorButton?.setOnClickListener(onClickListener)
-        } else {
-            errorButton?.visibility = View.GONE
-        }
+        addView(errorLayout, layoutParams)
         setContentVisibility(false)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         if (errorButton != null) errorButton!!.setOnClickListener(null)
-    }
-
-    private fun showErrorView() {
-        if (errorGroup == null) {
-            errorGroup = inflater?.inflate(R.layout.layout_progress_error, null)
-            errorGroup?.tag = ERROR_TAG
-//            errorLayout = errorGroup?.
-//
-//            errorTextView = errorGroup?.findViewById(R.id.tvError)
-//            errorButton = errorGroup?.findViewById(R.id.tvRetry)
-//
-//            layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.MATCH_PARENT)
-
-            addView(errorGroup, layoutParams)
-        } else {
-            errorLayout?.visibility = View.VISIBLE
-        }
     }
 
     private fun hideLoadingView() {
