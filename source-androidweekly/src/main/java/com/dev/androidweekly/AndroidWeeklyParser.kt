@@ -25,7 +25,7 @@ object AndroidWeeklyParser {
                 it.title.isNotEmpty()
             }.toMutableList()
 
-        return allList.subList(0, allList.indexOfFirst { it.title.contains("Place a") })
+        return allList
     }
 
     private fun parseTrendingItem(element: Element): AndroidWeeklyFeedItem {
