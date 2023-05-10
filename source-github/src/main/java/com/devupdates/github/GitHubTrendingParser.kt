@@ -24,7 +24,7 @@ object GitHubTrendingParser {
     }
 
     private fun parseTrendingItem(element: Element): GithubTrendingResponseItem {
-        val authorAndName = element.select("h1 > a")
+        val authorAndName = element.select("h2 > a")
             .attr("href")
             .toString()
             .removePrefix("/")
