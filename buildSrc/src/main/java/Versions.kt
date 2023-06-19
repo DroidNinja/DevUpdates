@@ -51,7 +51,7 @@ object Versions {
 
     object Helpers {
         const val Glide = "4.11.0"
-        const val Tikxml = "0.8.13"
+        const val Tikxml = "0.8.15"
     }
 
     object JetBrains {
