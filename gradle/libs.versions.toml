@@ -10,7 +10,7 @@ composecompiler = "1.2.0"
 composesnapshot = "-" # a single character = no snapshot
 coroutines = "1.6.3"
 dagger = "2.42"
-debugdrawer = "0.9.8-SNAPSHOT"
+debugdrawer = "0.9.8"
 hilt = "2.42"
 kotlin = "1.7.10"
 ktlint = "0.46.1"
