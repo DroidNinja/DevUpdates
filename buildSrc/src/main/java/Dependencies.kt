@@ -136,7 +136,7 @@ object Dependencies {
         const val Navigation = "androidx.navigation:navigation-compose:2.4.0-alpha08"
         const val Tooling = "androidx.compose.ui:ui-tooling:${Versions.Compose.ComposeVersion}"
         const val ConstraintLayout =
-            "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
+            "androidx.constraintlayout:constraintlayout-compose:1.0.1"
         const val Hilt = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     }
 
