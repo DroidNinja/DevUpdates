@@ -21,7 +21,7 @@ object Versions {
     object AndroidX {
         const val AppCompat = "1.4.0"
         const val CardView = "1.0.0"
-        const val ConstraintLayout = "2.1.2"
+        const val ConstraintLayout = "2.1.4"
         const val LifeCycleViewModel = "2.4.0"
         const val LifeCycleExtensions = "2.2.0"
         const val LifeCycleRuntime = "2.4.0"
