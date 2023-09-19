@@ -57,7 +57,7 @@ androidx-browser = "androidx.browser:browser:1.4.0"
 androidx-collection = "androidx.collection:collection-ktx:1.2.0"
 androidx-core = "androidx.core:core-ktx:1.8.0"
 androidx-emoji = "androidx.emoji:emoji:1.1.0"
-androidx-appcompat = "androidx.appcompat:appcompat:1.6.0-alpha05"
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.2"
 androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "androidx-fragment" }
 androidx-fragment-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
