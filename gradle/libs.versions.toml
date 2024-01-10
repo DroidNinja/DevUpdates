@@ -1,7 +1,7 @@
 [versions]
 accompanist = "0.24.13-rc"
 androidxhilt = "1.0.0"
-androidxlifecycle = "2.5.0"
+androidxlifecycle = "2.7.0"
 androidxtest = "1.4.0"
 chucker = "3.5.2"
 coil = "2.1.0"
