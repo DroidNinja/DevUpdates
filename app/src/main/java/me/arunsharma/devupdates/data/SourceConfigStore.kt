@@ -32,7 +32,7 @@ class SourceConfigStoreImpl @Inject constructor(
 
     val appCache = AppCache(CacheConstants.CACHE_DATASOURCES)
 
-    override suspend fun fetchFromRemote(): List<ServiceRequest> {
+    override suspend fun fetchFromRemote(): List<ServiceRequest> = withContext(Dispatchers.IO) {
         val config = cachingProvider.cacheData(appCache) {
             try {
                 val result = serviceConfig.getConfig(AppConstants.CONFIG_URL)
@@ -44,22 +44,25 @@ class SourceConfigStoreImpl @Inject constructor(
             }
         }
 
-        return config?.data ?: mutableListOf()
+        return@withContext config?.data ?: mutableListOf()
     }
 
     override suspend fun save(data: List<ServiceRequest>) {
-        cachingProvider.writeCacheData(appCache, SourceConfig(data = data))
+        withContext(Dispatchers.IO) {
+            cachingProvider.writeCacheData(appCache, SourceConfig(data = data))
+        }
     }
 
-    override suspend fun get(): MutableList<ServiceRequest> {
-        return cachingProvider.readCacheData<SourceConfig>(appCache)?.data?.toMutableList()
+    override suspend fun get(): MutableList<ServiceRequest> = withContext(Dispatchers.IO) {
+        return@withContext cachingProvider.readCacheData<SourceConfig>(appCache)?.data?.toMutableList()
             ?: mutableListOf()
     }
 
     override suspend fun addSource(serviceRequest: ServiceRequest) {
-        withContext(Dispatchers.IO) {}
-        val currentItems = get()
-        currentItems.add(serviceRequest)
-        save(currentItems)
+        withContext(Dispatchers.IO) {
+            val currentItems = get()
+            currentItems.add(serviceRequest)
+            save(currentItems)
+        }
     }
 }

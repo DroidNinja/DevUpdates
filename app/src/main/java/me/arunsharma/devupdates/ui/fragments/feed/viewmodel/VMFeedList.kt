@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
-import me.arunsharma.devupdates.utils.SingleLiveEvent
+import com.dev.core.utils.SingleLiveEvent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -50,8 +50,8 @@ open class VMFeedList @Inject constructor(
                     _lvUIState.value = FeedUIState.ShowList(request, result.data.data)
                 } else {
                     _lvUIState.value = FeedUIState.ShowError(
-                        context.getString(R.string.empty_feed),
-                        context.getString(R.string.swipe_down_to_refresh_the_feed)
+                        context.getString(com.dev.core.R.string.empty_feed),
+                        context.getString(com.dev.core.R.string.swipe_down_to_refresh_the_feed)
                     )
                 }
             } else if (result is ResponseStatus.Failure) {

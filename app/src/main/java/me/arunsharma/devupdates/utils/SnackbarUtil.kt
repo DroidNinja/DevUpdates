@@ -73,8 +73,11 @@ object SnackbarUtil {
      * @param backgroundColor 背景颜色
      */
     fun showBarShortTime(view: View, message: String, @ColorInt messageColor: Int = WHITE, @ColorInt
-    backgroundColor: Int = BLACK) {
+    backgroundColor: Int = BLACK, anchorView: View? = null) {
         val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+        if(anchorView != null){
+            snackbar.setAnchorView(view)
+        }
         setSnackbarColor(snackbar, messageColor, backgroundColor)
 
         snackbar.show()
@@ -214,7 +217,7 @@ object SnackbarUtil {
         //设置Snackbar自己的布局的背景颜色
         view.setBackgroundColor(backgroundColor)
         //设置Snackbar自己的布局中的TextView的颜色
-        (view.findViewById<View>(R.id.snackbar_text) as TextView).setTextColor(messageColor)
+        (view.findViewById<View>(com.google.android.material.R.id.snackbar_text) as TextView).setTextColor(messageColor)
     }
 
     /**

@@ -1,22 +1,26 @@
 plugins {
-    id(Plugins.ANDROID_LIBRARY)
-    kotlin(Plugins.KOTLIN_ANDROID)
-    kotlin(Plugins.KOTLIN_KAPT)
-    id(Plugins.KOTLIN_PARCELIZE)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
     compileSdk = AndroidVersion.COMPILE_SDK_VERSION
-
     defaultConfig {
-        minSdk = AndroidVersion.MIN_SDK_VERSION
-        targetSdk = AndroidVersion.TARGET_SDK_VERSION
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        compileOptions {
+            // Up to Java 11 APIs are available through desugaring
+            // https://developer.android.com/studio/write/java11-minimal-support-table
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+        }
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
+    namespace = "com.dev.core"
 }
 
 dependencies {
@@ -34,7 +38,8 @@ dependencies {
     api(libs.timber)
 
     implementation(libs.hilt.library)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)

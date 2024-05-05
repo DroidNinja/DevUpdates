@@ -66,24 +66,24 @@ fun FragmentActivity.popToRoot() {
     supportFragmentManager.executePendingTransactions()
 }
 
-fun FragmentActivity.popAll() {
-    if (supportFragmentManager.backStackEntryCount > 0) {
-        val first = supportFragmentManager.getBackStackEntryAt(0)
-        supportFragmentManager.popBackStackImmediate(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        getCurrentFragment(R.id.container)?.let {
-            removeFragment(it)
-        }
-    }
-}
-
-fun FragmentActivity.popAllAndReplace(fragment: BaseFragment, frameId: Int, addToBackstack: Boolean = true) {
-    val first = supportFragmentManager.getBackStackEntryAt(0)
-    supportFragmentManager.popBackStackImmediate(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    getCurrentFragment(R.id.container)?.let {
-        removeFragment(it)
-    }
-    replaceFragment(fragment, frameId, addToBackstack)
-}
+//fun FragmentActivity.popAll() {
+//    if (supportFragmentManager.backStackEntryCount > 0) {
+//        val first = supportFragmentManager.getBackStackEntryAt(0)
+//        supportFragmentManager.popBackStackImmediate(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+//        getCurrentFragment(R.id.container)?.let {
+//            removeFragment(it)
+//        }
+//    }
+//}
+//
+//fun FragmentActivity.popAllAndReplace(fragment: BaseFragment, frameId: Int, addToBackstack: Boolean = true) {
+//    val first = supportFragmentManager.getBackStackEntryAt(0)
+//    supportFragmentManager.popBackStackImmediate(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+//    getCurrentFragment(R.id.container)?.let {
+//        removeFragment(it)
+//    }
+//    replaceFragment(fragment, frameId, addToBackstack)
+//}
 
 fun FragmentActivity.removeFragment(fragment: BaseFragment) {
     supportFragmentManager.inTransaction { remove(fragment) }

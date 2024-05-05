@@ -21,8 +21,7 @@ class DeepLinkHandler {
         }
 
         private fun handlePage(context: FragmentActivity, uri: Uri): Boolean {
-            val page = uri.getQueryParameter(DeepLinkGenerator.QUERY_PAGE)
-            return when (page) {
+            return when (uri.getQueryParameter(DeepLinkGenerator.QUERY_PAGE)) {
                 ScreenType.OPEN_URL.type -> {
                     CustomTabHelper.open(
                         context,

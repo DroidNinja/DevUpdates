@@ -13,17 +13,11 @@ import javax.inject.Inject
 class DevUpdatesApp : Application(), Configuration.Provider {
 
     @Inject
-    lateinit var workerConfiguration: Configuration
-
-    // Setup custom configuration for WorkManager with a DelegatingWorkerFactory
-    override fun getWorkManagerConfiguration(): Configuration {
-        return workerConfiguration
-    }
+    lateinit var workerConf: Configuration
 
     override fun onCreate() {
         super.onCreate()
         enableStrictMode()
-//        DevikContext(this)
     }
 
     private fun enableStrictMode() {
@@ -50,4 +44,8 @@ class DevUpdatesApp : Application(), Configuration.Provider {
         Timber.plant(tree)
         d { "Timber Planted" }
     }
+
+    // Setup custom configuration for WorkManager with a DelegatingWorkerFactory
+    override val workManagerConfiguration: Configuration
+        get() = workerConf
 }

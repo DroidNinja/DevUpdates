@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dev.core.model.ErrorException
+import com.dev.core.utils.SingleLiveEvent
 import kotlinx.coroutines.*
 
 open class BaseViewModel : ViewModel() {
@@ -17,7 +18,7 @@ open class BaseViewModel : ViewModel() {
 
     open val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob + exceptionHandler)
 
-    open val _lvError = MutableLiveData<ErrorException>()
+    open val _lvError = SingleLiveEvent<ErrorException>()
     val lvError: LiveData<ErrorException>
         get() = _lvError
 

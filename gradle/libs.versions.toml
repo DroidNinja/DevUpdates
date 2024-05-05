@@ -1,29 +1,43 @@
 [versions]
 accompanist = "0.24.13-rc"
-androidxhilt = "1.0.0"
-androidxlifecycle = "2.5.0"
-androidxtest = "1.4.0"
+androidxhilt = "1.2.0"
+androidxlifecycle = "2.7.0"
+androidxtest = "1.5.2"
 chucker = "3.5.2"
 coil = "2.1.0"
-compose = "1.2.0-rc03"
+compose = "1.6.7"
 composecompiler = "1.2.0"
 composesnapshot = "-" # a single character = no snapshot
-coroutines = "1.6.3"
-dagger = "2.42"
+coroutines = "1.7.3"
+dagger = "2.50"
 debugdrawer = "0.9.8-SNAPSHOT"
-hilt = "2.42"
-kotlin = "1.7.10"
+desugar_jdk_libs = "2.0.4"
+hilt = "2.50"
+kotlin = "1.9.23"
 ktlint = "0.46.1"
-okhttp = "4.10.0"
-paging = "3.1.1"
+okhttp = "4.12.0"
+paging = "3.2.1"
 retrofit = "2.9.0"
-room = "2.4.2"
+room = "2.6.1"
 threetenbp = "1.6.0"
 spotless = "6.8.0"
-androidx-fragment = "1.4.0"
-gradleDependencyUpdate = "0.42.0"
+androidx-fragment = "1.7.0"
+gradleDependencyUpdate = "0.47.0"
 com-tickaroo-tikxml = "0.8.13"
-agp = "7.3.0"
+agp = "8.4.0"
+ksp = "1.9.23-1.0.20"
+googleServices = "4.4.1"
+firebaseCrashlyticsPlugin = "2.9.9"
+# Gradle Analytics
+mockk = "1.13.9"
+sqlite_driver = "3.42.0.0"
+mysql_driver = "8.0.33"
+jetbrains_exposed = "0.41.1"
+moshi = "1.15.0"
+commons-io = "2.15.1"
+oshi = "6.4.11"
+jna = "5.14.0"
+detekt = "1.23.4"
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
@@ -34,9 +48,12 @@ android-lint = { id = "com.android.lint", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-gms-googleServices = "com.google.gms.google-services:4.3.13"
-firebase-crashlytics = "com.google.firebase.crashlytics:2.9.1"
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+gms-googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }
 
 [libraries]
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
@@ -47,41 +64,36 @@ accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiper
 accompanist-pager-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 
-snapper = "dev.chrisbanes.snapper:snapper:0.2.2"
 
-android-pluginGradle = "com.android.tools.build:gradle:8.0.0-alpha06"
-
-androidx-activity-compose = "androidx.activity:activity-compose:1.5.0"
-androidx-archCoreTesting = "androidx.arch.core:core-testing:2.1.0"
-androidx-browser = "androidx.browser:browser:1.4.0"
-androidx-collection = "androidx.collection:collection-ktx:1.2.0"
-androidx-core = "androidx.core:core-ktx:1.8.0"
+androidx-browser = "androidx.browser:browser:1.8.0"
+androidx-collection = "androidx.collection:collection-ktx:1.4.0"
+androidx-core = "androidx.core:core-ktx:1.13.1"
 androidx-emoji = "androidx.emoji:emoji:1.1.0"
-androidx-appcompat = "androidx.appcompat:appcompat:1.6.0-alpha05"
-androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.2"
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
+androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "androidx-fragment" }
 androidx-fragment-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 androidx-swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxhilt" }
-androidx-hilt-compose = "androidx.hilt:hilt-navigation-compose:1.0.0"
+androidx-hilt-compose = "androidx.hilt:hilt-navigation-compose:1.2.0"
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "androidxhilt" }
 
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxlifecycle" }
-androidx-lifecycle-viewmodel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+androidx-lifecycle-viewmodel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0"
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxlifecycle" }
 androidx-lifecycle-lifecycle-extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-androidx-lifecycle-lifecycle-common-java8 = "androidx.lifecycle:lifecycle-common-java8:2.4.0"
+androidx-lifecycle-lifecycle-common-java8 = "androidx.lifecycle:lifecycle-common-java8:2.7.0"
 
-androidx-navigation-compose = "androidx.navigation:navigation-compose:2.5.0"
+androidx-navigation-compose = "androidx.navigation:navigation-compose:2.7.7"
 
 androidx-paging-common = { module = "androidx.paging:paging-common-ktx", version.ref = "paging" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
-androidx-paging-compose = "androidx.paging:paging-compose:1.0.0-alpha15"
+androidx-paging-compose = "androidx.paging:paging-compose:3.2.1"
 
 androidx-palette = "androidx.palette:palette:1.0.0"
 
-androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.2.0-rc01"
+androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.3.1"
 
 androidx-room-common = { module = "androidx.room:room-common", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
@@ -91,14 +103,14 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 
 androidx-test-core = { module = "androidx.test:core", version.ref = "androidxtest" }
-androidx-test-junit = "androidx.test.ext:junit-ktx:1.1.3"
+androidx-test-junit = "androidx.test.ext:junit-ktx:1.1.5"
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxtest" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxtest" }
 
-androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.4.0"
+androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.5.1"
 
-androidx-work-runtime = "androidx.work:work-runtime-ktx:2.7.1"
-androidx-startup-startup-runtime = "androidx.startup:startup-runtime:1.1.0"
+androidx-work-runtime = "androidx.work:work-runtime-ktx:2.9.0"
+androidx-startup-startup-runtime = "androidx.startup:startup-runtime:1.1.1"
 
 appauth = "net.openid:appauth:0.8.1"
 
@@ -121,12 +133,13 @@ compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", versio
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 dagger-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 
-google-analytics = "com.google.firebase:firebase-analytics-ktx:21.0.0"
-google-crashlytics = "com.google.firebase:firebase-crashlytics-ktx:18.2.11"
-google-crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:2.9.1"
-google-gmsGoogleServices = "com.google.gms:google-services:4.3.13"
-google-material = "com.google.android.material:material:1.5.0-rc01"
-google-firebase-bom = "com.google.firebase:firebase-bom:28.1.0"
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+google-analytics = "com.google.firebase:firebase-analytics-ktx:22.0.0"
+google-crashlytics = "com.google.firebase:firebase-crashlytics-ktx:19.0.0"
+google-crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:3.0.0"
+google-gmsGoogleServices = "com.google.gms:google-services:4.4.1"
+google-material = "com.google.android.material:material:1.12.0"
+google-firebase-bom = "com.google.firebase:firebase-bom:33.0.0"
 
 debugdrawer-debugdrawer = { module = "au.com.gridstone.debugdrawer:debugdrawer", version.ref = "debugdrawer" }
 debugdrawer-retrofit = { module = "au.com.gridstone.debugdrawer:debugdrawer-retrofit", version.ref = "debugdrawer" }
@@ -147,23 +160,17 @@ kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions",
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 
-leakCanary = "com.squareup.leakcanary:leakcanary-android:2.9.1"
-
 mockK = "io.mockk:mockk:1.12.4"
 
 okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
-okhttp-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 
-com-squareup-moshi = "com.squareup.moshi:moshi:1.13.0"
-com-squareup-moshi-kotlin-codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.13.0"
+com-squareup-moshi = "com.squareup.moshi:moshi:1.15.0"
+com-squareup-moshi-kotlin-codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.0"
 
 retrofit-gsonConverter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 retrofit-moshiConverter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 retrofit-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-mock = { module = "com.squareup.retrofit2:retrofit-mock", version.ref = "retrofit" }
-
-chucker-library = { module = "com.github.ChuckerTeam.Chucker:library", version.ref = "chucker" }
-chucker-library-no-op = { module = "com.github.ChuckerTeam.Chucker:library-no-op", version.ref = "chucker" }
 
 tikxml-annotation = { module = "com.tickaroo.tikxml:annotation", version.ref = "com-tickaroo-tikxml" }
 tikxml-converter-htmlescape = { module = "com.tickaroo.tikxml:converter-htmlescape", version.ref = "com-tickaroo-tikxml" }
@@ -171,7 +178,7 @@ tikxml-core = { module = "com.tickaroo.tikxml:core", version.ref = "com-tickaroo
 tikxml-processor = { module = "com.tickaroo.tikxml:processor", version.ref = "com-tickaroo-tikxml" }
 tikxml-retrofit-converter = { module = "com.tickaroo.tikxml:retrofit-converter", version.ref = "com-tickaroo-tikxml" }
 
-robolectric = "org.robolectric:robolectric:4.8.1"
+robolectric = "org.robolectric:robolectric:4.10.3"
 
 store = "com.dropbox.mobile.store:store4:4.0.5"
 
@@ -185,6 +192,37 @@ traktJava = "com.uwetrottmann.trakt5:trakt-java:6.10.0"
 
 truth = "com.google.truth:truth:1.1.3"
 
-jsoup = "org.jsoup:jsoup:1.13.1"
+jsoup = "org.jsoup:jsoup:1.15.4"
 
 com-facebook-shimmer = "com.facebook.shimmer:shimmer:0.5.0"
+
+# Gradle Analytics Plugin
+sqlite_driver = { module = "org.xerial:sqlite-jdbc", version.ref = "sqlite_driver" }
+mysql_driver = { module = "mysql:mysql-connector-java", version.ref = "mysql_driver" }
+jetbrains_exposed_core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "jetbrains_exposed" }
+jetbrains_exposed_jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "jetbrains_exposed" }
+moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
+oshi = { module = "com.github.oshi:oshi-core", version.ref = "oshi" }
+jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+
+# Coroutines
+coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutines" }
+
+okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+
+retrofit-RxAdapter = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit" }
+
+#dev-only
+devonly-leakcanary = "com.squareup.leakcanary:leakcanary-android:2.11"
+devonly-stetho = "com.facebook.stetho:stetho:1.6.0"
+devonly-stethoOkhttp = "com.facebook.stetho:stetho-okhttp3:1.6.0"
+devonly-chucker-library = { module = "com.github.ChuckerTeam.Chucker:library", version.ref = "chucker" }
+devonly-chucker-library-no-op = { module = "com.github.ChuckerTeam.Chucker:library-no-op", version.ref = "chucker" }
+
+#flipper
+devonly-flipper = "com.facebook.flipper:flipper:0.114.0"
+devonly-flipperSoLoader = "com.facebook.soloader:soloader:0.10.5"
+devonly-lipperNoOp = "com.facebook.flipper:flipper-noop:0.114.0"
+devonly-flipperNetwork = "com.facebook.flipper:flipper-network-plugin:0.114.0"

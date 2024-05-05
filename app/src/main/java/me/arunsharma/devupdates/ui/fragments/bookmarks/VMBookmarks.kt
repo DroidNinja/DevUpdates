@@ -11,16 +11,14 @@ import com.dev.services.api.models.ServiceRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.withContext
 import me.arunsharma.devupdates.R
 import me.arunsharma.devupdates.data.repo.RepoFeed
 import me.arunsharma.devupdates.ui.fragments.feed.FeedUIState
 import me.arunsharma.devupdates.utils.BookmarkEvent
-import me.arunsharma.devupdates.utils.Event
 import me.arunsharma.devupdates.utils.EventBus
-import me.arunsharma.devupdates.utils.SingleLiveEvent
+import com.dev.core.utils.SingleLiveEvent
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -59,8 +57,8 @@ class VMBookmarks @Inject constructor(
                     } else {
                         _lvUIState.postValue(
                             FeedUIState.ShowError(
-                                context.getString(R.string.empty_feed),
-                                context.getString(R.string.swipe_down_to_refresh_the_feed)
+                                context.getString(com.dev.core.R.string.empty_feed),
+                                context.getString(com.dev.core.R.string.swipe_down_to_refresh_the_feed)
                             )
                         )
                     }

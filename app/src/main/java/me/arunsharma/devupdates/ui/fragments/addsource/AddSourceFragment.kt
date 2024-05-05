@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ class AddSourceFragment : BottomSheetDialogFragment() {
 
     private val binding by viewBinding(FragmentAddDataSourceBinding::bind)
 
-    val viewModel: VMAddSource by viewModels()
+    val viewModel: VMDataSource by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

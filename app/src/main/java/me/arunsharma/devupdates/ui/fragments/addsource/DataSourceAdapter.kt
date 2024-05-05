@@ -47,7 +47,7 @@ class DataSourceAdapter(items: List<ServiceRequest>, val mListener: DataSourceAd
         viewHolder.itemView.setBackgroundColor(
             ContextCompat.getColor(
                 viewHolder.itemView.context,
-                R.color.colorOnPrimary_80
+                com.dev.core.R.color.colorOnPrimary_80
             )
         )
     }
@@ -56,7 +56,7 @@ class DataSourceAdapter(items: List<ServiceRequest>, val mListener: DataSourceAd
         viewHolder.itemView.setBackgroundColor(
             ContextCompat.getColor(
                 viewHolder.itemView.context,
-                R.color.colorOnPrimary
+                com.dev.core.R.color.colorOnPrimary
             )
         )
         mListener.onDragComplete()

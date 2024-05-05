@@ -1,6 +1,7 @@
 package me.arunsharma.devupdates.ui.fragments.addsource
 
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +18,7 @@ class DataSourceListFragment : BaseFragment(R.layout.fragment_data_source) {
 
     private val binding by viewBinding(FragmentDataSourceBinding::bind)
 
-    val viewModel: VMDataSource by viewModels()
+    val viewModel: VMDataSource by activityViewModels()
 
     override fun getFragmentTag(): String {
         return TAG
@@ -35,32 +36,47 @@ class DataSourceListFragment : BaseFragment(R.layout.fragment_data_source) {
         }
 
         viewModel.lvFetchConfig.observe(viewLifecycleOwner) { listItems ->
-            binding.recyclerView.adapter =
-                DataSourceAdapter(listItems, object : DataSourceAdapter.DataSourceAdapterListener {
-                    override fun onDragComplete() {
-                        val adapter = binding.recyclerView.adapter as? DataSourceAdapter
-                        adapter?.let {
-                            viewModel.saveConfig(it.mData)
-                            SnackbarUtil.showBarShortTime(
-                                requireView(),
-                                getString(R.string.changes_saved)
-                            )
-                        }
-                    }
-                }).apply {
-                    val itemTouchHelper = RecyclerViewMoveHelper.create(this)
-                    itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-
-                    setOnItemChildClickListener(object :
-                        BaseRecyclerViewAdapter.OnItemChildClickListener {
-                        override fun onItemChildClick(view: View, position: Int) {
-                            when (view.id) {
-                                R.id.btnDelete -> onDeleteItem(this@apply, position)
+            if (binding.recyclerView.adapter == null) {
+                binding.recyclerView.adapter =
+                    DataSourceAdapter(
+                        listItems,
+                        object : DataSourceAdapter.DataSourceAdapterListener {
+                            override fun onDragComplete() {
+                                val adapter = binding.recyclerView.adapter as? DataSourceAdapter
+                                adapter?.let {
+                                    viewModel.saveConfig(it.mData)
+                                    SnackbarUtil.showBarShortTime(
+                                        view = requireView(),
+                                        message = getString(R.string.changes_saved)
+                                    )
+                                }
                             }
-                        }
-                    })
-                }
+                        }).apply {
+                        val itemTouchHelper = RecyclerViewMoveHelper.create(this)
+                        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
+                        setOnItemChildClickListener(object :
+                            BaseRecyclerViewAdapter.OnItemChildClickListener {
+                            override fun onItemChildClick(view: View, position: Int) {
+                                when (view.id) {
+                                    R.id.btnDelete -> onDeleteItem(this@apply, position)
+                                }
+                            }
+                        })
+                    }
+
+            } else {
+                (binding.recyclerView.adapter as? DataSourceAdapter)?.setData(listItems)
+            }
+        }
+
+        viewModel.onDataSourceAdded.observe(viewLifecycleOwner) { message ->
+            if (message != null) {
+                SnackbarUtil.showBarShortTime(
+                    view = requireView(),
+                    message = message
+                )
+            }
         }
 
         binding.btnAddSource.setOnClickListener {
@@ -71,7 +87,8 @@ class DataSourceListFragment : BaseFragment(R.layout.fragment_data_source) {
     }
 
     private fun showAddSource() {
-        AddSourceFragment.newInstance().show(requireActivity().supportFragmentManager, AddSourceFragment.TAG)
+        AddSourceFragment.newInstance()
+            .show(requireActivity().supportFragmentManager, AddSourceFragment.TAG)
     }
 
     private fun onDeleteItem(

@@ -1,11 +1,10 @@
 plugins {
-    id(Plugins.ANDROID_APPLICATION)
-    kotlin(Plugins.KOTLIN_ANDROID)
-    kotlin(Plugins.KOTLIN_KAPT)
-    id(Plugins.KOTLIN_PARCELIZE)
-    id(Plugins.HILT)
-    id(Plugins.GOOGLE_SERVICES)
-    id(Plugins.CRASHLYTICS)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.gms.googleServices)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -23,6 +22,14 @@ android {
             annotationProcessorOptions {
                 arguments["room.schemaLocation"] = "$projectDir/schemas"
             }
+        }
+
+        compileOptions {
+            // Up to Java 11 APIs are available through desugaring
+            // https://developer.android.com/studio/write/java11-minimal-support-table
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
+            isCoreLibraryDesugaringEnabled = true
         }
     }
 
@@ -56,15 +63,17 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
+
+    namespace = "me.arunsharma.devupdates"
 }
 
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
     implementation(project(":services"))
-//    debugImplementation(project(":devik"))
-//    releaseImplementation(project(":devik-noop"))
+
     implementation(libs.google.material)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
@@ -81,13 +90,16 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     implementation(libs.hilt.library)
-    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.navigation.compose)
+    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.espresso.core)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
