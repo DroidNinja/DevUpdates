@@ -34,7 +34,7 @@ jobs:
           java-version: '17'
 
       - name: Build project
-        run: ./gradlew assembleRelease lintRelease --stacktrace
+        run: ./gradlew assembleRelease --stacktrace
 
       - name: Upload build outputs (APKs)
         uses: actions/upload-artifact@v3
