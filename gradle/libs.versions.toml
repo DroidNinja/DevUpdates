@@ -4,7 +4,7 @@ androidxhilt = "1.2.0"
 androidxlifecycle = "2.7.0"
 androidxtest = "1.5.2"
 chucker = "3.5.2"
-coil = "2.1.0"
+coil = "2.6.0"
 compose = "1.6.7"
 composecompiler = "1.2.0"
 composesnapshot = "-" # a single character = no snapshot
