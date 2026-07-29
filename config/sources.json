@@ -32,6 +32,18 @@
 
     {
 
+      "name": "Hacker News",
+
+      "type": "HACKER_NEWS",
+
+      "shouldUseCache": true,
+
+      "hasPagingSupport": false
+
+    },
+
+    {
+
       "name": "Android Weekly",
 
       "type": "ANDROID_WEEKLY",

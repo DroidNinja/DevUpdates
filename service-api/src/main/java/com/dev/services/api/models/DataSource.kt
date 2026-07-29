@@ -8,5 +8,6 @@ enum class DataSource {
     RSS_CHANNEL,
     ANDROID_WEEKLY,
     KOTLIN_WEEKLY,
+    HACKER_NEWS,
     ALL
 }

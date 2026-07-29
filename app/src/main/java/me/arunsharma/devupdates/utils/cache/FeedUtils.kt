@@ -12,6 +12,9 @@ object FeedUtils {
             DataSource.MEDIUM -> {
                 R.drawable.ic_logo_medium
             }
+            DataSource.HACKER_NEWS -> {
+                R.drawable.ic_hackernews
+            }
             else -> {
                 R.drawable.ic_rss_feed
             }

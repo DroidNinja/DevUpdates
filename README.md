@@ -28,6 +28,7 @@ Although If you have some suggestions regarding data sources, I will try to add 
 - Integrated multiple sources (focused on android only):
     - Home (aggregated feed from different sources)
     - Github Trending 
+    - Hacker News
     - Android Weekly
     - Official Android Blog
     - Medium - Android Developers

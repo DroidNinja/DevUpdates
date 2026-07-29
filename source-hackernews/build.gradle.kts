@@ -20,24 +20,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    namespace = "com.dev.services"
+    namespace = "com.dev.hackernews"
 }
 
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
-    api(project(":service-api"))
-    implementation(project(":source-github"))
-    implementation(project(":source-medium"))
-    implementation(project(":source-androidweekly"))
-    implementation(project(":source-kotlinweekly"))
-    implementation(project(":source-hackernews"))
-    implementation(project(":source-rss"))
-    implementation(libs.jsoup)
-
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    implementation(project(":service-api"))
 
     implementation(libs.com.squareup.moshi)
     ksp(libs.com.squareup.moshi.kotlin.codegen)
