@@ -12,6 +12,9 @@ fun ServiceRequest.getDrawable(): Int {
         DataSource.GITHUB -> {
             R.drawable.ic_github
         }
+        DataSource.HACKER_NEWS -> {
+            R.drawable.ic_hackernews
+        }
         DataSource.ALL -> {
             R.drawable.ic_home_feed
         }
