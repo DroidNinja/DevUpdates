@@ -22,7 +22,7 @@ class APIGithub @Inject constructor(val service: ServiceGithub) : ServiceIntegra
                     description = item.description,
                     author = item.author,
                     topTitleText = if (item.language.isNullOrBlank()) starsToday else item.language + " ● " + starsToday,
-                    likes = "★ " + item.stars?.toString(),
+                    likes = "★ " + (item.stars ?: 0),
                     actionUrl = item.url,
                     sourceType = request.type.toString(),
                     createdAt = System.currentTimeMillis(),
