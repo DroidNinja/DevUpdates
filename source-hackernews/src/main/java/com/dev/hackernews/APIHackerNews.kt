@@ -16,13 +16,15 @@ class APIHackerNews @Inject constructor(val service: ServiceHackerNews) : Servic
         try {
             val result = service.getFrontPage(tags = "front_page", hitsPerPage = 30).hits.map { item ->
                 val createdAt = (item.createdAtSeconds ?: 0L) * 1000L
+                val commentsUrl = ServiceHackerNews.ITEM_URL + item.objectId
                 ServiceItem(
                     title = item.title ?: "",
                     description = item.url?.let { getHost(it) },
                     author = item.author,
                     topTitleText = item.author + " ● " + DateUtils.getRelativeTimeSpanString(createdAt),
-                    likes = "▲ " + (item.points ?: 0),
-                    actionUrl = item.url ?: (ServiceHackerNews.ITEM_URL + item.objectId),
+                    likes = "▲ " + (item.points ?: 0) + "  ●  ✉ " + (item.numComments ?: 0),
+                    actionUrl = item.url ?: commentsUrl,
+                    commentsUrl = commentsUrl,
                     sourceType = request.type.toString(),
                     createdAt = createdAt,
                     groupId = request.name

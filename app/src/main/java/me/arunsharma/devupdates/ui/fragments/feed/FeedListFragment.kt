@@ -112,6 +112,8 @@ class FeedListFragment : BaseFragment(R.layout.fragment_feed_list) {
                             item.isBookmarked = !item.isBookmarked
                             notifyItemChanged(position)
                             viewModel.addBookmark(item)
+                        } else if (view.id == R.id.ivComments) {
+                            getItem(position).commentsUrl?.let { CustomTabHelper.open(view.context, it) }
                         }
                     }
                 })

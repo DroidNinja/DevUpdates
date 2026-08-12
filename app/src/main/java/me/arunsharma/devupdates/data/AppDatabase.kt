@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.dev.services.api.models.ServiceItem
 import me.arunsharma.devupdates.data.dao.FeedDao
 
-@Database(entities = [ServiceItem::class], version = 1)
+@Database(entities = [ServiceItem::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun feedDao(): FeedDao
 
