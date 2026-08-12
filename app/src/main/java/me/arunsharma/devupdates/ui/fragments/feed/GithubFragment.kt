@@ -56,7 +56,9 @@ class GithubFragment : BaseFragment(R.layout.fragment_feed_github) {
                             chip.setOnCheckedChangeListener { buttonView, isChecked ->
                                 if (isChecked) {
                                     val lang = buttonView.text.toString()
-                                    if (lang != DEFAULT_LANG) {
+                                    if (lang == DEFAULT_LANG) {
+                                        request.metadata?.remove(ServiceConstants.GITHUB_SELECTED_LANGUAGE)
+                                    } else {
                                         request.metadata?.put(ServiceConstants.GITHUB_SELECTED_LANGUAGE, lang)
                                     }
                                     viewModel.getData(request, forceUpdate = true)

@@ -16,11 +16,12 @@ class APIGithub @Inject constructor(val service: ServiceGithub) : ServiceIntegra
         try {
             Timber.d("Debug--getData")
             val result = service.getTrending(request.metadata?.get(ServiceConstants.GITHUB_SELECTED_LANGUAGE) ?: "", "daily").map { item ->
+                val starsToday = (item.currentPeriodStars ?: 0).toString() + " stars today"
                 ServiceItem(
                     title = item.author + " / " + item.name,
                     description = item.description,
                     author = item.author,
-                    topTitleText = item.language + " ● " + item.currentPeriodStars + " stars today",
+                    topTitleText = if (item.language.isNullOrBlank()) starsToday else item.language + " ● " + starsToday,
                     likes = "★ " + item.stars?.toString(),
                     actionUrl = item.url,
                     sourceType = request.type.toString(),
