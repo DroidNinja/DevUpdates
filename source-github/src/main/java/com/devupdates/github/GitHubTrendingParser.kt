@@ -53,16 +53,11 @@ object GitHubTrendingParser {
                     }
                 }
 
-            // "3,441" stars, forks
-            val counts = element.select(".Link--muted.d-inline-block.mr-3")
-                .asSequence()
-                .map(Element::text)
-                .map { it.removeCommas() }
-                .mapNotNull(String::toIntOrNull)
-                .toList()
-
-            val stars = counts.getOrNull(0)
-            val forks = counts.getOrNull(1)
+            // Prefer selecting by the stargazers/forks link's href, since it's a stable,
+            // semantic URL rather than GitHub's frequently-churned Primer CSS utility
+            // classes. Fall back to the old class-based selector if that ever comes back.
+            val stars = parseCount(element, "a[href$=stargazers]", fallbackIndex = 0)
+            val forks = parseCount(element, "a[href$=forks], a[href$=members]", fallbackIndex = 1)
 
             // "691 stars today"
             val starsToday = element.select(".d-inline-block.float-sm-right").firstOrNull()
@@ -90,5 +85,16 @@ object GitHubTrendingParser {
             d { "Skipping trending item, failed to parse: ${exception.message}" }
             null
         }
+    }
+
+    /**
+     * Reads a "3,441"-style count from [primarySelector] (an href-based selector, stable
+     * across GitHub's styling changes), falling back to the [fallbackIndex]-th match of the
+     * legacy class-based selector if the primary one finds nothing.
+     */
+    private fun parseCount(element: Element, primarySelector: String, fallbackIndex: Int): Int? {
+        val primary = element.select(primarySelector).firstOrNull()
+        val target = primary ?: element.select(".Link--muted.d-inline-block.mr-3").getOrNull(fallbackIndex)
+        return target?.text()?.removeCommas()?.toIntOrNull()
     }
 }
