@@ -26,4 +26,6 @@ data class ServiceItem(
     var groupId: String?,
     @ColumnInfo(name = "topTitleText")
     var topTitleText: String?,
+    @ColumnInfo(name = "commentsUrl")
+    var commentsUrl: String? = null,
 )

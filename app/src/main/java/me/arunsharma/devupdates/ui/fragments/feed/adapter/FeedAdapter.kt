@@ -25,6 +25,12 @@ class FeedAdapter(items: List<ServiceItem>, val allowBookmarks: Boolean = true) 
         } else {
             helper.binding.ivBookmark.visibility = View.GONE
         }
+        if (item.commentsUrl != null) {
+            helper.binding.ivComments.visibility = View.VISIBLE
+            helper.addOnClickListener(R.id.ivComments)
+        } else {
+            helper.binding.ivComments.visibility = View.GONE
+        }
     }
 
     override fun createHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {

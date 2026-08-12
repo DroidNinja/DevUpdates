@@ -92,6 +92,8 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
                         mData.removeAt(position)
                         notifyItemRemoved(position)
                         viewModel.removeBookmark(item)
+                    } else if (view.id == R.id.ivComments) {
+                        getItem(position).commentsUrl?.let { CustomTabHelper.open(view.context, it) }
                     }
                 }
             })
